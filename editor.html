@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✏️ Editor Visual — LLANA Brindes</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ===== EDITOR UI ===== */
+    :root { --ed-h: 60px; }
+
+    #ed-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 99999;
+      height: var(--ed-h);
+      background: #1a1a2e;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      gap: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: .88rem;
+    }
+
+    #ed-bar .ed-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+      color: #FF6B35;
+    }
+    #ed-bar .ed-logo span { color: #fff; }
+
+    #ed-status {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .3rem .8rem;
+      border-radius: 20px;
+      font-size: .8rem;
+      font-weight: 600;
+      background: rgba(255,255,255,.08);
+      white-space: nowrap;
+    }
+    #ed-status .dot { width: 8px; height: 8px; border-radius: 50%; background: #718096; flex-shrink: 0; }
+    #ed-status.on .dot { background: #48BB78; }
+    #ed-status.on { background: rgba(72,187,120,.15); color: #9AE6B4; }
+
+    #ed-hint {
+      flex: 1;
+      font-size: .78rem;
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ed-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem 1rem;
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all .2s;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .ed-btn:hover { transform: translateY(-1px); }
+
+    #ed-toggle {
+      background: #FF6B35;
+      color: #fff;
+      border-color: #FF6B35;
+    }
+    #ed-toggle:hover { background: #e5561f; }
+    #ed-toggle.ativo {
+      background: transparent;
+      color: #FC8181;
+      border-color: #FC8181;
+    }
+    #ed-toggle.ativo:hover { background: rgba(252,129,129,.1); }
+
+    #ed-download {
+      background: #48BB78;
+      color: #fff;
+      border-color: #48BB78;
+    }
+    #ed-download:hover { background: #38a169; }
+
+    #ed-help {
+      background: transparent;
+      color: rgba(255,255,255,.6);
+      border-color: rgba(255,255,255,.2);
+    }
+    #ed-help:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+
+    /* Offset page content */
+    body { padding-top: var(--ed-h) !important; }
+    .site-header { top: var(--ed-h) !important; }
+
+    /* ===== EDIT MODE STYLES ===== */
+    body.edit-on [data-ed]:not([data-ed-img]):not([data-ed-link]):hover {
+      outline: 2px dashed #FF6B35 !important;
+      outline-offset: 3px !important;
+      cursor: text !important;
+      border-radius: 4px;
+    }
+    body.edit-on [data-ed][contenteditable="true"] {
+      outline: 2px solid #FF6B35 !important;
+      outline-offset: 3px !important;
+      border-radius: 4px;
+      min-height: 1em;
+    }
+    body.edit-on [data-ed][contenteditable="true"]:focus {
+      outline-color: #3B82F6 !important;
+    }
+
+    /* Image overlay */
+    .ed-img-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .ed-img-wrap .ed-img-btn {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .4rem;
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 600;
+      border-radius: inherit;
+      z-index: 10;
+      border: none;
+      width: 100%;
+    }
+    body.edit-on .ed-img-wrap .ed-img-btn { display: flex; }
+    .ed-img-wrap .ed-img-btn:hover { background: rgba(0,0,0,.72); }
+    .ed-img-wrap .ed-img-btn .ed-cam { font-size: 1.75rem; }
+
+    /* Link badge */
+    .ed-link-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .ed-link-badge {
+      display: none;
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #3B82F6;
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      cursor: pointer;
+      z-index: 20;
+      border: none;
+      font-family: -apple-system, sans-serif;
+    }
+    body.edit-on .ed-link-wrap:hover .ed-link-badge { display: block; }
+
+    /* ===== MODAL ===== */
+    #ed-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: rgba(0,0,0,.6);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    #ed-modal.open { display: flex; }
+
+    .ed-modal-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.35);
+      animation: modalIn .2s ease;
+    }
+    @keyframes modalIn { from{opacity:0;transform:scale(.94)} to{opacity:1;transform:scale(1)} }
+
+    .ed-modal-box h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+      color: #1a1a2e;
+    }
+    .ed-modal-box .ed-modal-sub {
+      font-size: .82rem;
+      color: #718096;
+      margin-bottom: 1.25rem;
+    }
+
+    .ed-modal-box label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      color: #2D3748;
+      margin-bottom: .35rem;
+    }
+    .ed-modal-box input[type="text"],
+    .ed-modal-box input[type="url"] {
+      width: 100%;
+      padding: .7rem 1rem;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: .92rem;
+      outline: none;
+      transition: border-color .2s;
+      color: #2D3748;
+      margin-bottom: 1rem;
+    }
+    .ed-modal-box input:focus { border-color: #FF6B35; }
+
+    .ed-modal-preview {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #F8F9FA;
+      display: block;
+    }
+
+    .ed-modal-actions {
+      display: flex;
+      gap: .75rem;
+      justify-content: flex-end;
+    }
+    .ed-modal-actions button {
+      padding: .6rem 1.4rem;
+      border-radius: 8px;
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      font-family: inherit;
+      transition: all .2s;
+    }
+    .ed-btn-cancel { background: #F7FAFC; color: #4A5568; border-color: #E2E8F0; }
+    .ed-btn-cancel:hover { background: #EDF2F7; }
+    .ed-btn-save { background: #FF6B35; color: #fff; border-color: #FF6B35; }
+    .ed-btn-save:hover { background: #e5561f; }
+
+    /* ===== HELP PANEL ===== */
+    #ed-help-panel {
+      display: none;
+      position: fixed;
+      top: calc(var(--ed-h) + 1rem);
+      right: 1rem;
+      z-index: 99998;
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.5rem;
+      max-width: 320px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.2);
+      font-family: -apple-system, sans-serif;
+      font-size: .85rem;
+      color: #2D3748;
+      line-height: 1.55;
+    }
+    #ed-help-panel.open { display: block; }
+    #ed-help-panel h4 { font-size: 1rem; margin-bottom: 1rem; color: #1a1a2e; }
+    #ed-help-panel ul { padding-left: 1.1rem; }
+    #ed-help-panel li { margin-bottom: .5rem; }
+    #ed-help-panel strong { color: #FF6B35; }
+    #ed-help-close { position: absolute; top: .75rem; right: .75rem; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #718096; }
+
+    /* Toast */
+    #ed-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1a1a2e;
+      color: #fff;
+      padding: .65rem 1.5rem;
+      border-radius: 30px;
+      font-size: .85rem;
+      font-weight: 600;
+      z-index: 999999;
+      opacity: 0;
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      font-family: -apple-system, sans-serif;
+      white-space: nowrap;
+    }
+    #ed-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- EDITOR BAR -->
+<div id="ed-bar">
+  <div class="ed-logo">LL<span>ANA</span> <span style="color:rgba(255,255,255,.4);font-weight:400;font-size:.8rem;margin-left:.25rem;">Editor Visual</span></div>
+  <div id="ed-status"><span class="dot"></span>Edição desativada</div>
+  <div id="ed-hint">Ative a edição para clicar e editar qualquer texto, imagem ou link</div>
+  <button class="ed-btn" id="ed-toggle" onclick="edToggle()">✏️ Ativar Edição</button>
+  <button class="ed-btn" id="ed-download" onclick="edDownload()">⬇️ Baixar index.html</button>
+  <button class="ed-btn" id="ed-help" onclick="edHelpToggle()">? Ajuda</button>
+</div>
+
+<!-- HELP PANEL -->
+<div id="ed-help-panel">
+  <button id="ed-help-close" onclick="edHelpToggle()">✕</button>
+  <h4>Como usar o editor</h4>
+  <ul>
+    <li>Clique em <strong>"Ativar Edição"</strong> para entrar no modo de edição</li>
+    <li>Passe o mouse sobre qualquer <strong>texto</strong> para vê-lo destacado — clique para editar</li>
+    <li>Passe o mouse sobre uma <strong>imagem</strong> para ver o botão "Trocar imagem" — clique e cole a URL</li>
+    <li>Passe o mouse sobre um <strong>link/botão</strong> — aparece um badge azul "Editar URL" no topo</li>
+    <li>Clique fora do texto para confirmar a edição</li>
+    <li>Quando terminar, clique em <strong>"Baixar index.html"</strong> para salvar o arquivo</li>
+  </ul>
+  <p style="margin-top:.75rem;font-size:.78rem;color:#718096;">Para imagens: faça upload no WordPress (Mídia → Adicionar Nova), copie o link e cole aqui.</p>
+</div>
+
+<!-- MODAL (imagens e links) -->
+<div id="ed-modal">
+  <div class="ed-modal-box">
+    <h3 id="ed-modal-title">Trocar imagem</h3>
+    <p class="ed-modal-sub" id="ed-modal-sub">Cole a URL da nova imagem abaixo.</p>
+    <div id="ed-modal-body"></div>
+    <div class="ed-modal-actions">
+      <button class="ed-btn-cancel" onclick="edModalClose()">Cancelar</button>
+      <button class="ed-btn-save" id="ed-modal-save">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="ed-toast"></div>
+
+<!-- ============================================================
+     CONTEÚDO DO SITE
+     ============================================================ -->
+
+<div class="top-bar" data-ed="top-bar-text">
+  🎁 Brindes personalizados com sua marca — <a href="/contato" data-ed="top-bar-link">Solicite um orçamento gratuito</a>
+</div>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/inicio" class="logo">
+        <div class="logo-text">
+          <span class="brand" data-ed="logo-brand">LL<span>ANA</span></span>
+          <span class="tagline" data-ed="logo-tagline">Brindes &amp; Campanhas</span>
+        </div>
+      </a>
+      <nav class="main-nav" aria-label="Menu principal">
+        <a href="/inicio" class="active" data-ed="nav-inicio">Início</a>
+        <a href="https://llana.com.br/catalogo-de-brindes/" data-ed="nav-catalogo">Catálogo</a>
+        <a href="/campanhas" data-ed="nav-campanhas">Campanhas</a>
+        <a href="/kits" data-ed="nav-kits">Kits Promocionais</a>
+        <a href="/contato" data-ed="nav-contato">Contato</a>
+      </nav>
+      <div class="header-cta">
+        <a href="https://wa.me/5511971071213" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" data-ed="header-wa">💬 WhatsApp</a>
+        <a href="/contato" class="btn btn-primary btn-sm" data-ed="header-cta">Solicitar Orçamento</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu" aria-label="Menu mobile">
+    <a href="/inicio" class="active">🏠 Início</a>
+    <a href="/catalogo">📦 Catálogo de Brindes</a>
+    <a href="/campanhas">📣 Mural de Campanhas</a>
+    <a href="/kits">🎁 Kits Promocionais</a>
+    <a href="/contato">✉️ Contato</a>
+    <div class="mobile-menu-cta">
+      <a href="https://wa.me/5511971071213" class="btn btn-whatsapp btn-full" style="margin-bottom:.75rem;" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+      <a href="/contato" class="btn btn-primary btn-full">Solicitar Orçamento</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="ed-hero-bg" style="background-image:url('https://placehold.co/1920x900/1a2e4a/1a2e4a?text=.')"></div>
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-split">
+        <div class="hero-content fade-up">
+          <div class="hero-tag"><span class="dot"></span><span data-ed="hero-tag">Brindes que marcam presença</span></div>
+          <h1 data-ed="hero-h1">Sua marca em<br><span data-ed="hero-h1-span">cada detalhe</span></h1>
+          <p data-ed="hero-p">Brindes personalizados, kits promocionais e campanhas corporativas desenvolvidos para impactar, fidelizar e gerar resultados reais.</p>
+          <div class="hero-cta">
+            <a href="/contato" class="btn btn-primary btn-xl" data-ed="hero-btn1">🎁 Solicitar Orçamento</a>
+            <a href="/catalogo" class="btn btn-outline btn-xl" data-ed="hero-btn2">Ver Catálogo</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat-item"><strong data-count="500" data-suffix="+" data-ed="stat1-num">500+</strong><span data-ed="stat1-label">Clientes atendidos</span></div>
+            <div class="hero-stat-item"><strong data-count="1200" data-suffix="+" data-ed="stat2-num">1.200+</strong><span data-ed="stat2-label">Produtos no catálogo</span></div>
+            <div class="hero-stat-item"><strong data-count="10" data-suffix=" anos" data-ed="stat3-num">10 anos</strong><span data-ed="stat3-label">De experiência</span></div>
+          </div>
+        </div>
+        <div class="hero-split-image float-anim">
+          <div class="ed-img-wrap" style="border-radius:24px;overflow:hidden;">
+            <img id="hero-img" src="https://placehold.co/600x700/FFFFFF/1E3A5F?text=PRODUTO+%0ACOM+LOGO+LLANA" alt="Brinde personalizado LLANA" style="border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);display:block;" />
+            <button class="ed-img-btn" onclick="edEditImg('hero-img','Imagem principal do Hero','Substitua pelo mockup do produto com logomarca LLANA (sugerido: 600×700px)')"><span class="ed-cam">📷</span>Trocar imagem</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="selos-section">
+    <div class="container">
+      <div class="selos-grid">
+        <div class="selo-item reveal"><span class="icon">🚚</span><span data-ed="selo1">Entrega em todo Brasil</span></div>
+        <div class="selo-item reveal"><span class="icon">🎨</span><span data-ed="selo2">Personalização exclusiva</span></div>
+        <div class="selo-item reveal"><span class="icon">⚡</span><span data-ed="selo3">Prazo garantido</span></div>
+        <div class="selo-item reveal"><span class="icon">🏆</span><span data-ed="selo4">+10 anos no mercado</span></div>
+        <div class="selo-item reveal"><span class="icon">💼</span><span data-ed="selo5">Atendimento B2B</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categorias">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag" data-ed="cat-tag">Nossos produtos</span>
+        <h2 data-ed="cat-h2">Explore nossas categorias</h2>
+        <p data-ed="cat-p">Do brinde simples ao kit premium — temos a solução certa para cada campanha e evento.</p>
+      </div>
+      <div class="categorias-grid">
+        <a href="catalogo.html?cat=canetas" class="categoria-card reveal">
+          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB)">
+            <div class="ed-img-wrap" style="position:absolute;inset:0;border-radius:0;">
+              <span style="font-size:4rem;">✏️</span>
+              <button class="ed-img-btn" onclick="edEditBg(this.closest('.categoria-card'),'Categoria: Canetas e Escritório')"><span class="ed-cam">📷</span>Trocar imagem</button>
+            </div>
+          </div>
+          <div class="cat-overlay"><h3 data-ed="cat1-nome">Canetas e Escritório</h3><span data-ed="cat1-qt">+120 opções</span></div>
+          <span class="cat-badge" data-ed="cat1-badge">Popular</span>
+        </a>
+        <a href="catalogo.html?cat=bolsas" class="categoria-card reveal">
+          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)">
+            <div class="ed-img-wrap" style="position:absolute;inset:0;border-radius:0;">
+              <span style="font-size:4rem;">👜</span>
+              <button class="ed-img-btn" onclick="edEditBg(this.closest('.categoria-card'),'Categoria: Bolsas e Mochilas')"><span class="ed-cam">📷</span>Trocar imagem</button>
+            </div>
+          </div>
+          <div class="cat-overlay"><h3 data-ed="cat2-nome">Bolsas e Mochilas</h3><span data-ed="cat2-qt">+85 opções</span></div>
+        </a>
+        <a href="catalogo.html?cat=copos" class="categoria-card reveal">
+          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9)">
+            <div class="ed-img-wrap" style="position:absolute;inset:0;border-radius:0;">
+              <span style="font-size:4rem;">☕</span>
+              <button class="ed-img-btn" onclick="edEditBg(this.closest('.categoria-card'),'Categoria: Copos e Garrafas')"><span class="ed-cam">📷</span>Trocar imagem</button>
+            </div>
+          </div>
+          <div class="cat-overlay"><h3 data-ed="cat3-nome">Copos e Garrafas</h3><span data-ed="cat3-qt">+200 opções</span></div>
+          <span class="cat-badge" data-ed="cat3-badge">Novo</span>
+        </a>
+        <a href="catalogo.html?cat=agenda" class="categoria-card reveal">
+          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#FFF8E1,#FFECB3)">
+            <div class="ed-img-wrap" style="position:absolute;inset:0;border-radius:0;">
+              <span style="font-size:4rem;">📓</span>
+              <button class="ed-img-btn" onclick="edEditBg(this.closest('.categoria-card'),'Categoria: Agendas e Cadernos')"><span class="ed-cam">📷</span>Trocar imagem</button>
+            </div>
+          </div>
+          <div class="cat-overlay"><h3 data-ed="cat4-nome">Agendas e Cadernos</h3><span data-ed="cat4-qt">+95 opções</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="diferenciais">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag" data-ed="dif-tag">Por que escolher a LLANA</span>
+        <h2 data-ed="dif-h2">Diferenciais que fazem a diferença</h2>
+        <p data-ed="dif-p">Cada detalhe do nosso processo é pensado para entregar o melhor resultado para a sua marca.</p>
+      </div>
+      <div class="diferenciais-grid">
+        <div class="diferencial-card reveal"><div class="ico-wrap" data-ed="dif1-ico">🎨</div><h4 data-ed="dif1-h4">Personalização exclusiva</h4><p data-ed="dif1-p">Aplicamos sua marca com qualidade gráfica premium em todos os produtos do catálogo.</p></div>
+        <div class="diferencial-card reveal"><div class="ico-wrap" data-ed="dif2-ico">📦</div><h4 data-ed="dif2-h4">Variedade de produtos</h4><p data-ed="dif2-p">Mais de 1.200 itens disponíveis, dos básicos corporativos aos mais premium e inovadores.</p></div>
+        <div class="diferencial-card reveal"><div class="ico-wrap" data-ed="dif3-ico">⚡</div><h4 data-ed="dif3-h4">Prazo garantido</h4><p data-ed="dif3-p">Cumprimos prazos mesmo em pedidos urgentes. Planejamos cada etapa para não falhar com você.</p></div>
+        <div class="diferencial-card reveal"><div class="ico-wrap" data-ed="dif4-ico">🤝</div><h4 data-ed="dif4-h4">Consultoria especializada</h4><p data-ed="dif4-p">Nosso time ajuda a escolher o brinde certo para cada campanha, evento e objetivo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-img reveal-left">
+          <div class="ed-img-wrap" style="border-radius:24px;overflow:hidden;">
+            <img id="sobre-img" src="https://placehold.co/560x680/EFF3F8/1E3A5F?text=IMAGEM+%0AINSTITUCIONAL+%0ALLANA" alt="LLANA Brindes" style="width:100%;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.18);" />
+            <button class="ed-img-btn" onclick="edEditImg('sobre-img','Imagem Institucional','Foto da empresa, equipe ou produto (sugerido: 560×680px)')"><span class="ed-cam">📷</span>Trocar imagem</button>
+          </div>
+          <div class="sobre-badge"><span class="num" data-ed="sobre-badge-num">+10</span><span class="txt" data-ed="sobre-badge-txt">anos de mercado</span></div>
+        </div>
+        <div class="sobre-content reveal-right">
+          <span class="tag" data-ed="sobre-tag">Sobre a LLANA</span>
+          <h2 data-ed="sobre-h2">Especialistas em transformar marcas em experiências</h2>
+          <p data-ed="sobre-p1">A LLANA é uma empresa especializada em brindes corporativos personalizados, kits promocionais e campanhas de incentivo. Atendemos marcas que entendem o poder de um brinde bem feito.</p>
+          <p data-ed="sobre-p2">Com mais de uma década de experiência, oferecemos um processo completo: da escolha do produto até a entrega final, sempre com sua identidade visual aplicada com precisão e qualidade.</p>
+          <div class="beneficios-list">
+            <div class="beneficio-item"><div class="check">✓</div><div><h5 data-ed="ben1-h5">Arte e aprovação inclusa</h5><p data-ed="ben1-p">Nossa equipe de design cuida da arte e envia para aprovação antes de produzir.</p></div></div>
+            <div class="beneficio-item"><div class="check">✓</div><div><h5 data-ed="ben2-h5">Pedido mínimo acessível</h5><p data-ed="ben2-p">Produzimos a partir de quantidades pequenas, ideal para qualquer orçamento.</p></div></div>
+            <div class="beneficio-item"><div class="check">✓</div><div><h5 data-ed="ben3-h5">Entrega nacional</h5><p data-ed="ben3-p">Enviamos para todo o Brasil com rastreamento e embalagem segura.</p></div></div>
+            <div class="beneficio-item"><div class="check">✓</div><div><h5 data-ed="ben4-h5">Nota fiscal garantida</h5><p data-ed="ben4-p">Empresa regularizada, com NF para pessoa jurídica e física.</p></div></div>
+          </div>
+          <div style="margin-top:2rem;">
+            <a href="/contato" class="btn btn-primary btn-lg" data-ed="sobre-cta">Falar com um consultor →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--dark" style="padding:4rem 0;">
+    <div class="container">
+      <div class="numbers-grid">
+        <div class="number-item reveal"><strong data-count="500" data-suffix="+" data-ed="num1-val">500+</strong><span data-ed="num1-label">Empresas atendidas</span></div>
+        <div class="number-item reveal"><strong data-count="1200" data-suffix="+" data-ed="num2-val">1.200+</strong><span data-ed="num2-label">Produtos disponíveis</span></div>
+        <div class="number-item reveal"><strong data-count="98" data-suffix="%" data-ed="num3-val">98%</strong><span data-ed="num3-label">Índice de satisfação</span></div>
+        <div class="number-item reveal"><strong data-count="10" data-suffix="" data-ed="num4-val">10</strong><span data-ed="num4-label">Anos de experiência</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="campanhas-cta">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" class="reveal">
+        <div style="border-radius:20px;overflow:hidden;box-shadow:var(--sh-xl);">
+          <div class="ed-img-wrap" style="border-radius:20px;overflow:hidden;">
+            <img id="camp-img" src="https://placehold.co/600x400/1E3A5F/FFFFFF?text=CAMPANHA+%0ALLANA" alt="Mural de Campanhas LLANA" style="width:100%;display:block;" />
+            <button class="ed-img-btn" onclick="edEditImg('camp-img','Imagem Campanhas','Peça de campanha ou mural visual (sugerido: 600×400px)')"><span class="ed-cam">📷</span>Trocar imagem</button>
+          </div>
+        </div>
+        <div>
+          <span class="tag" data-ed="camp-tag">Mural de Campanhas</span>
+          <h2 data-ed="camp-h2">Peças prontas para<br>suas campanhas</h2>
+          <p data-ed="camp-p">Acesse nosso mural com campanhas sazonais, materiais para datas comemorativas e kits temáticos prontos para ativar com sua marca.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+            <a href="/campanhas" class="btn btn-primary btn-lg" data-ed="camp-btn1">Ver Campanhas</a>
+            <a href="/contato" class="btn btn-outline-dark btn-lg" data-ed="camp-btn2">Solicitar Material</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="kits-cta">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" class="reveal">
+        <div>
+          <span class="tag" data-ed="kits-tag">Kits Promocionais</span>
+          <h2 data-ed="kits-h2">Kits montados e<br>prontos para usar</h2>
+          <p data-ed="kits-p">Soluções completas para eventos, onboarding, incentivo de equipes e campanhas corporativas. Kits personalizados com a identidade da sua marca.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+            <a href="/kits" class="btn btn-primary btn-lg" data-ed="kits-btn1">Ver Kits</a>
+            <a href="/contato" class="btn btn-outline-dark btn-lg" data-ed="kits-btn2">Montar Kit Personalizado</a>
+          </div>
+        </div>
+        <div style="border-radius:20px;overflow:hidden;box-shadow:var(--sh-xl);">
+          <div class="ed-img-wrap" style="border-radius:20px;overflow:hidden;">
+            <img id="kits-img" src="https://placehold.co/600x400/FF6B35/FFFFFF?text=KIT+PROMOCIONAL+%0ALLANA" alt="Kit Promocional LLANA" style="width:100%;display:block;" />
+            <button class="ed-img-btn" onclick="edEditImg('kits-img','Imagem Kits Promocionais','Foto de kit de brindes (sugerido: 600×400px)')"><span class="ed-cam">📷</span>Trocar imagem</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="newsletter">
+    <div class="container">
+      <div style="max-width:680px;margin:0 auto;text-align:center;" class="reveal">
+        <span class="tag" data-ed="nl-tag">Fique por dentro</span>
+        <h2 data-ed="nl-h2">Receba novidades e<br>ofertas em primeira mão</h2>
+        <p data-ed="nl-p">Cadastre seu e-mail e receba lançamentos, campanhas sazonais e condições especiais diretamente na sua caixa de entrada.</p>
+        <form id="mc-form" action="SEU_LINK_DO_MAILCHIMP_AQUI" method="post" novalidate style="margin-top:2rem;">
+          <div style="display:flex;gap:.75rem;max-width:480px;margin:0 auto .75rem;">
+            <input type="email" name="EMAIL" placeholder="Seu melhor e-mail" required style="flex:1;padding:.85rem 1.25rem;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-size:1rem;outline:none;" />
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+          </div>
+          <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_TROQUE_PELO_CODIGO_DO_MAILCHIMP" tabindex="-1" value=""></div>
+          <p id="mc-message" style="font-size:.85rem;min-height:1.2rem;"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" id="cta-final">
+    <div class="container">
+      <h2 class="reveal" data-ed="cta-h2">Pronto para ativar sua marca<br>com brindes de impacto?</h2>
+      <p class="reveal" data-ed="cta-p">Fale com um consultor especializado e receba uma proposta personalizada para sua campanha, evento ou ação corporativa.</p>
+      <div class="cta-buttons reveal">
+        <a href="https://wa.me/5511971071213" class="btn btn-whatsapp btn-xl" target="_blank" rel="noopener" data-ed="cta-wa">💬 Falar no WhatsApp</a>
+        <a href="/contato" class="btn btn-outline btn-xl" data-ed="cta-orcamento">Solicitar Orçamento</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <span class="brand" data-ed="footer-brand">LL<span>ANA</span></span>
+          <div class="tagline" data-ed="footer-tagline">Brindes &amp; Campanhas</div>
+        </div>
+        <p style="margin-top:1rem;" data-ed="footer-sobre">Especialistas em brindes personalizados, kits promocionais e campanhas corporativas para marcas que querem impactar.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="/inicio">Início</a>
+        <a href="/catalogo">Catálogo de Brindes</a>
+        <a href="/campanhas">Mural de Campanhas</a>
+        <a href="/kits">Kits Promocionais</a>
+        <a href="/contato">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <a href="#">Canetas e Escritório</a>
+        <a href="#">Bolsas e Mochilas</a>
+        <a href="#">Copos e Garrafas</a>
+        <a href="#">Agendas e Cadernos</a>
+        <a href="#">Camisetas e Uniformes</a>
+        <a href="#">Tecnologia</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <div class="footer-contact-item"><div class="ico">📍</div><div><strong>Endereço</strong><p data-ed="footer-end">Rua Exemplo, 123 — São Paulo, SP</p></div></div>
+        <div class="footer-contact-item"><div class="ico">📞</div><div><strong>Telefone / WhatsApp</strong><p><a href="tel:+5511971071213" data-ed="footer-tel">(11) 97107-1213</a></p></div></div>
+        <div class="footer-contact-item"><div class="ico">✉️</div><div><strong>E-mail</strong><p><a href="mailto:comercial@llana.com.br" data-ed="footer-email">comercial@llana.com.br</a></p></div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-ed="footer-copy">© 2025 LLANA Brindes. Todos os direitos reservados.</span>
+      <span><a href="#">Política de Privacidade</a> &nbsp;|&nbsp; <a href="#">Termos de Uso</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <span class="whatsapp-tooltip">Fale conosco!</span>
+  <a href="https://wa.me/5511971071213" class="whatsapp-float-btn whatsapp-pulse" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<script src="js/main.js"></script>
+<script class="ed-script">
+/* ============================================================
+   EDITOR VISUAL — LLANA BRINDES
+   ============================================================ */
+(function () {
+  let editOn = false;
+  let currentTarget = null;
+
+  /* ---- Toggle edit mode ---- */
+  window.edToggle = function () {
+    editOn = !editOn;
+    document.body.classList.toggle('edit-on', editOn);
+
+    const btn = document.getElementById('ed-toggle');
+    const status = document.getElementById('ed-status');
+    const hint = document.getElementById('ed-hint');
+
+    if (editOn) {
+      btn.textContent = '⏹ Desativar Edição';
+      btn.classList.add('ativo');
+      status.className = 'on';
+      status.innerHTML = '<span class="dot"></span>Modo edição ATIVO';
+      hint.textContent = 'Clique em qualquer texto para editar • Passe o mouse nas imagens para trocá-las';
+
+      // Make [data-ed] text elements editable on click
+      document.querySelectorAll('[data-ed]').forEach(el => {
+        if (el.matches('img') || el.matches('button')) return;
+        el.addEventListener('click', onTextClick);
+      });
+
+      // Prevent navigation on links in edit mode
+      document.querySelectorAll('a[data-ed]').forEach(a => {
+        a.addEventListener('click', preventNav);
+      });
+
+    } else {
+      btn.textContent = '✏️ Ativar Edição';
+      btn.classList.remove('ativo');
+      status.className = '';
+      status.innerHTML = '<span class="dot"></span>Edição desativada';
+      hint.textContent = 'Ative a edição para clicar e editar qualquer texto, imagem ou link';
+
+      // Remove contenteditable from all
+      document.querySelectorAll('[contenteditable]').forEach(el => {
+        el.removeAttribute('contenteditable');
+        el.blur();
+      });
+
+      document.querySelectorAll('[data-ed]').forEach(el => {
+        el.removeEventListener('click', onTextClick);
+      });
+      document.querySelectorAll('a[data-ed]').forEach(a => {
+        a.removeEventListener('click', preventNav);
+      });
+    }
+  };
+
+  function preventNav(e) {
+    if (editOn) e.preventDefault();
+  }
+
+  function onTextClick(e) {
+    if (!editOn) return;
+    if (e.target.closest('#ed-bar') || e.target.closest('.ed-img-btn')) return;
+
+    const el = e.currentTarget;
+
+    // If clicking a link with data-ed, show URL editor
+    if (el.tagName === 'A' && el.hasAttribute('href')) {
+      e.preventDefault();
+      edEditLink(el);
+      return;
+    }
+
+    // Otherwise make text editable
+    if (el.contentEditable !== 'true') {
+      // Remove contenteditable from others
+      document.querySelectorAll('[contenteditable="true"]').forEach(other => {
+        if (other !== el) { other.removeAttribute('contenteditable'); other.blur(); }
+      });
+      el.contentEditable = 'true';
+      el.focus();
+
+      // Place cursor at end
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      edHint('Editando — clique fora para confirmar');
+    }
+
+    e.stopPropagation();
+  }
+
+  // Click outside = deactivate current editable
+  document.addEventListener('click', function (e) {
+    if (!editOn) return;
+    if (e.target.closest('#ed-bar') || e.target.closest('#ed-modal') || e.target.closest('.ed-img-btn')) return;
+    const active = document.querySelector('[contenteditable="true"]');
+    if (active && !active.contains(e.target)) {
+      active.removeAttribute('contenteditable');
+      active.blur();
+      edHint('Clique em qualquer texto para editar • Passe o mouse nas imagens para trocá-las');
+    }
+  });
+
+  /* ---- Image editing ---- */
+  window.edEditImg = function (imgId, name, hint) {
+    if (!editOn) { edToast('Ative o modo de edição primeiro!'); return; }
+    const img = document.getElementById(imgId);
+    if (!img) return;
+    currentTarget = { type: 'img', el: img };
+    openModal(
+      '📷 ' + name,
+      hint || 'Cole a URL da nova imagem abaixo.',
+      `<label>URL da imagem</label>
+       <input type="url" id="ed-url-input" placeholder="https://..." value="${img.src}" />
+       <img id="ed-img-preview" class="ed-modal-preview" src="${img.src}" alt="Preview" onerror="this.style.opacity='.3'" />`,
+      function () {
+        const url = document.getElementById('ed-url-input').value.trim();
+        if (url) { img.src = url; edToast('Imagem atualizada!'); }
+      }
+    );
+
+    // Live preview
+    setTimeout(() => {
+      const input = document.getElementById('ed-url-input');
+      const preview = document.getElementById('ed-img-preview');
+      if (input && preview) {
+        input.addEventListener('input', () => { preview.src = input.value; });
+      }
+    }, 50);
+  };
+
+  window.edEditBg = function (card, name) {
+    if (!editOn) { edToast('Ative o modo de edição primeiro!'); return; }
+    currentTarget = { type: 'bg', el: card };
+    const current = card.style.backgroundImage || '';
+    const currentUrl = current.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+    openModal(
+      '📷 ' + name,
+      'Cole a URL da imagem para o background do card.',
+      `<label>URL da imagem</label>
+       <input type="url" id="ed-url-input" placeholder="https://..." value="${currentUrl}" />
+       <img id="ed-img-preview" class="ed-modal-preview" src="${currentUrl || ''}" alt="Preview" />`,
+      function () {
+        const url = document.getElementById('ed-url-input').value.trim();
+        if (url) {
+          // Replace placeholder background with real image
+          const placeholder = card.querySelector('.cat-img-placeholder');
+          if (placeholder) {
+            placeholder.style.backgroundImage = `url(${url})`;
+            placeholder.style.backgroundSize = 'cover';
+            placeholder.style.backgroundPosition = 'center';
+            const icon = placeholder.querySelector('span[style]');
+            if (icon) icon.style.display = 'none';
+          }
+          card.dataset.bgImg = url;
+          edToast('Imagem da categoria atualizada!');
+        }
+      }
+    );
+    setTimeout(() => {
+      const input = document.getElementById('ed-url-input');
+      const preview = document.getElementById('ed-img-preview');
+      if (input && preview) input.addEventListener('input', () => { preview.src = input.value; });
+    }, 50);
+  };
+
+  /* ---- Link editing ---- */
+  function edEditLink(a) {
+    const label = a.textContent.trim() || 'Link';
+    openModal(
+      '🔗 Editar link',
+      'Altere o texto e/ou a URL do link.',
+      `<label>Texto do link</label>
+       <input type="text" id="ed-link-text" value="${a.textContent.trim()}" />
+       <label>URL de destino</label>
+       <input type="url" id="ed-link-href" placeholder="https://... ou /pagina" value="${a.getAttribute('href') || ''}" />`,
+      function () {
+        const text = document.getElementById('ed-link-text').value;
+        const href = document.getElementById('ed-link-href').value.trim();
+        if (text) a.textContent = text;
+        if (href) a.href = href;
+        edToast('Link atualizado!');
+      }
+    );
+  }
+
+  /* ---- Modal ---- */
+  function openModal(title, sub, bodyHTML, onSave) {
+    document.getElementById('ed-modal-title').textContent = title;
+    document.getElementById('ed-modal-sub').textContent = sub;
+    document.getElementById('ed-modal-body').innerHTML = bodyHTML;
+    document.getElementById('ed-modal-save').onclick = function () { onSave(); edModalClose(); };
+    document.getElementById('ed-modal').classList.add('open');
+
+    // Focus first input
+    setTimeout(() => {
+      const inp = document.querySelector('#ed-modal-body input');
+      if (inp) { inp.focus(); inp.select(); }
+    }, 60);
+  }
+
+  window.edModalClose = function () {
+    document.getElementById('ed-modal').classList.remove('open');
+  };
+
+  // Close modal on backdrop click
+  document.getElementById('ed-modal').addEventListener('click', function (e) {
+    if (e.target === this) edModalClose();
+  });
+
+  // Enter key in modal
+  document.getElementById('ed-modal').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      document.getElementById('ed-modal-save').click();
+    }
+    if (e.key === 'Escape') edModalClose();
+  });
+
+  /* ---- Download HTML ---- */
+  window.edDownload = function () {
+    // Deactivate edit mode first
+    if (editOn) edToggle();
+
+    const clone = document.documentElement.cloneNode(true);
+
+    // Remove editor elements
+    ['#ed-bar', '#ed-help-panel', '#ed-modal', '#ed-toast'].forEach(sel => {
+      const el = clone.querySelector(sel);
+      if (el) el.remove();
+    });
+    clone.querySelectorAll('.ed-script, .ed-style').forEach(el => el.remove());
+    clone.querySelectorAll('.ed-img-btn').forEach(el => el.remove());
+
+    // Remove editor attributes and classes
+    clone.querySelectorAll('[data-ed]').forEach(el => el.removeAttribute('data-ed'));
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    clone.body.classList.remove('edit-on');
+    clone.body.style.paddingTop = '';
+    const siteHeader = clone.querySelector('.site-header');
+    if (siteHeader) siteHeader.style.top = '';
+
+    // Remove editor inline style from body
+    clone.querySelector('style') && null; // kept for safety
+
+    // Fix ed-img-wrap wrappers: unwrap them, keep inner img
+    clone.querySelectorAll('.ed-img-wrap').forEach(wrap => {
+      const parent = wrap.parentNode;
+      // Move children to parent
+      while (wrap.firstChild) parent.insertBefore(wrap.firstChild, wrap);
+      parent.removeChild(wrap);
+    });
+
+    // Remove editor <style> block (first style = editor styles, keep site.css link)
+    // The first <style> tag in head is the editor style
+    const headStyles = clone.querySelectorAll('head style');
+    headStyles.forEach(s => s.remove());
+
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    edToast('✅ index.html baixado com sucesso!');
+  };
+
+  /* ---- Help panel ---- */
+  window.edHelpToggle = function () {
+    document.getElementById('ed-help-panel').classList.toggle('open');
+  };
+
+  /* ---- Toast ---- */
+  function edToast(msg) {
+    const t = document.getElementById('ed-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function edHint(msg) {
+    const h = document.getElementById('ed-hint');
+    if (h) h.textContent = msg;
+  }
+
+})();
+</script>
+</body>
+</html>
