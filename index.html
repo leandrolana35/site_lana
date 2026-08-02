@@ -3,308 +3,465 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLANA Brindes — Brindes Personalizados e Kits Promocionais</title>
-  <meta name="description" content="Brindes personalizados, kits promocionais e campanhas corporativas para sua marca. Solicite seu orçamento com a LLANA." />
-  <link rel="stylesheet" href="css/style.css" />
+  <title>LLana Grupo — Inteligência Operacional e Presença de Marca</title>
+  <meta name="description" content="LLana Grupo Corporativo: soluções em Brindes Corporativos Premium e Tecnologia & Dados com IA para empresas que querem crescer com estratégia." />
+  <link rel="stylesheet" href="css/theme.css" />
+  <style>
+    /* ── PORTAL HERO ─────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - var(--hh));
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 40%, rgba(59,130,246,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 20%, rgba(6,182,212,.08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 80% 80%, rgba(139,92,246,.08) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 5rem 0 4rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      margin-bottom: 2rem;
+    }
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--cyan);
+      animation: orb-pulse 2s ease-in-out infinite;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: -.03em;
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--tx-muted);
+      max-width: 600px;
+      margin: 0 auto 2.75rem;
+      line-height: 1.75;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── UNITS GRID ──────────────────────────── */
+    .units-section { padding: 6rem 0 5rem; position: relative; }
+    .units-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .unit-card {
+      position: relative;
+      border-radius: var(--r-2xl);
+      padding: 2.75rem 2.5rem;
+      overflow: hidden;
+      border: 1px solid var(--bdr);
+      background: var(--bg-card);
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+      cursor: pointer;
+    }
+    .unit-card:hover { transform: translateY(-5px); }
+    .unit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      transition: opacity .4s ease;
+      opacity: .6;
+    }
+    .unit-card--promo::before { background: rgba(245,158,11,.12); }
+    .unit-card--tech::before  { background: rgba(59,130,246,.14); }
+    .unit-card--promo:hover { border-color: rgba(245,158,11,.3); box-shadow: 0 0 40px rgba(245,158,11,.1); }
+    .unit-card--tech:hover  { border-color: var(--bdr-blue);     box-shadow: var(--sh-blue); }
+    .unit-card--promo:hover::before { opacity: 1; }
+    .unit-card--tech:hover::before  { opacity: 1; }
+
+    .unit-tag {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .25rem .85rem;
+      border-radius: 99px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid;
+      margin-bottom: 1.75rem;
+      position: relative; z-index: 1;
+    }
+    .unit-tag-promo { background: rgba(245,158,11,.1); color: #fbbf24; border-color: rgba(245,158,11,.2); }
+    .unit-tag-tech  { background: rgba(59,130,246,.1); color: var(--blue-lt); border-color: rgba(59,130,246,.2); }
+
+    .unit-card h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; margin-bottom: .85rem; position: relative; z-index: 1; letter-spacing: -.02em; }
+    .unit-card p  { color: var(--tx-muted); line-height: 1.7; margin-bottom: 2rem; font-size: .97rem; position: relative; z-index: 1; max-width: 440px; }
+
+    .unit-features { display: flex; flex-direction: column; gap: .55rem; margin-bottom: 2.25rem; position: relative; z-index: 1; }
+    .unit-feat {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .88rem; color: var(--tx-muted);
+    }
+    .unit-feat::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .unit-card--promo .unit-feat::before { background: #fbbf24; }
+    .unit-card--tech  .unit-feat::before { background: var(--blue-lt); }
+
+    .unit-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .9rem; font-weight: 700;
+      padding: .75rem 1.6rem;
+      border-radius: var(--r-md);
+      border: 1.5px solid;
+      transition: all var(--t);
+      position: relative; z-index: 1;
+    }
+    .unit-cta-promo { color: #fbbf24; border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.06); }
+    .unit-cta-promo:hover { background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.5); }
+    .unit-cta-tech { color: var(--blue-lt); border-color: var(--bdr-blue); background: rgba(59,130,246,.06); }
+    .unit-cta-tech:hover { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.5); }
+    .unit-cta .arrow { transition: transform var(--t); }
+    .unit-cta:hover .arrow { transform: translateX(4px); }
+
+    .unit-bg-emoji {
+      position: absolute;
+      bottom: -10px; right: 24px;
+      font-size: 8rem;
+      opacity: .07;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity .3s ease;
+    }
+    .unit-card:hover .unit-bg-emoji { opacity: .12; }
+
+    /* ── SOBRE ───────────────────────────────── */
+    .sobre-section { padding: 5rem 0; background: var(--bg-2); }
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .sobre-content h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); margin: .75rem 0 1.25rem; letter-spacing: -.02em; }
+    .sobre-content p { color: var(--tx-muted); line-height: 1.75; margin-bottom: 1rem; }
+    .sobre-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-box strong { display: block; font-size: 2.25rem; font-weight: 900; line-height: 1; margin-bottom: .3rem; }
+    .stat-box span { font-size: .78rem; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .06em; }
+
+    .sobre-visual {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .vis-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: .4rem;
+    }
+    .vis-card:nth-child(1) { grid-column: span 2; }
+    .vis-card .vc-icon { font-size: 1.4rem; margin-bottom: .35rem; }
+    .vis-card .vc-label { font-size: .78rem; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .06em; }
+    .vis-card .vc-val { font-size: 1.6rem; font-weight: 800; }
+
+    /* ── CTA FINAL ───────────────────────────── */
+    .cta-section {
+      padding: 6rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(59,130,246,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: 1rem; position: relative; z-index: 1; }
+    .cta-section p  { color: var(--tx-muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.5rem; position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 900px) {
+      .units-grid { grid-template-columns: 1fr; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .sobre-visual { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.2rem; }
+      .sobre-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="top-bar">
-  🎁 Brindes personalizados com sua marca — <a href="/contato">Solicite um orçamento gratuito</a>
-</div>
-
+<!-- ── HEADER ──────────────────────────────── -->
 <header class="site-header" id="header">
   <div class="container">
     <div class="header-inner">
-      <a href="/inicio" class="logo">
-        <div class="logo-text">
-          <span class="brand">LL<span>ANA</span></span>
-          <span class="tagline">Brindes &amp; Campanhas</span>
+      <a href="/" class="logo">
+        <div class="logo-mark">LL</div>
+        <div class="logo-body">
+          <span class="logo-name">LL<em>ANA</em></span>
+          <span class="logo-unit">Grupo Corporativo</span>
         </div>
       </a>
       <nav class="main-nav" aria-label="Menu principal">
-        <a href="/inicio" class="active">Início</a>
-        <a href="https://llana.com.br/catalogo-de-brindes/">Catálogo</a>
-        <a href="/campanhas">Campanhas</a>
-        <a href="/kits">Kits Promocionais</a>
-        <a href="/contato">Contato</a>
+        <a href="/" class="active">Início</a>
+        <a href="/brindes">LLana Promo</a>
+        <a href="/tech">LLana Tech</a>
+        <a href="#sobre">Sobre o Grupo</a>
       </nav>
       <div class="header-cta">
-        <a href="https://wa.me/5511971071213" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">💬 WhatsApp</a>
-        <a href="/contato" class="btn btn-primary btn-sm">Solicitar Orçamento</a>
+        <a href="#contato" class="btn btn-ghost btn-sm">Contato</a>
+        <a href="https://wa.me/5511971071213" class="btn btn-primary btn-sm" target="_blank" rel="noopener">💬 WhatsApp</a>
       </div>
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-  <nav class="mobile-menu" aria-label="Menu mobile">
-    <a href="/inicio" class="active">🏠 Início</a>
-    <a href="/catalogo">📦 Catálogo de Brindes</a>
-    <a href="/campanhas">📣 Mural de Campanhas</a>
-    <a href="/kits">🎁 Kits Promocionais</a>
-    <a href="/contato">✉️ Contato</a>
-    <div class="mobile-menu-cta">
-      <a href="https://wa.me/5511971071213" class="btn btn-whatsapp btn-full" style="margin-bottom:.75rem;" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
-      <a href="/contato" class="btn btn-primary btn-full">Solicitar Orçamento</a>
+  <nav class="mobile-nav" aria-label="Menu mobile">
+    <a href="/">Início</a>
+    <a href="/brindes">🎁 LLana Promo & Gifts</a>
+    <a href="/tech">⚡ LLana Tech & Data</a>
+    <a href="#sobre">Sobre o Grupo</a>
+    <div class="mob-cta">
+      <a href="https://wa.me/5511971071213" class="btn btn-wa btn-full" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+      <a href="#contato" class="btn btn-outline btn-full">Entrar em Contato</a>
     </div>
   </nav>
 </header>
 
-<main>
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero bg-grid">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow fade">
+        <span class="hero-eyebrow-dot"></span>
+        <span class="badge badge-blue">Grupo Corporativo B2B</span>
+      </div>
+      <h1 class="fade">
+        Transformamos marcas em<br>
+        <span class="gtext">ecossistemas inteligentes</span>
+      </h1>
+      <p class="hero-sub fade">
+        Do brinde premium ao dashboard executivo — a LLana entrega presença física de marca
+        e inteligência digital em uma única parceria estratégica.
+      </p>
+      <div class="hero-cta fade">
+        <a href="#unidades" class="btn btn-primary btn-xl">Conhecer Soluções</a>
+        <a href="https://wa.me/5511971071213" class="btn btn-ghost btn-xl" target="_blank" rel="noopener">💬 Falar com Consultor</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="hero" id="hero">
-    <div class="hero-bg" style="background-image:url('https://placehold.co/1920x900/1a2e4a/1a2e4a?text=.')"></div>
-    <div class="hero-pattern"></div>
-    <div class="container">
-      <div class="hero-split">
-        <div class="hero-content fade-up">
-          <div class="hero-tag"><span class="dot"></span>Brindes que marcam presença</div>
-          <h1>Sua marca em<br><span>cada detalhe</span></h1>
-          <p>Brindes personalizados, kits promocionais e campanhas corporativas desenvolvidos para impactar, fidelizar e gerar resultados reais.</p>
-          <div class="hero-cta">
-            <a href="/contato" class="btn btn-primary btn-xl">🎁 Solicitar Orçamento</a>
-            <a href="/catalogo" class="btn btn-outline btn-xl">Ver Catálogo</a>
-          </div>
-          <div class="hero-stats">
-            <div class="hero-stat-item"><strong data-count="500" data-suffix="+">500+</strong><span>Clientes atendidos</span></div>
-            <div class="hero-stat-item"><strong data-count="1200" data-suffix="+">1.200+</strong><span>Produtos no catálogo</span></div>
-            <div class="hero-stat-item"><strong data-count="10" data-suffix=" anos">10 anos</strong><span>De experiência</span></div>
-          </div>
+<!-- ── UNIDADES ─────────────────────────────── -->
+<section class="units-section" id="unidades">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-cyan">Escolha sua unidade</span>
+      <h2>Duas unidades.<br>Uma parceria completa.</h2>
+      <p>Selecione a solução que você precisa — ou combine as duas para uma estratégia 360° integrada.</p>
+    </div>
+
+    <div class="units-grid">
+
+      <!-- Card: LLana Promo -->
+      <a href="brindes/" class="unit-card unit-card--promo reveal-l" style="display:block;">
+        <div class="unit-tag unit-tag-promo">🎁 LLana Promo & Gifts</div>
+        <h3>Presença de marca<br>que permanece</h3>
+        <p>Brindes corporativos premium, kits de onboarding e campanhas promocionais desenvolvidas para impactar clientes, fidelizar talentos e fortalecer a cultura da sua empresa.</p>
+        <div class="unit-features">
+          <div class="unit-feat">Kits Onboarding & Boas-vindas</div>
+          <div class="unit-feat">Brindes Executivos Premium</div>
+          <div class="unit-feat">Ações Promocionais e Eventos</div>
+          <div class="unit-feat">Ecossistema de Personalização B2B</div>
         </div>
-        <div class="hero-split-image float-anim">
-          <img src="https://placehold.co/600x700/FFFFFF/1E3A5F?text=PRODUTO+%0ACOM+LOGO+LLANA" alt="Brinde personalizado LLANA" style="border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);" />
+        <span class="unit-cta unit-cta-promo">
+          Catálogo & Soluções Promocionais
+          <span class="arrow">→</span>
+        </span>
+        <div class="unit-bg-emoji">🎁</div>
+      </a>
+
+      <!-- Card: LLana Tech -->
+      <a href="tech/" class="unit-card unit-card--tech reveal-r" style="display:block;">
+        <div class="unit-tag unit-tag-tech">⚡ LLana Tech & Data</div>
+        <h3>Inteligência de dados<br>e sistemas com IA</h3>
+        <p>Dashboards executivos, automação com inteligência artificial, integração de sistemas e análise preditiva — transformamos dados em decisões estratégicas para o seu negócio.</p>
+        <div class="unit-features">
+          <div class="unit-feat">Dashboards Executivos & Business Intelligence</div>
+          <div class="unit-feat">Agentes de IA & Automação de Processos</div>
+          <div class="unit-feat">Sistemas Web e Integrações sob Medida</div>
+          <div class="unit-feat">Análise Preditiva e Tratamento de Dados</div>
         </div>
-      </div>
-    </div>
-  </section>
+        <span class="unit-cta unit-cta-tech">
+          Soluções em Tecnologia & IA
+          <span class="arrow">→</span>
+        </span>
+        <div class="unit-bg-emoji">⚡</div>
+      </a>
 
-  <section class="selos-section">
-    <div class="container">
-      <div class="selos-grid">
-        <div class="selo-item reveal"><span class="icon">🚚</span><span>Entrega em todo Brasil</span></div>
-        <div class="selo-item reveal"><span class="icon">🎨</span><span>Personalização exclusiva</span></div>
-        <div class="selo-item reveal"><span class="icon">⚡</span><span>Prazo garantido</span></div>
-        <div class="selo-item reveal"><span class="icon">🏆</span><span>+10 anos no mercado</span></div>
-        <div class="selo-item reveal"><span class="icon">💼</span><span>Atendimento B2B</span></div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="categorias">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="tag">Nossos produtos</span>
-        <h2>Explore nossas categorias</h2>
-        <p>Do brinde simples ao kit premium — temos a solução certa para cada campanha e evento.</p>
-      </div>
-      <div class="categorias-grid">
-        <a href="catalogo.html?cat=canetas" class="categoria-card reveal">
-          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB)">✏️</div>
-          <div class="cat-overlay"><h3>Canetas e Escritório</h3><span>+120 opções</span></div>
-          <span class="cat-badge">Popular</span>
-        </a>
-        <a href="catalogo.html?cat=bolsas" class="categoria-card reveal">
-          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)">👜</div>
-          <div class="cat-overlay"><h3>Bolsas e Mochilas</h3><span>+85 opções</span></div>
-        </a>
-        <a href="catalogo.html?cat=copos" class="categoria-card reveal">
-          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9)">☕</div>
-          <div class="cat-overlay"><h3>Copos e Garrafas</h3><span>+200 opções</span></div>
-          <span class="cat-badge">Novo</span>
-        </a>
-        <a href="catalogo.html?cat=agenda" class="categoria-card reveal">
-          <div class="cat-img-placeholder" style="background:linear-gradient(135deg,#FFF8E1,#FFECB3)">📓</div>
-          <div class="cat-overlay"><h3>Agendas e Cadernos</h3><span>+95 opções</span></div>
-        </a>
-      </div>
-      <div style="text-align:center;margin-top:2.5rem;" class="reveal">
-        <a href="/catalogo" class="btn btn-outline-dark btn-lg">Ver catálogo completo →</a>
-      </div>
-    </div>
-  </section>
+<div class="divider"></div>
 
-  <section class="section section--alt" id="diferenciais">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="tag">Por que escolher a LLANA</span>
-        <h2>Diferenciais que fazem a diferença</h2>
-        <p>Cada detalhe do nosso processo é pensado para entregar o melhor resultado para a sua marca.</p>
-      </div>
-      <div class="diferenciais-grid">
-        <div class="diferencial-card reveal"><div class="ico-wrap">🎨</div><h4>Personalização exclusiva</h4><p>Aplicamos sua marca com qualidade gráfica premium em todos os produtos do catálogo.</p></div>
-        <div class="diferencial-card reveal"><div class="ico-wrap">📦</div><h4>Variedade de produtos</h4><p>Mais de 1.200 itens disponíveis, dos básicos corporativos aos mais premium e inovadores.</p></div>
-        <div class="diferencial-card reveal"><div class="ico-wrap">⚡</div><h4>Prazo garantido</h4><p>Cumprimos prazos mesmo em pedidos urgentes. Planejamos cada etapa para não falhar com você.</p></div>
-        <div class="diferencial-card reveal"><div class="ico-wrap">🤝</div><h4>Consultoria especializada</h4><p>Nosso time ajuda a escolher o brinde certo para cada campanha, evento e objetivo.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="sobre">
-    <div class="container">
-      <div class="sobre-grid">
-        <div class="sobre-img reveal-left">
-          <img src="https://placehold.co/560x680/EFF3F8/1E3A5F?text=IMAGEM+%0AINSTITUCIONAL+%0ALLANA" alt="LLANA Brindes — imagem institucional" />
-          <div class="sobre-badge"><span class="num">+10</span><span class="txt">anos de<br>mercado</span></div>
-        </div>
-        <div class="sobre-content reveal-right">
-          <span class="tag">Sobre a LLANA</span>
-          <h2>Especialistas em transformar marcas em experiências</h2>
-          <p>A LLANA é uma empresa especializada em brindes corporativos personalizados, kits promocionais e campanhas de incentivo. Atendemos marcas que entendem o poder de um brinde bem feito.</p>
-          <p>Com mais de uma década de experiência, oferecemos um processo completo: da escolha do produto até a entrega final, sempre com sua identidade visual aplicada com precisão e qualidade.</p>
-          <div class="beneficios-list">
-            <div class="beneficio-item"><div class="check">✓</div><div><h5>Arte e aprovação inclusa</h5><p>Nossa equipe de design cuida da arte e envia para aprovação antes de produzir.</p></div></div>
-            <div class="beneficio-item"><div class="check">✓</div><div><h5>Pedido mínimo acessível</h5><p>Produzimos a partir de quantidades pequenas, ideal para qualquer orçamento.</p></div></div>
-            <div class="beneficio-item"><div class="check">✓</div><div><h5>Entrega nacional</h5><p>Enviamos para todo o Brasil com rastreamento e embalagem segura.</p></div></div>
-            <div class="beneficio-item"><div class="check">✓</div><div><h5>Nota fiscal garantida</h5><p>Empresa regularizada, com NF para pessoa jurídica e física.</p></div></div>
+<!-- ── SOBRE ─────────────────────────────────── -->
+<section class="sobre-section" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-content reveal-l">
+        <span class="badge badge-purple">Sobre o Grupo LLana</span>
+        <h2>Parceiros estratégicos de empresas que crescem com inteligência</h2>
+        <p>A LLana nasceu com um propósito claro: ser mais do que um fornecedor — ser um parceiro de crescimento. Com mais de 10 anos de experiência em atendimento corporativo B2B, expandimos nossa atuação para unir o mundo físico dos brindes premium à inteligência digital de dados e sistemas.</p>
+        <p>Atendemos empresas que entendem que a marca se constrói tanto no brinde entregue ao cliente quanto no dashboard que guia a decisão do gestor.</p>
+        <div class="sobre-stats">
+          <div class="stat-box">
+            <strong class="gtext" data-count="500" data-suffix="+">500+</strong>
+            <span>Empresas atendidas</span>
           </div>
-          <div style="margin-top:2rem;" class="reveal">
-            <a href="/contato" class="btn btn-primary btn-lg">Falar com um consultor →</a>
+          <div class="stat-box">
+            <strong class="gtext" data-count="10" data-suffix=" anos">10+</strong>
+            <span>De experiência</span>
+          </div>
+          <div class="stat-box">
+            <strong class="gtext" data-count="98" data-suffix="%">98%</strong>
+            <span>Índice de satisfação</span>
+          </div>
+          <div class="stat-box">
+            <strong class="gtext" data-count="1200" data-suffix="+">1200+</strong>
+            <span>Produtos em catálogo</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section--dark" style="padding:4rem 0;">
-    <div class="container">
-      <div class="numbers-grid">
-        <div class="number-item reveal"><strong data-count="500" data-suffix="+">500+</strong><span>Empresas atendidas</span></div>
-        <div class="number-item reveal"><strong data-count="1200" data-suffix="+">1.200+</strong><span>Produtos disponíveis</span></div>
-        <div class="number-item reveal"><strong data-count="98" data-suffix="%">98%</strong><span>Índice de satisfação</span></div>
-        <div class="number-item reveal"><strong data-count="10" data-suffix="">10</strong><span>Anos de experiência</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="campanhas-cta">
-    <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" class="reveal">
-        <div style="border-radius:20px;overflow:hidden;box-shadow:var(--sh-xl);">
-          <img src="https://placehold.co/600x400/1E3A5F/FFFFFF?text=CAMPANHA+%0ALLANA" alt="Mural de Campanhas LLANA" style="width:100%;display:block;" />
+      <div class="sobre-visual reveal-r">
+        <div class="vis-card" style="background:linear-gradient(135deg, rgba(59,130,246,.08), rgba(6,182,212,.04)); border-color: var(--bdr-blue);">
+          <div class="vc-icon">📊</div>
+          <div class="vc-label">Última análise entregue</div>
+          <div class="vc-val gtext">Dashboard Q4 — 2024</div>
+          <div style="font-size:.82rem; color:var(--tx-dim); margin-top:.25rem;">↑ 34% em eficiência operacional identificada</div>
         </div>
-        <div>
-          <span class="tag">Mural de Campanhas</span>
-          <h2>Peças prontas para<br>suas campanhas</h2>
-          <p>Acesse nosso mural com campanhas sazonais, materiais para datas comemorativas e kits temáticos prontos para ativar com sua marca.</p>
-          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
-            <a href="/campanhas" class="btn btn-primary btn-lg">Ver Campanhas</a>
-            <a href="/contato" class="btn btn-outline-dark btn-lg">Solicitar Material</a>
-          </div>
+        <div class="vis-card">
+          <div class="vc-icon">🎁</div>
+          <div class="vc-label">Último kit entregue</div>
+          <div class="vc-val">Kit Onboarding Premium</div>
+          <div style="font-size:.82rem; color:var(--tx-dim); margin-top:.25rem;">250 colaboradores · São Paulo</div>
+        </div>
+        <div class="vis-card">
+          <div class="vc-icon">🤖</div>
+          <div class="vc-label">Automação em produção</div>
+          <div class="vc-val gtext-purple">Agente IA Ativo</div>
+          <div style="font-size:.82rem; color:var(--tx-dim); margin-top:.25rem;">−68% em tempo de processo</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section--alt" id="kits-cta">
-    <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" class="reveal">
-        <div>
-          <span class="tag">Kits Promocionais</span>
-          <h2>Kits montados e<br>prontos para usar</h2>
-          <p>Soluções completas para eventos, onboarding, incentivo de equipes e campanhas corporativas. Kits personalizados com a identidade da sua marca.</p>
-          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
-            <a href="/kits" class="btn btn-primary btn-lg">Ver Kits</a>
-            <a href="/contato" class="btn btn-outline-dark btn-lg">Montar Kit Personalizado</a>
-          </div>
-        </div>
-        <div style="border-radius:20px;overflow:hidden;box-shadow:var(--sh-xl);">
-          <img src="https://placehold.co/600x400/FF6B35/FFFFFF?text=KIT+PROMOCIONAL+%0ALLANA" alt="Kit Promocional LLANA" style="width:100%;display:block;" />
-        </div>
-      </div>
+<div class="divider"></div>
+
+<!-- ── CTA FINAL ──────────────────────────── -->
+<section class="cta-section" id="contato">
+  <div class="container container--sm">
+    <span class="badge badge-green reveal" style="margin-bottom:1.5rem;">Vamos conversar?</span>
+    <h2 class="reveal">Pronto para dar o próximo<br>passo com a LLana?</h2>
+    <p class="reveal">Fale com um de nossos consultores e descubra como integramos presença de marca e inteligência de dados para acelerar o crescimento do seu negócio.</p>
+    <div class="cta-btns reveal">
+      <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20conhecer%20as%20soluções%20do%20Grupo%20LLana." class="btn btn-wa btn-xl" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+      <a href="mailto:comercial@llana.com.br" class="btn btn-outline btn-xl">✉️ Enviar E-mail</a>
     </div>
-  </section>
+    <p class="reveal" style="margin-top:2rem; font-size:.82rem; color:var(--tx-dim);">
+      📞 (11) 97107-1213 &nbsp;·&nbsp; ✉️ comercial@llana.com.br &nbsp;·&nbsp; São Paulo, SP
+    </p>
+  </div>
+</section>
 
-  <section class="section" id="newsletter">
-    <div class="container">
-      <div style="max-width:680px;margin:0 auto;text-align:center;" class="reveal">
-        <span class="tag">Fique por dentro</span>
-        <h2>Receba novidades e<br>ofertas em primeira mão</h2>
-        <p>Cadastre seu e-mail e receba lançamentos, campanhas sazonais e condições especiais diretamente na sua caixa de entrada.</p>
-        <form id="mc-form" action="SEU_LINK_DO_MAILCHIMP_AQUI" method="post" novalidate style="margin-top:2rem;">
-          <div style="display:flex;gap:.75rem;max-width:480px;margin:0 auto .75rem;">
-            <input type="email" name="EMAIL" placeholder="Seu melhor e-mail" required style="flex:1;padding:.85rem 1.25rem;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-size:1rem;outline:none;" />
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-          </div>
-          <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_TROQUE_PELO_CODIGO_DO_MAILCHIMP" tabindex="-1" value=""></div>
-          <p id="mc-message" style="font-size:.85rem;min-height:1.2rem;"></p>
-          <p style="font-size:.78rem;color:var(--c-gray);margin:0;">Sem spam. Cancele quando quiser. Sua privacidade é respeitada.</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-banner" id="cta-final">
-    <div class="container">
-      <h2 class="reveal">Pronto para ativar sua marca<br>com brindes de impacto?</h2>
-      <p class="reveal">Fale com um consultor especializado e receba uma proposta personalizada para sua campanha, evento ou ação corporativa.</p>
-      <div class="cta-buttons reveal">
-        <a href="https://wa.me/5511971071213" class="btn btn-whatsapp btn-xl" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
-        <a href="/contato" class="btn btn-outline btn-xl">Solicitar Orçamento</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
+<!-- ── FOOTER ─────────────────────────────── -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <div class="footer-logo">
-          <span class="brand">LL<span>ANA</span></span>
-          <div class="tagline">Brindes &amp; Campanhas</div>
-        </div>
-        <p style="margin-top:1rem;">Especialistas em brindes personalizados, kits promocionais e campanhas corporativas para marcas que querem impactar.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="Facebook">📘</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-          <a href="#" aria-label="WhatsApp">💬</a>
+        <a href="/" class="logo" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-mark">LL</div>
+          <div class="logo-body" style="margin-left:.6rem;">
+            <span class="logo-name">LL<em>ANA</em></span>
+            <span class="logo-unit">Grupo Corporativo</span>
+          </div>
+        </a>
+        <p>Parceiros estratégicos de empresas que crescem com inteligência — da presença de marca à eficiência digital.</p>
+        <div style="display:flex; gap:.5rem; margin-top:1.25rem;">
+          <a href="#" aria-label="Instagram" style="font-size:1rem;">📷</a>
+          <a href="#" aria-label="LinkedIn"  style="font-size:1rem;">💼</a>
+          <a href="https://wa.me/5511971071213" aria-label="WhatsApp" style="font-size:1rem;">💬</a>
         </div>
       </div>
       <div class="footer-col">
-        <h4>Navegação</h4>
-        <a href="/inicio">Início</a>
-        <a href="/catalogo">Catálogo de Brindes</a>
-        <a href="/campanhas">Mural de Campanhas</a>
-        <a href="/kits">Kits Promocionais</a>
-        <a href="/contato">Contato</a>
-        <a href="/contato#orcamento">Solicitar Orçamento</a>
+        <h5>Unidades</h5>
+        <a href="brindes/">LLana Promo & Gifts</a>
+        <a href="tech/">LLana Tech & Data</a>
       </div>
       <div class="footer-col">
-        <h4>Categorias</h4>
-        <a href="catalogo.html?cat=canetas">Canetas e Escritório</a>
-        <a href="catalogo.html?cat=bolsas">Bolsas e Mochilas</a>
-        <a href="catalogo.html?cat=copos">Copos e Garrafas</a>
-        <a href="catalogo.html?cat=agenda">Agendas e Cadernos</a>
-        <a href="catalogo.html?cat=camisetas">Camisetas e Uniformes</a>
-        <a href="catalogo.html?cat=tecnologia">Tecnologia</a>
+        <h5>Navegação</h5>
+        <a href="/">Portal do Grupo</a>
+        <a href="#sobre">Sobre a LLana</a>
+        <a href="#contato">Contato</a>
+        <a href="https://llana.com.br/catalogo-de-brindes/">Catálogo de Brindes</a>
       </div>
       <div class="footer-col">
-        <h4>Contato</h4>
-        <div class="footer-contact-item"><div class="ico">📍</div><div><strong>Endereço</strong><p>Rua Exemplo, 123 — São Paulo, SP</p></div></div>
-        <div class="footer-contact-item"><div class="ico">📞</div><div><strong>Telefone / WhatsApp</strong><p><a href="tel:+5511971071213">(11) 97107-1213</a></p></div></div>
-        <div class="footer-contact-item"><div class="ico">✉️</div><div><strong>E-mail</strong><p><a href="mailto:comercial@llana.com.br">comercial@llana.com.br</a></p></div></div>
-        <div class="footer-newsletter">
-          <p style="font-size:.82rem;margin-bottom:.5rem;">Receba novidades por e-mail:</p>
-          <form class="footer-newsletter-form" id="footer-mc-form" action="SEU_LINK_MAILCHIMP" method="post">
-            <input type="email" name="EMAIL" placeholder="seu@email.com" required />
-            <button type="submit" class="btn btn-primary btn-sm">OK</button>
-          </form>
-        </div>
+        <h5>Contato</h5>
+        <a href="tel:+5511971071213">(11) 97107-1213</a>
+        <a href="mailto:comercial@llana.com.br">comercial@llana.com.br</a>
+        <p style="margin-top:.5rem;">São Paulo, SP — Brasil</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 LLANA Brindes. Todos os direitos reservados.</span>
-      <span><a href="#">Política de Privacidade</a> &nbsp;|&nbsp; <a href="#">Termos de Uso</a></span>
+      <span>© 2025 LLana Grupo Corporativo. Todos os direitos reservados.</span>
+      <span><a href="#">Privacidade</a> · <a href="#">Termos</a></span>
     </div>
   </div>
 </footer>
 
-<div class="whatsapp-float">
-  <span class="whatsapp-tooltip">Fale conosco!</span>
-  <a href="https://wa.me/5511971071213?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." class="whatsapp-float-btn whatsapp-pulse" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">💬</a>
+<!-- WhatsApp Float -->
+<div class="wa-float">
+  <span class="wa-tip">Fale com a LLana</span>
+  <a href="https://wa.me/5511971071213" class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
 </div>
 
 <script src="js/main.js"></script>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLana Promo & Gifts — Brindes Corporativos Premium B2B</title>
+  <meta name="description" content="Kits de onboarding, brindes executivos premium e campanhas promocionais B2B. Presença de marca que fideliza talentos e clientes. Solicite seu orçamento." />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <style>
+    /* ── PROMO HERO ──────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: calc(88vh - var(--hh));
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(245,158,11,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(251,191,36,.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 70% 80%, rgba(59,130,246,.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 5rem 0;
+    }
+    .hero-eyebrow { display: flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem; }
+    .hero-dot-amber { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); animation: orb-pulse 2s infinite; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 900; letter-spacing: -.03em; line-height: 1.08;
+      margin-bottom: 1.35rem;
+    }
+    .gtext-amber { background: linear-gradient(135deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.05rem; color: var(--tx-muted); line-height: 1.75; margin-bottom: 2.25rem; max-width: 480px; }
+    .hero-cta { display: flex; gap: .85rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+    .btn-amber { background: linear-gradient(135deg,#f59e0b,#f97316); color: #fff; border: none; box-shadow: 0 4px 20px rgba(245,158,11,.28); }
+    .btn-amber:hover { box-shadow: 0 8px 32px rgba(245,158,11,.45); filter: brightness(1.06); }
+
+    .hero-seals { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+    .seal { display: flex; align-items: center; gap: .45rem; font-size: .82rem; color: var(--tx-muted); }
+    .seal-icon { font-size: 1rem; }
+
+    /* Kit visual mockup */
+    .hero-visual { position: relative; }
+    .kit-frame {
+      background: var(--bg-card);
+      border: 1px solid rgba(245,158,11,.2);
+      border-radius: var(--r-2xl);
+      padding: 2rem;
+      box-shadow: 0 0 40px rgba(245,158,11,.08), var(--sh-card);
+      position: relative;
+    }
+    .kit-title { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--tx-dim); font-weight: 600; margin-bottom: 1.25rem; }
+    .kit-items-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .kit-item {
+      background: var(--bg-2);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-lg);
+      padding: 1rem;
+      display: flex; flex-direction: column; align-items: flex-start; gap: .3rem;
+      transition: border-color var(--t);
+    }
+    .kit-item:hover { border-color: rgba(245,158,11,.25); }
+    .kit-item .ki-icon { font-size: 1.5rem; }
+    .kit-item .ki-name { font-size: .82rem; font-weight: 600; color: var(--white); }
+    .kit-item .ki-sub { font-size: .7rem; color: var(--tx-dim); }
+    .kit-badge {
+      position: absolute; top: -14px; left: 24px;
+      background: var(--bg-up);
+      border: 1px solid rgba(245,158,11,.3);
+      border-radius: 99px;
+      padding: .35rem .9rem;
+      font-size: .72rem; font-weight: 700; color: #fbbf24;
+      letter-spacing: .05em;
+    }
+
+    /* ── TOP BAR PROMO ───────────────────────── */
+    .top-promo {
+      background: linear-gradient(90deg, rgba(245,158,11,.1), rgba(59,130,246,.08));
+      border-bottom: 1px solid rgba(245,158,11,.15);
+      text-align: center;
+      padding: .55rem 1rem;
+      font-size: .82rem;
+      font-weight: 500;
+      color: #fbbf24;
+    }
+    .top-promo a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── CATEGORIES ───────────────────────────── */
+    .cat-section { padding: 5.5rem 0; background: var(--bg-2); }
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .cat-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 2rem;
+      overflow: hidden;
+      transition: border-color var(--t), box-shadow var(--t), transform var(--t);
+      cursor: pointer;
+    }
+    .cat-card:hover { transform: translateY(-4px); }
+    .cat-card::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 200px; height: 200px; border-radius: 50%;
+      filter: blur(60px); opacity: 0;
+      transition: opacity .4s ease; pointer-events: none;
+    }
+    .cat-card:hover::before { opacity: 1; }
+
+    .cat-card--on:hover  { border-color: rgba(59,130,246,.35); box-shadow: var(--sh-blue); }
+    .cat-card--on::before { background: rgba(59,130,246,.2); }
+    .cat-card--tech:hover { border-color: rgba(6,182,212,.35); box-shadow: var(--sh-cyan); }
+    .cat-card--tech::before { background: rgba(6,182,212,.18); }
+    .cat-card--eco:hover { border-color: rgba(16,185,129,.35); box-shadow: 0 0 32px rgba(16,185,129,.15); }
+    .cat-card--eco::before { background: rgba(16,185,129,.18); }
+    .cat-card--ev:hover  { border-color: rgba(139,92,246,.35); box-shadow: var(--sh-purple); }
+    .cat-card--ev::before { background: rgba(139,92,246,.18); }
+    .cat-card--dat:hover  { border-color: rgba(245,158,11,.35); box-shadow: 0 0 32px rgba(245,158,11,.12); }
+    .cat-card--dat::before { background: rgba(245,158,11,.18); }
+    .cat-card--exec:hover { border-color: rgba(236,72,153,.35); box-shadow: 0 0 32px rgba(236,72,153,.12); }
+    .cat-card--exec::before { background: rgba(236,72,153,.12); }
+
+    .cat-emoji { font-size: 2.25rem; margin-bottom: 1rem; position: relative; z-index: 1; display: block; }
+    .cat-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; position: relative; z-index: 1; }
+    .cat-card p  { font-size: .88rem; color: var(--tx-muted); line-height: 1.6; position: relative; z-index: 1; margin-bottom: 1.1rem; }
+    .cat-link {
+      font-size: .82rem; font-weight: 700; color: var(--tx-dim);
+      transition: color var(--t); position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: .35rem;
+    }
+    .cat-card:hover .cat-link { color: var(--blue-lt); }
+
+    /* ── DIFERENCIAIS ─────────────────────────── */
+    .dif-section { padding: 5.5rem 0; }
+    .dif-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .dif-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 1.75rem;
+      text-align: center;
+      transition: border-color var(--t), transform var(--t);
+    }
+    .dif-card:hover { border-color: rgba(245,158,11,.25); transform: translateY(-3px); }
+    .dif-icon { font-size: 2rem; margin-bottom: .85rem; display: block; }
+    .dif-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .5rem; }
+    .dif-card p  { font-size: .84rem; color: var(--tx-muted); line-height: 1.6; }
+
+    /* ── NUMBERS ──────────────────────────────── */
+    .numbers-section { padding: 4.5rem 0; background: linear-gradient(135deg, rgba(245,158,11,.05) 0%, rgba(59,130,246,.05) 100%); border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr); }
+    .numbers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; text-align: center; }
+    .num-item strong { display: block; font-size: 2.75rem; font-weight: 900; line-height: 1; margin-bottom: .3rem; }
+    .num-item span { font-size: .75rem; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ── PROCESSO PROMO ───────────────────────── */
+    .process-section { padding: 5.5rem 0; background: var(--bg-2); }
+    .process-flow { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; position: relative; }
+    .process-flow::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bdr) 20%, rgba(245,158,11,.2) 50%, var(--bdr) 80%, transparent);
+    }
+    .proc-step {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: .85rem;
+    }
+    .proc-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,.3);
+      background: rgba(245,158,11,.08);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem; color: #fbbf24;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+    .proc-step h4 { font-size: .9rem; font-weight: 700; }
+    .proc-step p  { font-size: .82rem; color: var(--tx-muted); line-height: 1.5; }
+
+    /* ── CTA WA ───────────────────────────────── */
+    .cta-wa-section {
+      padding: 6rem 0;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-wa-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(37,211,102,.06) 0%, transparent 70%);
+    }
+    .cta-wa-section h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: 1rem; position: relative; z-index: 1; }
+    .cta-wa-section p  { color: var(--tx-muted); max-width: 520px; margin: 0 auto 2.25rem; font-size: 1.05rem; position: relative; z-index: 1; }
+    .cta-wa-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    .wa-big {
+      padding: 1.1rem 2.5rem;
+      font-size: 1.05rem;
+      border-radius: var(--r-xl);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .dif-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-flow { grid-template-columns: repeat(2, 1fr); }
+      .process-flow::before { display: none; }
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { display: none; }
+      .numbers-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 640px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .dif-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top promo bar -->
+<div class="top-promo">
+  🎁 Brindes personalizados com sua marca — <a href="#contato">Solicite um orçamento gratuito agora</a>
+</div>
+
+<!-- ── HEADER ──────────────────────────────── -->
+<header class="site-header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark" style="background:linear-gradient(135deg,#f59e0b,#f97316);">LP</div>
+        <div class="logo-body">
+          <span class="logo-name">LLana <em style="color:#fbbf24;">Promo</em></span>
+          <span class="logo-unit">Brindes & Campanhas B2B</span>
+        </div>
+      </a>
+      <nav class="main-nav" aria-label="Menu Promo">
+        <a href="index.html" class="active">Início</a>
+        <a href="#categorias">Categorias</a>
+        <a href="https://llana.com.br/catalogo-de-brindes/" target="_blank" rel="noopener">Catálogo</a>
+        <a href="#processo">Como Pedimos</a>
+        <a href="#contato">Orçamento</a>
+        <span class="nav-sep"></span>
+        <a href="../tech/" class="nav-back">⚡ LLana Tech →</a>
+      </nav>
+      <div class="header-cta">
+        <a href="../" class="btn btn-ghost btn-sm">🏠 Portal</a>
+        <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20de%20brindes." class="btn btn-amber btn-sm" target="_blank" rel="noopener">💬 Orçamento</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav">
+    <a href="index.html">Início</a>
+    <a href="#categorias">Categorias</a>
+    <a href="https://llana.com.br/catalogo-de-brindes/" target="_blank">Catálogo Completo</a>
+    <a href="#processo">Como Pedimos</a>
+    <a href="#contato">Solicitar Orçamento</a>
+    <a href="../tech/">⚡ Ir para LLana Tech</a>
+    <div class="mob-cta">
+      <a href="https://wa.me/5511971071213" class="btn btn-wa btn-full" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+      <a href="../" class="btn btn-ghost btn-full">🏠 Portal do Grupo</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero bg-grid">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow fade">
+          <div class="hero-dot-amber"></div>
+          <span class="badge badge-amber">LLana Promo & Gifts</span>
+        </div>
+        <h1 class="fade">
+          Brindes que comunicam.<br>
+          <span class="gtext-amber">Presença que permanece.</span>
+        </h1>
+        <p class="hero-sub fade">
+          Kits de onboarding, brindes executivos premium e campanhas promocionais desenvolvidos
+          para fortalecer a cultura da sua empresa, fidelizar talentos e impressionar clientes.
+        </p>
+        <div class="hero-cta fade">
+          <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20de%20brindes." class="btn btn-amber btn-xl" target="_blank" rel="noopener">💬 Solicitar Orçamento</a>
+          <a href="https://llana.com.br/catalogo-de-brindes/" class="btn btn-outline btn-xl" target="_blank" rel="noopener">Ver Catálogo Completo</a>
+        </div>
+        <div class="hero-seals fade">
+          <div class="seal"><span class="seal-icon">🚚</span> Entrega em todo Brasil</div>
+          <div class="seal"><span class="seal-icon">🎨</span> Arte inclusa</div>
+          <div class="seal"><span class="seal-icon">📋</span> Nota Fiscal garantida</div>
+          <div class="seal"><span class="seal-icon">⚡</span> Prazo garantido</div>
+        </div>
+      </div>
+
+      <!-- Kit visual mockup -->
+      <div class="hero-visual reveal-r">
+        <div class="kit-frame">
+          <div class="kit-badge">🎁 Kit Onboarding Premium</div>
+          <div class="kit-title">Itens inclusos no kit</div>
+          <div class="kit-items-grid">
+            <div class="kit-item"><span class="ki-icon">👜</span><span class="ki-name">Mochila Premium</span><span class="ki-sub">com logo bordado</span></div>
+            <div class="kit-item"><span class="ki-icon">💻</span><span class="ki-name">Mouse Pad</span><span class="ki-sub">personalizado</span></div>
+            <div class="kit-item"><span class="ki-icon">☕</span><span class="ki-name">Garrafa Térmica</span><span class="ki-sub">inox 500ml</span></div>
+            <div class="kit-item"><span class="ki-icon">📓</span><span class="ki-name">Caderno Executivo</span><span class="ki-sub">capa personalizada</span></div>
+            <div class="kit-item"><span class="ki-icon">✏️</span><span class="ki-name">Kit Canetas</span><span class="ki-sub">3 unidades premium</span></div>
+            <div class="kit-item"><span class="ki-icon">💡</span><span class="ki-name">Power Bank</span><span class="ki-sub">10.000 mAh c/ logo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIAS ────────────────────────── -->
+<section class="cat-section" id="categorias">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-amber">Categorias</span>
+      <h2>Soluções para cada<br>momento corporativo</h2>
+      <p>Do primeiro dia do colaborador ao presente de fim de ano — temos o kit certo para cada ação da sua empresa.</p>
+    </div>
+    <div class="cat-grid">
+
+      <div class="cat-card cat-card--on reveal">
+        <span class="cat-emoji">🤝</span>
+        <h3>Kit Onboarding & Boas-vindas</h3>
+        <p>Primeiras impressões importam. Kits completos para receber novos colaboradores com a identidade da sua marca, gerando engajamento desde o dia 1.</p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <span class="badge badge-blue" style="font-size:.65rem;">Mochila</span>
+          <span class="badge badge-blue" style="font-size:.65rem;">Garrafa</span>
+          <span class="badge badge-blue" style="font-size:.65rem;">Caderno</span>
+          <span class="badge badge-blue" style="font-size:.65rem;">Carta personalizada</span>
+        </div>
+        <a href="https://wa.me/5511971071213" class="cat-link" target="_blank">Solicitar orçamento →</a>
+      </div>
+
+      <div class="cat-card cat-card--tech reveal">
+        <span class="cat-emoji">💡</span>
+        <h3>Tech & Acessórios Premium</h3>
+        <p>Brindes tecnológicos com alto valor percebido: power banks, fones Bluetooth, hubs USB, carregadores sem fio — todos com sua logomarca aplicada.</p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <span class="badge badge-cyan" style="font-size:.65rem;">Power Bank</span>
+          <span class="badge badge-cyan" style="font-size:.65rem;">Fone BT</span>
+          <span class="badge badge-cyan" style="font-size:.65rem;">Hub USB</span>
+          <span class="badge badge-cyan" style="font-size:.65rem;">Mouse</span>
+        </div>
+        <a href="https://wa.me/5511971071213" class="cat-link" target="_blank">Solicitar orçamento →</a>
+      </div>
+
+      <div class="cat-card cat-card--eco reveal">
+        <span class="cat-emoji">🌱</span>
+        <h3>Brindes Ecológicos & Sustentáveis</h3>
+        <p>Brindes com propósito: produtos em bambu, algodão orgânico, materiais reciclados e embalagens biodegradáveis. Marca positiva que vai além do produto.</p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <span class="badge badge-green" style="font-size:.65rem;">Bambu</span>
+          <span class="badge badge-green" style="font-size:.65rem;">Orgânico</span>
+          <span class="badge badge-green" style="font-size:.65rem;">Reciclado</span>
+        </div>
+        <a href="https://wa.me/5511971071213" class="cat-link" target="_blank">Solicitar orçamento →</a>
+      </div>
+
+      <div class="cat-card cat-card--ev reveal">
+        <span class="cat-emoji">🎪</span>
+        <h3>Eventos Corporativos & Feiras</h3>
+        <p>Brindes pensados para alto impacto em eventos, conferências e feiras — itens que as pessoas guardam e usam, mantendo sua marca presente no dia a dia.</p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <span class="badge badge-purple" style="font-size:.65rem;">Sacolas</span>
+          <span class="badge badge-purple" style="font-size:.65rem;">Pins</span>
+          <span class="badge badge-purple" style="font-size:.65rem;">Crachás</span>
+          <span class="badge badge-purple" style="font-size:.65rem;">Kits evento</span>
+        </div>
+        <a href="https://wa.me/5511971071213" class="cat-link" target="_blank">Solicitar orçamento →</a>
+      </div>
+
+      <div class="cat-card cat-card--dat reveal">
+        <span class="cat-emoji">🎉</span>
+        <h3>Datas Comemorativas</h3>
+        <p>Natal, Dia das Mães, Dia dos Pais, aniversários da empresa e datas comemorativas — campanhas sazonais com kits temáticos e embalagens especiais.</p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <span class="badge badge-amber" style="font-size:.65rem;">Natal</span>
+          <span class="badge badge-amber" style="font-size:.65rem;">Dia das Mães</span>
+          <span class="badge badge-amber" style="font-size:.65rem;">Aniversários</span>
+        </div>
+        <a href="https://wa.me/5511971071213" class="cat-link" target="_blank">Solicitar orçamento →</a>
+      </div>
+
+      <div class="cat-card cat-card--exec reveal">
+        <span class="cat-emoji">💼</span>
+        <h3>Linha Executiva Premium</h3>
+        <p>Brindes de alto padrão para presentear clientes estratégicos, parceiros e lideranças: copos de vinho, conjuntos de couro, canetas premium e muito mais.</p>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <span class="badge" style="background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.2);font-size:.65rem;">Couro</span>
+          <span class="badge" style="background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.2);font-size:.65rem;">Inox Premium</span>
+          <span class="badge" style="background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.2);font-size:.65rem;">Cristal</span>
+        </div>
+        <a href="https://wa.me/5511971071213" class="cat-link" target="_blank">Solicitar orçamento →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── DIFERENCIAIS ──────────────────────── -->
+<section class="dif-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-cyan">Por que a LLana Promo</span>
+      <h2>Mais do que brindes —<br>estratégia de marca</h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card reveal">
+        <span class="dif-icon">🎨</span>
+        <h4>Arte e aprovação inclusa</h4>
+        <p>Nossa equipe de design cuida da arte e envia para sua aprovação antes de iniciar a produção. Zero surpresas.</p>
+      </div>
+      <div class="dif-card reveal">
+        <span class="dif-icon">📦</span>
+        <h4>Mais de 1.200 produtos</h4>
+        <p>Do básico ao premium — nosso catálogo cobre todas as categorias com opções para qualquer orçamento e objetivo.</p>
+      </div>
+      <div class="dif-card reveal">
+        <span class="dif-icon">⚡</span>
+        <h4>Prazo garantido</h4>
+        <p>Planejamos cada etapa para cumprir os prazos acordados, mesmo em pedidos urgentes e campanhas de última hora.</p>
+      </div>
+      <div class="dif-card reveal">
+        <span class="dif-icon">🚚</span>
+        <h4>Entrega nacional</h4>
+        <p>Enviamos para todo o Brasil com rastreamento em tempo real e embalagem segura. Matriz ou filiais, cobrimos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NÚMEROS ───────────────────────────── -->
+<section class="numbers-section">
+  <div class="container">
+    <div class="numbers-grid">
+      <div class="num-item reveal">
+        <strong class="gtext-amber" data-count="500" data-suffix="+">500+</strong>
+        <span>Empresas atendidas</span>
+      </div>
+      <div class="num-item reveal">
+        <strong class="gtext" data-count="1200" data-suffix="+">1.200+</strong>
+        <span>Produtos no catálogo</span>
+      </div>
+      <div class="num-item reveal">
+        <strong class="gtext" data-count="98" data-suffix="%">98%</strong>
+        <span>Clientes satisfeitos</span>
+      </div>
+      <div class="num-item reveal">
+        <strong class="gtext-amber" data-count="10" data-suffix="+ anos">10+</strong>
+        <span>De experiência B2B</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESSO ──────────────────────────── -->
+<section class="process-section" id="processo">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-amber">Como funciona</span>
+      <h2>Do pedido à entrega<br>em 4 etapas simples</h2>
+    </div>
+    <div class="process-flow">
+      <div class="proc-step reveal">
+        <div class="proc-num">01</div>
+        <h4>Briefing & Escolha</h4>
+        <p>Você nos conta o objetivo, quantidade e ocasião. Sugerimos os melhores produtos para o seu contexto.</p>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-num">02</div>
+        <h4>Arte & Orçamento</h4>
+        <p>Criamos a arte com sua logo e enviamos o orçamento detalhado. Aprovação rápida via WhatsApp.</p>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-num">03</div>
+        <h4>Produção</h4>
+        <p>Após a aprovação, iniciamos a produção com prazo acordado. Você acompanha cada etapa.</p>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-num">04</div>
+        <h4>Entrega com NF</h4>
+        <p>Entregamos no endereço desejado, com nota fiscal e rastreamento. Empresa 100% regularizada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA WHATSAPP ──────────────────────── -->
+<section class="cta-wa-section" id="contato">
+  <div class="container container--sm">
+    <span class="badge badge-green reveal" style="margin-bottom:1.5rem;">Orçamento gratuito em minutos</span>
+    <h2 class="reveal">Pronto para ativar<br>sua marca com brindes?</h2>
+    <p class="reveal">Fale com nosso time pelo WhatsApp e receba um orçamento personalizado com sugestões de produtos, artes e prazos de entrega — sem compromisso.</p>
+    <div class="cta-wa-btns reveal">
+      <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20de%20brindes%20corporativos%20para%20minha%20empresa."
+         class="btn btn-wa wa-big" target="_blank" rel="noopener">
+        💬 Falar no WhatsApp Agora
+      </a>
+      <a href="https://llana.com.br/catalogo-de-brindes/" class="btn btn-outline btn-xl" target="_blank" rel="noopener">
+        📦 Ver Catálogo Completo
+      </a>
+    </div>
+    <p class="reveal" style="margin-top:2rem; font-size:.82rem; color:var(--tx-dim);">
+      📞 (11) 97107-1213 &nbsp;·&nbsp; ✉️ comercial@llana.com.br &nbsp;·&nbsp; Entrega em todo Brasil
+    </p>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="logo" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-mark" style="background:linear-gradient(135deg,#f59e0b,#f97316);">LP</div>
+          <div class="logo-body" style="margin-left:.6rem;">
+            <span class="logo-name">LLana <em style="color:#fbbf24;">Promo</em></span>
+            <span class="logo-unit">Brindes & Campanhas B2B</span>
+          </div>
+        </a>
+        <p>Brindes corporativos premium para empresas que entendem o poder da presença de marca no mundo físico.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Categorias</h5>
+        <a href="#categorias">Kit Onboarding</a>
+        <a href="#categorias">Tech & Premium</a>
+        <a href="#categorias">Ecológicos</a>
+        <a href="#categorias">Eventos</a>
+        <a href="#categorias">Datas Comemorativas</a>
+        <a href="#categorias">Linha Executiva</a>
+      </div>
+      <div class="footer-col">
+        <h5>Links</h5>
+        <a href="https://llana.com.br/catalogo-de-brindes/" target="_blank">Catálogo Completo</a>
+        <a href="#processo">Como Funciona</a>
+        <a href="../">Portal do Grupo LLana</a>
+        <a href="../tech/">LLana Tech & Data</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="https://wa.me/5511971071213" target="_blank">(11) 97107-1213 (WhatsApp)</a>
+        <a href="mailto:comercial@llana.com.br">comercial@llana.com.br</a>
+        <p style="margin-top:.5rem;">São Paulo, SP — Entrega nacional</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 LLana Promo & Gifts — Grupo LLana Corporativo</span>
+      <a href="../">← Portal do Grupo</a>
+    </div>
+  </div>
+</footer>
+
+<div class="wa-float">
+  <span class="wa-tip">Orçamento de brindes</span>
+  <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20brindes%20corporativos." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

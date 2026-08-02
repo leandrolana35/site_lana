@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLana Tech & Data — Dashboards, IA e Sistemas Corporativos</title>
+  <meta name="description" content="Dashboards executivos, automação com IA, integração de sistemas e análise preditiva. LLana Tech & Data para empresas que decidem com inteligência." />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <style>
+    /* ── TECH HERO ───────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: calc(92vh - var(--hh));
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .hero-orbs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-orbs .o1 { width: 600px; height: 600px; top: -15%; left: -8%; background: rgba(59,130,246,.1); }
+    .hero-orbs .o2 { width: 500px; height: 500px; top: 20%; right: -10%; background: rgba(6,182,212,.08); }
+    .hero-orbs .o3 { width: 350px; height: 350px; bottom: -5%; left: 30%; background: rgba(139,92,246,.07); }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 5rem 0;
+    }
+    .hero-content {}
+    .hero-eyebrow { display: flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem; }
+    .hero-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); animation: orb-pulse 2s infinite; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -.03em;
+      line-height: 1.08;
+      margin-bottom: 1.35rem;
+    }
+    .hero-sub { font-size: 1.05rem; color: var(--tx-muted); line-height: 1.75; margin-bottom: 2.25rem; max-width: 480px; }
+    .hero-cta { display: flex; gap: .85rem; flex-wrap: wrap; }
+
+    .hero-trust { display: flex; align-items: center; gap: 1.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: .45rem; font-size: .82rem; color: var(--tx-dim); }
+    .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+    /* Dashboard visual mockup */
+    .hero-visual {
+      position: relative;
+    }
+    .dash-frame {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr-blue);
+      border-radius: var(--r-2xl);
+      padding: 1.5rem;
+      box-shadow: var(--sh-blue), var(--sh-card);
+      position: relative;
+    }
+    .dash-header {
+      display: flex; align-items: center; gap: .5rem;
+      margin-bottom: 1.25rem;
+    }
+    .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dash-title { font-size: .8rem; color: var(--tx-dim); margin-left: .25rem; font-weight: 500; }
+    .dash-kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; margin-bottom: 1rem; }
+    .kpi {
+      background: var(--bg-2);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-lg);
+      padding: .9rem 1rem;
+    }
+    .kpi-label { font-size: .68rem; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .3rem; }
+    .kpi-val { font-size: 1.4rem; font-weight: 800; line-height: 1; }
+    .kpi-trend { font-size: .72rem; margin-top: .2rem; }
+    .kpi-trend.up { color: #34d399; }
+    .kpi-trend.dn { color: #f87171; }
+
+    .dash-chart {
+      background: var(--bg-2);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-lg);
+      padding: 1rem;
+      height: 110px;
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      min-width: 8px;
+      transition: filter .2s;
+    }
+    .dash-frame:hover .bar { filter: brightness(1.2); }
+
+    .dash-ai-badge {
+      position: absolute;
+      bottom: -16px; right: 24px;
+      background: var(--bg-up);
+      border: 1px solid var(--bdr-purple);
+      border-radius: var(--r-lg);
+      padding: .6rem 1rem;
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .78rem; font-weight: 600; color: var(--purple-lt);
+      box-shadow: var(--sh-purple);
+    }
+    .ai-pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--purple-lt);
+      animation: orb-pulse 1.5s infinite;
+    }
+
+    /* ── SOLUTIONS ────────────────────────────── */
+    .solutions-section { padding: 7rem 0 5rem; position: relative; }
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .sol-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 2.25rem 2rem;
+      transition: border-color var(--t), box-shadow var(--t), transform var(--t);
+      position: relative;
+      overflow: hidden;
+    }
+    .sol-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0;
+      transition: opacity .4s ease;
+      pointer-events: none;
+    }
+    .sol-card:hover::before { opacity: 1; }
+    .sol-card:hover { transform: translateY(-4px); }
+
+    .sol-card--bi:hover { border-color: var(--bdr-blue); box-shadow: var(--sh-blue); }
+    .sol-card--bi::before { background: rgba(59,130,246,.18); }
+    .sol-card--ai:hover { border-color: var(--bdr-purple); box-shadow: var(--sh-purple); }
+    .sol-card--ai::before { background: rgba(139,92,246,.2); }
+    .sol-card--sys:hover { border-color: var(--bdr-cyan); box-shadow: var(--sh-cyan); }
+    .sol-card--sys::before { background: rgba(6,182,212,.15); }
+    .sol-card--data:hover { border-color: rgba(16,185,129,.3); box-shadow: 0 0 32px rgba(16,185,129,.15); }
+    .sol-card--data::before { background: rgba(16,185,129,.15); }
+
+    .sol-card h3 { font-size: 1.15rem; font-weight: 700; margin: 1rem 0 .6rem; position: relative; z-index: 1; }
+    .sol-card p  { font-size: .9rem; color: var(--tx-muted); line-height: 1.65; position: relative; z-index: 1; margin-bottom: 1.25rem; }
+    .sol-tags { display: flex; gap: .4rem; flex-wrap: wrap; position: relative; z-index: 1; }
+    .sol-tag {
+      font-size: .7rem; font-weight: 600; color: var(--tx-dim);
+      background: var(--bg-2); border: 1px solid var(--bdr);
+      padding: .2rem .6rem; border-radius: 99px; letter-spacing: .03em;
+    }
+
+    /* ── FEATURES ─────────────────────────────── */
+    .features-section { padding: 5.5rem 0; background: var(--bg-2); }
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .feat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 2rem;
+      text-align: center;
+      transition: border-color var(--t), transform var(--t);
+    }
+    .feat-card:hover { border-color: var(--bdr-blue); transform: translateY(-3px); }
+    .feat-num { font-size: 2.5rem; font-weight: 900; line-height: 1; margin: .5rem 0 .3rem; }
+    .feat-label { font-size: .78rem; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .75rem; }
+    .feat-card p { font-size: .88rem; color: var(--tx-muted); line-height: 1.6; }
+
+    /* ── HOW WE WORK ──────────────────────────── */
+    .process-section { padding: 5.5rem 0; }
+    .process-steps { display: flex; flex-direction: column; gap: 1rem; max-width: 720px; margin: 0 auto; }
+    .step {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      padding: 1.75rem;
+      align-items: start;
+      transition: border-color var(--t);
+    }
+    .step:hover { border-color: var(--bdr-blue); }
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--g-bc);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem; color: #fff;
+      flex-shrink: 0;
+    }
+    .step h4 { font-size: 1rem; font-weight: 700; margin-bottom: .35rem; }
+    .step p  { font-size: .88rem; color: var(--tx-muted); line-height: 1.6; }
+
+    /* ── CONTACT ──────────────────────────────── */
+    .contact-section {
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(59,130,246,.07), transparent 70%);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      position: relative; z-index: 1;
+    }
+    .contact-info h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; letter-spacing: -.03em; margin: .75rem 0 1rem; }
+    .contact-info p { color: var(--tx-muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    .contact-items { display: flex; flex-direction: column; gap: .75rem; margin-top: 1.5rem; }
+    .contact-item { display: flex; align-items: center; gap: .75rem; font-size: .9rem; color: var(--tx-muted); }
+    .contact-item strong { color: var(--white); }
+
+    .contact-form { background: var(--bg-card); border: 1px solid var(--bdr); border-radius: var(--r-2xl); padding: 2.25rem; }
+    .contact-form h3 { font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: .78rem; font-weight: 600; color: var(--tx-muted); letter-spacing: .04em; text-transform: uppercase; margin-bottom: .4rem; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: var(--bg-2);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-md);
+      color: var(--white);
+      font-size: .9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--t);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--bdr-blue); }
+    .form-group select option { background: var(--bg-card); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    #form-feedback { font-size: .85rem; min-height: 1.2rem; margin-top: .75rem; }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .solutions-grid { grid-template-columns: 1fr 1fr; }
+      .features-grid  { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .solutions-grid { grid-template-columns: 1fr; }
+      .features-grid  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ──────────────────────────────── -->
+<header class="site-header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark" style="background:var(--g-pb);">LT</div>
+        <div class="logo-body">
+          <span class="logo-name">LLana <em style="color:var(--purple-lt);">Tech</em></span>
+          <span class="logo-unit">Sistemas & Dados & IA</span>
+        </div>
+      </a>
+      <nav class="main-nav" aria-label="Menu Tech">
+        <a href="index.html" class="active">Início</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#processo">Como Funciona</a>
+        <a href="#contato">Contato</a>
+        <span class="nav-sep"></span>
+        <a href="../brindes/" class="nav-back">🎁 LLana Promo →</a>
+      </nav>
+      <div class="header-cta">
+        <a href="../" class="btn btn-ghost btn-sm">🏠 Portal</a>
+        <a href="#contato" class="btn btn-primary btn-sm">Diagnóstico Gratuito</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav">
+    <a href="index.html">Início</a>
+    <a href="#solucoes">Soluções</a>
+    <a href="#processo">Como Funciona</a>
+    <a href="#contato">Contato</a>
+    <a href="../brindes/">🎁 Ir para LLana Promo</a>
+    <div class="mob-cta">
+      <a href="#contato" class="btn btn-primary btn-full">Solicitar Diagnóstico</a>
+      <a href="../" class="btn btn-ghost btn-full">🏠 Portal do Grupo</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero bg-grid">
+  <div class="hero-orbs">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow fade">
+          <div class="hero-dot"></div>
+          <span class="badge badge-purple">LLana Tech & Data</span>
+        </div>
+        <h1 class="fade">
+          Dados e IA para decisões que<br>
+          <span class="gtext-purple">mudam resultados</span>
+        </h1>
+        <p class="hero-sub fade">
+          Desenvolvemos dashboards executivos, agentes inteligentes e sistemas sob medida
+          que transformam complexidade em clareza e operações lentas em processos ágeis.
+        </p>
+        <div class="hero-cta fade">
+          <a href="#contato" class="btn btn-primary btn-lg">Solicitar Diagnóstico Gratuito</a>
+          <a href="#solucoes" class="btn btn-outline btn-lg">Ver Soluções</a>
+        </div>
+        <div class="hero-trust fade">
+          <div class="trust-item"><span class="trust-dot"></span>Implantação ágil</div>
+          <div class="trust-item"><span class="trust-dot"></span>Sem lock-in de plataforma</div>
+          <div class="trust-item"><span class="trust-dot"></span>ROI mensurável</div>
+        </div>
+      </div>
+
+      <!-- Dashboard Mockup -->
+      <div class="hero-visual reveal-r">
+        <div class="dash-frame">
+          <div class="dash-header">
+            <div class="dash-dot" style="background:#f87171;"></div>
+            <div class="dash-dot" style="background:#fbbf24;"></div>
+            <div class="dash-dot" style="background:#34d399;"></div>
+            <span class="dash-title">Dashboard Executivo — LLana BI</span>
+          </div>
+          <div class="dash-kpis">
+            <div class="kpi">
+              <div class="kpi-label">Receita MTD</div>
+              <div class="kpi-val gtext" data-count="1.84" data-prefix="R$" data-suffix="M">R$1.84M</div>
+              <div class="kpi-trend up">↑ +18.3% vs mês ant.</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Eficiência Op.</div>
+              <div class="kpi-val" style="color:var(--cyan-lt);" data-count="94" data-suffix="%">94%</div>
+              <div class="kpi-trend up">↑ +6 pts</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">NPS</div>
+              <div class="kpi-val" style="color:var(--purple-lt);" data-count="72">72</div>
+              <div class="kpi-trend up">↑ Promotores: 68%</div>
+            </div>
+          </div>
+          <div class="dash-chart">
+            <div class="bar" style="height:45%; background:rgba(59,130,246,.25);"></div>
+            <div class="bar" style="height:65%; background:rgba(59,130,246,.35);"></div>
+            <div class="bar" style="height:55%; background:rgba(59,130,246,.25);"></div>
+            <div class="bar" style="height:80%; background:rgba(59,130,246,.45);"></div>
+            <div class="bar" style="height:62%; background:rgba(59,130,246,.35);"></div>
+            <div class="bar" style="height:88%; background:rgba(59,130,246,.55);"></div>
+            <div class="bar" style="height:72%; background:rgba(59,130,246,.4);"></div>
+            <div class="bar" style="height:95%; background:var(--g-bc);"></div>
+          </div>
+          <div class="dash-ai-badge">
+            <div class="ai-pulse"></div>
+            Agente IA ativo — analisando padrões
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SOLUÇÕES ──────────────────────────── -->
+<section class="solutions-section" id="solucoes">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-blue">O que fazemos</span>
+      <h2>Soluções que entregam<br>resultado real</h2>
+      <p>Tecnologia aplicada ao negócio — sem jargão técnico, com métricas claras de impacto desde a primeira entrega.</p>
+    </div>
+    <div class="solutions-grid">
+
+      <div class="sol-card sol-card--bi reveal">
+        <div class="icon-box icon-box-blue">📊</div>
+        <h3>Dashboards & Business Intelligence</h3>
+        <p>Painéis executivos em tempo real que consolidam dados de todas as fontes do seu negócio. Tome decisões com base em fatos, não intuição.</p>
+        <div class="sol-tags">
+          <span class="sol-tag">Power BI</span>
+          <span class="sol-tag">Metabase</span>
+          <span class="sol-tag">Looker Studio</span>
+          <span class="sol-tag">KPIs Customizados</span>
+        </div>
+      </div>
+
+      <div class="sol-card sol-card--ai reveal">
+        <div class="icon-box icon-box-purple">🤖</div>
+        <h3>Agentes de IA & Automação</h3>
+        <p>Automatize processos repetitivos com agentes inteligentes treinados no contexto do seu negócio. Mais agilidade, menos erros operacionais.</p>
+        <div class="sol-tags">
+          <span class="sol-tag">LLMs Aplicados</span>
+          <span class="sol-tag">RAG</span>
+          <span class="sol-tag">RPA</span>
+          <span class="sol-tag">Integração n8n</span>
+        </div>
+      </div>
+
+      <div class="sol-card sol-card--sys reveal">
+        <div class="icon-box icon-box-cyan">⚙️</div>
+        <h3>Sistemas & Integrações sob Medida</h3>
+        <p>Desenvolvimento de sistemas web customizados e integrações entre plataformas via API. Seu ecossistema digital funcionando em sincronia.</p>
+        <div class="sol-tags">
+          <span class="sol-tag">APIs REST</span>
+          <span class="sol-tag">ERPs</span>
+          <span class="sol-tag">Webhooks</span>
+          <span class="sol-tag">Desenvolvimento Web</span>
+        </div>
+      </div>
+
+      <div class="sol-card sol-card--data card-cyan reveal">
+        <div class="icon-box icon-box-green">📈</div>
+        <h3>Análise de Dados & Modelagem Preditiva</h3>
+        <p>Tratamento, limpeza e modelagem de dados brutos. Análise preditiva para antecipar tendências e otimizar recursos antes que os problemas apareçam.</p>
+        <div class="sol-tags">
+          <span class="sol-tag">Python</span>
+          <span class="sol-tag">Machine Learning</span>
+          <span class="sol-tag">ETL</span>
+          <span class="sol-tag">Relatórios Automáticos</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── FEATURES / BENEFÍCIOS ─────────────── -->
+<section class="features-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-cyan">Por que a LLana Tech</span>
+      <h2>Impacto mensurável desde<br>a primeira entrega</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="icon-box icon-box-blue" style="margin: 0 auto 1rem;">⚡</div>
+        <div class="feat-num gtext" data-count="68" data-suffix="%">68%</div>
+        <div class="feat-label">Redução de tempo operacional</div>
+        <p>Em média, nossos clientes economizam 68% do tempo em processos manuais após a implantação de automações e sistemas integrados.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="icon-box icon-box-purple" style="margin: 0 auto 1rem;">🎯</div>
+        <div class="feat-num gtext-purple" data-count="3.2" data-prefix="" data-suffix="×">3.2×</div>
+        <div class="feat-label">Velocidade de decisão</div>
+        <p>Com dashboards executivos em tempo real, gestores tomam decisões 3x mais rápidas com base em dados concretos e visuais claros.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="icon-box icon-box-green" style="margin: 0 auto 1rem;">📦</div>
+        <div class="feat-num" style="color:var(--green);" data-count="30" data-suffix=" dias">30</div>
+        <div class="feat-label">Da contratação ao primeiro entregável</div>
+        <p>Metodologia ágil com sprints curtos: em até 30 dias você já tem a primeira versão funcional rodando no seu ambiente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PROCESSO ──────────────────────────── -->
+<section class="process-section" id="processo">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-purple">Como trabalhamos</span>
+      <h2>Do diagnóstico ao resultado<br>em 4 etapas</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div>
+          <h4>Diagnóstico & Mapeamento</h4>
+          <p>Reunião inicial sem custo para entender os processos, dores e objetivos. Mapeamos as fontes de dados existentes e os pontos de maior impacto.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div>
+          <h4>Proposta & Arquitetura</h4>
+          <p>Apresentamos uma proposta técnica clara com escopo, tecnologias, cronograma e métricas de sucesso. Zero jargão — linguagem de negócio.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div>
+          <h4>Desenvolvimento Ágil</h4>
+          <p>Entregas incrementais em sprints de 2 semanas. Você acompanha o progresso em tempo real e valida cada etapa antes de avançarmos.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div>
+          <h4>Implantação & Suporte Contínuo</h4>
+          <p>Go-live com treinamento da equipe, documentação completa e suporte pós-implantação. Evoluímos a solução conforme o negócio cresce.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTATO ───────────────────────────── -->
+<section class="contact-section" id="contato">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal-l">
+        <span class="badge badge-blue">Diagnóstico gratuito</span>
+        <h2>Agende uma conversa com nosso time de dados</h2>
+        <p>Em 30 minutos, nossa equipe analisa os seus principais desafios e apresenta um diagnóstico inicial com caminhos concretos para resolução — sem compromisso.</p>
+        <div class="contact-items">
+          <div class="contact-item">📞 <div><strong>(11) 97107-1213</strong> — WhatsApp / Ligação</div></div>
+          <div class="contact-item">✉️ <div><strong>tech@llana.com.br</strong></div></div>
+          <div class="contact-item">📍 <div><strong>São Paulo, SP</strong> — atendimento nacional</div></div>
+        </div>
+        <div style="margin-top:2rem; display:flex; gap:.75rem; flex-wrap:wrap;">
+          <a href="https://wa.me/5511971071213?text=Olá!%20Quero%20saber%20mais%20sobre%20as%20soluções%20LLana%20Tech." class="btn btn-wa btn-lg" target="_blank" rel="noopener">💬 WhatsApp Direto</a>
+        </div>
+      </div>
+
+      <div class="contact-form reveal-r">
+        <h3>Solicite o Diagnóstico Gratuito</h3>
+        <form data-feedback="#form-feedback">
+          <div class="form-group">
+            <label>Seu nome</label>
+            <input type="text" placeholder="João Silva" required />
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" placeholder="Nome da empresa" required />
+          </div>
+          <div class="form-group">
+            <label>E-mail corporativo</label>
+            <input type="email" placeholder="joao@empresa.com.br" required />
+          </div>
+          <div class="form-group">
+            <label>Qual solução te interessa?</label>
+            <select required>
+              <option value="" disabled selected>Selecione…</option>
+              <option>Dashboards & Business Intelligence</option>
+              <option>Agentes de IA & Automação</option>
+              <option>Sistemas & Integrações sob Medida</option>
+              <option>Análise de Dados & Modelagem Preditiva</option>
+              <option>Não sei ainda — quero orientação</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Contexto / desafio atual (opcional)</label>
+            <textarea placeholder="Descreva brevemente o maior gargalo operacional ou decisão que você precisa tomar…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-full">Solicitar Diagnóstico →</button>
+          <p id="form-feedback"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="logo" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-mark" style="background:var(--g-pb);">LT</div>
+          <div class="logo-body" style="margin-left:.6rem;">
+            <span class="logo-name">LLana <em style="color:var(--purple-lt);">Tech</em></span>
+            <span class="logo-unit">Sistemas & Dados & IA</span>
+          </div>
+        </a>
+        <p>Inteligência de dados e sistemas com IA para empresas que decidem com clareza e crescem com estratégia.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Soluções</h5>
+        <a href="#solucoes">Dashboards & BI</a>
+        <a href="#solucoes">Agentes de IA</a>
+        <a href="#solucoes">Sistemas & Integrações</a>
+        <a href="#solucoes">Análise Preditiva</a>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <a href="#processo">Como Funciona</a>
+        <a href="#contato">Contato</a>
+        <a href="../">Portal do Grupo LLana</a>
+        <a href="../brindes/">LLana Promo & Gifts</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="tel:+5511971071213">(11) 97107-1213</a>
+        <a href="mailto:tech@llana.com.br">tech@llana.com.br</a>
+        <p style="margin-top:.5rem;">São Paulo, SP — Brasil</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 LLana Tech & Data — Grupo LLana Corporativo</span>
+      <a href="../">← Portal do Grupo</a>
+    </div>
+  </div>
+</footer>
+
+<div class="wa-float">
+  <span class="wa-tip">Falar com LLana Tech</span>
+  <a href="https://wa.me/5511971071213" class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
