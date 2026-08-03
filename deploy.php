@@ -4,11 +4,6 @@ if (!$token || !isset($_GET['token']) || $_GET['token'] !== $token) {
     http_response_code(403);
     die('Unauthorized');
 }
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    die('Method not allowed');
-}
-
 $zipUrl = 'https://github.com/leandrolana35/site_lana/archive/refs/heads/main.zip';
 $tmpZip = sys_get_temp_dir() . '/site_lana_' . time() . '.zip';
 $tmpDir = sys_get_temp_dir() . '/site_lana_' . time();
