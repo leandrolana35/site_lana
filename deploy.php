@@ -1,6 +1,7 @@
 <?php
 $token = getenv('DEPLOY_TOKEN');
-if (!$token || !isset($_GET['token']) || $_GET['token'] !== $token) {
+$provided = $_SERVER['HTTP_X_DEPLOY_TOKEN'] ?? $_GET['token'] ?? '';
+if (!$token || $provided !== $token) {
     http_response_code(403);
     die('Unauthorized');
 }

@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Trigger deployment webhook
         run: |
-          response=$(curl -s -A "Mozilla/5.0" "https://llana.com.br/deploy.php?token=${{ secrets.DEPLOY_TOKEN }}")
+          response=$(curl -s -A "Mozilla/5.0" -H "X-Deploy-Token: ${{ secrets.DEPLOY_TOKEN }}" "https://llana.com.br/deploy.php")
           echo "Response: $response"
           if echo "$response" | grep -q "sucesso"; then
             echo "Deploy realizado com sucesso!"
