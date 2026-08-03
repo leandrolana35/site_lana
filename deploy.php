@@ -1,9 +1,12 @@
 <?php
-$token = getenv('DEPLOY_TOKEN');
-$provided = $_SERVER['HTTP_X_DEPLOY_TOKEN'] ?? $_GET['token'] ?? '';
-if (!$token || $provided !== $token) {
-    http_response_code(403);
-    die('Unauthorized');
+$isCli = php_sapi_name() === 'cli';
+if (!$isCli) {
+    $token = getenv('DEPLOY_TOKEN');
+    $provided = $_SERVER['HTTP_X_DEPLOY_TOKEN'] ?? $_GET['token'] ?? '';
+    if (!$token || $provided !== $token) {
+        http_response_code(403);
+        die('Unauthorized');
+    }
 }
 $zipUrl = 'https://github.com/leandrolana35/site_lana/archive/refs/heads/main.zip';
 $tmpZip = sys_get_temp_dir() . '/site_lana_' . time() . '.zip';
