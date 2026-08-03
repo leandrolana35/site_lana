@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Cadernos — LLana Promo & Gifts</title>
+  <meta name="description" content="Catálogo completo de cadernos corporativos personalizados. Mais de 25 modelos: capa dura, ecológicos, fotolux e executivos. Orçamento rápido via WhatsApp." />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <style>
+    .cat-hero {
+      padding: 4rem 0 3rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(245,158,11,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(251,191,36,.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .cat-hero-inner { position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: var(--tx-dim); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--tx-dim); text-decoration: none; transition: color var(--t); }
+    .breadcrumb a:hover { color: #fbbf24; }
+    .breadcrumb span { color: var(--tx-dim); }
+
+    .cat-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: .75rem; }
+    .cat-hero p { font-size: 1.05rem; color: var(--tx-muted); max-width: 560px; margin-bottom: 2rem; line-height: 1.7; }
+    .cat-hero-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .meta-item { display: flex; align-items: center; gap: .4rem; font-size: .85rem; color: var(--tx-muted); }
+
+    /* Filters */
+    .filter-bar { padding: 1.5rem 0; border-bottom: 1px solid var(--bdr); background: var(--bg-2); position: sticky; top: var(--hh); z-index: 40; }
+    .filter-inner { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .filter-label { font-size: .78rem; font-weight: 700; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+    .filter-btn {
+      padding: .4rem 1rem; border-radius: 99px; border: 1px solid var(--bdr);
+      background: var(--bg-card); color: var(--tx-muted); font-size: .82rem; font-weight: 600;
+      cursor: pointer; transition: all var(--t);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: rgba(245,158,11,.4); background: rgba(245,158,11,.08); color: #fbbf24;
+    }
+
+    /* Catalog grid */
+    .catalog-section { padding: 3rem 0 5rem; }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bdr);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+      display: flex; flex-direction: column;
+    }
+    .product-card:hover {
+      border-color: rgba(245,158,11,.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(245,158,11,.1);
+    }
+    .product-card[data-cat="eco"]:hover { border-color: rgba(16,185,129,.3); box-shadow: 0 8px 32px rgba(16,185,129,.08); }
+    .product-card[data-cat="fotolux"]:hover { border-color: rgba(59,130,246,.3); box-shadow: 0 8px 32px rgba(59,130,246,.08); }
+    .product-card[data-cat="exec"]:hover { border-color: rgba(139,92,246,.3); box-shadow: 0 8px 32px rgba(139,92,246,.08); }
+
+    .product-card.hidden { display: none; }
+
+    .product-img {
+      width: 100%; aspect-ratio: 1 / 1;
+      background: var(--bg-2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      border-bottom: 1px solid var(--bdr);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-code-badge {
+      position: absolute; top: .6rem; left: .6rem;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(245,158,11,.2);
+      border-radius: 6px;
+      padding: .2rem .5rem;
+      font-size: .68rem; font-weight: 700; color: #fbbf24;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .product-info { padding: .85rem; flex: 1; display: flex; flex-direction: column; gap: .6rem; }
+    .product-code { font-size: .78rem; font-weight: 800; color: #f59e0b; letter-spacing: .03em; }
+    .product-name { font-size: .85rem; font-weight: 600; color: var(--white); line-height: 1.4; flex: 1; }
+    .product-tags { display: flex; gap: .3rem; flex-wrap: wrap; }
+    .product-tag {
+      font-size: .62rem; font-weight: 600; padding: .15rem .45rem;
+      border-radius: 4px; border: 1px solid;
+    }
+    .tag-eco { background: rgba(16,185,129,.1); color: #6ee7b7; border-color: rgba(16,185,129,.2); }
+    .tag-exec { background: rgba(139,92,246,.1); color: #c4b5fd; border-color: rgba(139,92,246,.2); }
+    .tag-foto { background: rgba(59,130,246,.1); color: #93c5fd; border-color: rgba(59,130,246,.2); }
+
+    .btn-orcar {
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+      padding: .55rem .75rem;
+      background: rgba(245,158,11,.08);
+      border: 1px solid rgba(245,158,11,.2);
+      border-radius: var(--r-lg);
+      color: #fbbf24; font-size: .8rem; font-weight: 700;
+      text-decoration: none;
+      transition: all var(--t);
+    }
+    .btn-orcar:hover {
+      background: rgba(245,158,11,.15);
+      border-color: rgba(245,158,11,.4);
+      color: #f59e0b;
+    }
+
+    .section-group { margin-bottom: 3rem; }
+    .group-title {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--tx-dim);
+      padding: .5rem 0 1rem;
+      border-bottom: 1px solid var(--bdr);
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .group-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--bdr), transparent);
+    }
+
+    /* CTA bar */
+    .cta-bar {
+      background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(251,191,36,.04));
+      border: 1px solid rgba(245,158,11,.15);
+      border-radius: var(--r-2xl);
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta-bar h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: .5rem; }
+    .cta-bar p { color: var(--tx-muted); margin-bottom: 1.5rem; font-size: .95rem; }
+    .cta-bar-btns { display: flex; gap: .85rem; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 1200px) { .catalog-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 900px)  { .catalog-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px)  { .catalog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 400px)  { .catalog-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark" style="background:linear-gradient(135deg,#f59e0b,#f97316);">LP</div>
+        <div class="logo-body">
+          <span class="logo-name">LLana <em style="color:#fbbf24;">Promo</em></span>
+          <span class="logo-unit">Brindes & Campanhas B2B</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="../">Início</a>
+        <a href="../#categorias">Categorias</a>
+        <a href="cadernos/" class="active">Cadernos</a>
+        <a href="#contato">Orçamento</a>
+        <span class="nav-sep"></span>
+        <a href="../../tech/" class="nav-back">⚡ LLana Tech →</a>
+      </nav>
+      <div class="header-cta">
+        <a href="../../" class="btn btn-ghost btn-sm">🏠 Portal</a>
+        <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20cadernos%20corporativos." class="btn btn-amber btn-sm" target="_blank" rel="noopener">💬 Orçamento</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav">
+    <a href="../">Brindes — Início</a>
+    <a href="../#categorias">Categorias</a>
+    <a href="cadernos/">Catálogo Cadernos</a>
+    <a href="../../">Portal do Grupo</a>
+    <div class="mob-cta">
+      <a href="https://wa.me/5511971071213" class="btn btn-wa btn-full" target="_blank">💬 Orçamento WhatsApp</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="cat-hero">
+  <div class="container">
+    <div class="cat-hero-inner">
+      <div class="breadcrumb fade">
+        <a href="../../">Portal</a>
+        <span>›</span>
+        <a href="../">LLana Promo</a>
+        <span>›</span>
+        <span style="color:var(--white);">Cadernos</span>
+      </div>
+      <div class="hero-eyebrow fade" style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;display:block;"></span>
+        <span class="badge badge-amber">Catálogo de Cadernos</span>
+      </div>
+      <h1 class="fade">Cadernos & Blocos<br><span style="background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Corporativos</span></h1>
+      <p class="fade">Mais de 25 modelos de cadernos para personalizar com a identidade da sua empresa — capa dura, ecológicos, fotolux e linha executiva. Todos com impressão da sua logo.</p>
+      <div class="cat-hero-meta fade">
+        <div class="meta-item">📓 25+ modelos</div>
+        <div class="meta-item">🎨 Arte inclusa</div>
+        <div class="meta-item">🚚 Entrega nacional</div>
+        <div class="meta-item">📋 Nota fiscal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <span class="filter-label">Filtrar:</span>
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="capa-dura">Capa Dura</button>
+      <button class="filter-btn" data-filter="eco">Ecológicos</button>
+      <button class="filter-btn" data-filter="fotolux">Fotolux</button>
+      <button class="filter-btn" data-filter="exec">Linha Executiva</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<section class="catalog-section">
+  <div class="container">
+
+    <!-- Grupo: Capa Dura Premium -->
+    <div class="section-group">
+      <div class="group-title">📓 Capa Dura Premium</div>
+      <div class="catalog-grid">
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📓
+            <span class="product-code-badge">53268</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">53268</div>
+            <div class="product-name">Caderno A5 Capa Dura em Palha</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2053268%20-%20Capa%20Dura%20em%20Palha." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📔
+            <span class="product-code-badge">53654</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">53654</div>
+            <div class="product-name">Caderno Dois em Um 15x21cm</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2053654%20-%20Dois%20em%20Um%2015x21cm." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            🌿
+            <span class="product-code-badge">93087</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93087</div>
+            <div class="product-name">Caderno A5 em Couro Reciclado</div>
+            <div class="product-tags"><span class="product-tag tag-eco">Ecológico</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093087%20-%20Couro%20Reciclado." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📓
+            <span class="product-code-badge">93270</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93270</div>
+            <div class="product-name">Caderno Capa Dura</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093270%20-%20Capa%20Dura." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📒
+            <span class="product-code-badge">93275</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93275</div>
+            <div class="product-name">Caderno A5 192 Folhas, Capa Dura</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093275%20-%20A5%20192%20Folhas." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📓
+            <span class="product-code-badge">93492</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93492</div>
+            <div class="product-name">Bloco de Notas Capa Dura</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2093492%20-%20Bloco%20Capa%20Dura." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📓
+            <span class="product-code-badge">93493</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93493</div>
+            <div class="product-name">Bloco de Notas Capa Dura Premium</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2093493%20-%20Bloco%20Capa%20Dura%20Premium." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            🌱
+            <span class="product-code-badge">93495</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93495</div>
+            <div class="product-name">Caderno em Cartão Reciclado</div>
+            <div class="product-tags"><span class="product-tag tag-eco">Ecológico</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093495%20-%20Cartão%20Reciclado." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📔
+            <span class="product-code-badge">93591</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93591</div>
+            <div class="product-name">Caderno Capa Dura em Poliéster</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093591%20-%20Capa%20Dura%20Poliéster." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="exec">
+          <div class="product-img">
+            📒
+            <span class="product-code-badge">93592</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93592</div>
+            <div class="product-name">Caderno Capa Dura em PU Térmico</div>
+            <div class="product-tags"><span class="product-tag tag-exec">Executivo</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093592%20-%20PU%20Térmico." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Grupo: Ecológicos & Especiais -->
+    <div class="section-group">
+      <div class="group-title">🌱 Ecológicos & Especiais</div>
+      <div class="catalog-grid">
+
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            🍂
+            <span class="product-code-badge">93285</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93285</div>
+            <div class="product-name">Caderno B6 Capa Dura em Cortiça</div>
+            <div class="product-tags"><span class="product-tag tag-eco">Ecológico</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093285%20-%20Cortiça." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            🧲
+            <span class="product-code-badge">93419</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93419</div>
+            <div class="product-name">Caderno Capa Dura com Imã</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093419%20-%20Capa%20Dura%20com%20Imã." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            ♻️
+            <span class="product-code-badge">93428</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93428</div>
+            <div class="product-name">Caderno Capa Dura em Cartão Reciclado</div>
+            <div class="product-tags"><span class="product-tag tag-eco">Ecológico</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093428%20-%20Cartão%20Reciclado." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            🛡️
+            <span class="product-code-badge">93474</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93474</div>
+            <div class="product-name">Caderno A5 em PP Antibacteriano</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093474%20-%20PP%20Antibacteriano." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="capa-dura">
+          <div class="product-img">
+            📓
+            <span class="product-code-badge">93707</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">93707</div>
+            <div class="product-name">Caderno de Notas Capa Dura</div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%2093707%20-%20Capa%20Dura." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Grupo: Linha Fotolux -->
+    <div class="section-group">
+      <div class="group-title">✨ Linha Fotolux — Personalização Total</div>
+      <div class="catalog-grid">
+
+        <div class="product-card reveal" data-cat="fotolux">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(59,130,246,.04));">
+            📘
+            <span class="product-code-badge">CAD11B</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD11B</div>
+            <div class="product-name">Caderno Fotolux Brilho</div>
+            <div class="product-tags"><span class="product-tag tag-foto">Fotolux</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD11B%20-%20Fotolux%20Brilho." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="fotolux">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(59,130,246,.04));">
+            📗
+            <span class="product-code-badge">CAD11F</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD11F</div>
+            <div class="product-name">Caderno Fotolux Fosco</div>
+            <div class="product-tags"><span class="product-tag tag-foto">Fotolux</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD11F%20-%20Fotolux%20Fosco." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="fotolux">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(120,80,40,.12),rgba(120,80,40,.05));">
+            📙
+            <span class="product-code-badge">CAD11K</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD11K</div>
+            <div class="product-name">Caderno Fotolux Kraft</div>
+            <div class="product-tags"><span class="product-tag tag-foto">Fotolux</span><span class="product-tag tag-eco">Eco</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD11K%20-%20Fotolux%20Kraft." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="fotolux">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));">
+            📒
+            <span class="product-code-badge">CAD11M</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD11M</div>
+            <div class="product-name">Caderno Fotolux Pérola</div>
+            <div class="product-tags"><span class="product-tag tag-foto">Fotolux</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD11M%20-%20Fotolux%20Pérola." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="fotolux">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(16,185,129,.03));">
+            🌿
+            <span class="product-code-badge">CAD11R</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD11R</div>
+            <div class="product-name">Caderno Fotolux Reciclado</div>
+            <div class="product-tags"><span class="product-tag tag-foto">Fotolux</span><span class="product-tag tag-eco">Eco</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD11R%20-%20Fotolux%20Reciclado." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Grupo: Linha Executiva -->
+    <div class="section-group">
+      <div class="group-title">💼 Linha Executiva Premium</div>
+      <div class="catalog-grid">
+
+        <div class="product-card reveal" data-cat="exec">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(139,92,246,.03));">
+            📕
+            <span class="product-code-badge">CAD12</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD12</div>
+            <div class="product-name">Caderno Andrômeda</div>
+            <div class="product-tags"><span class="product-tag tag-exec">Executivo</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD12%20-%20Andrômeda." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="exec">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(139,92,246,.03));">
+            📔
+            <span class="product-code-badge">CAD12P</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD12P</div>
+            <div class="product-name">Caderno Andrômeda Plus</div>
+            <div class="product-tags"><span class="product-tag tag-exec">Executivo</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD12P%20-%20Andrômeda%20Plus." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="exec">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(139,92,246,.04));">
+            📗
+            <span class="product-code-badge">CAD12V</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD12V</div>
+            <div class="product-name">Caderno Andrômeda VIP</div>
+            <div class="product-tags"><span class="product-tag tag-exec">Executivo VIP</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD12V%20-%20Andrômeda%20VIP." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="exec">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(139,92,246,.03));">
+            📓
+            <span class="product-code-badge">CAD13</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD13</div>
+            <div class="product-name">Caderno Perdizes</div>
+            <div class="product-tags"><span class="product-tag tag-exec">Executivo</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD13%20-%20Perdizes." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+        <div class="product-card reveal" data-cat="exec">
+          <div class="product-img" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(139,92,246,.03));">
+            📒
+            <span class="product-code-badge">CAD13P</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CAD13P</div>
+            <div class="product-name">Caderno Pompeia</div>
+            <div class="product-tags"><span class="product-tag tag-exec">Executivo</span></div>
+            <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20caderno%20CAD13P%20-%20Pompeia." class="btn-orcar" target="_blank" rel="noopener">📋 Orçar</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bar reveal" id="contato">
+      <h3>Precisa de mais modelos<br>ou não encontrou o que quer?</h3>
+      <p>Temos um catálogo com mais de 1.200 produtos. Fale com nosso time e encontramos o caderno ideal para sua empresa.</p>
+      <div class="cta-bar-btns">
+        <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20cadernos%20corporativos%20personalizados." class="btn btn-wa" target="_blank" rel="noopener" style="padding:.85rem 2rem;font-size:.95rem;">
+          💬 Falar no WhatsApp
+        </a>
+        <a href="mailto:comercial@llana.com.br" class="btn btn-outline" style="padding:.85rem 2rem;font-size:.95rem;">
+          ✉️ Enviar E-mail
+        </a>
+        <a href="../" class="btn btn-ghost" style="padding:.85rem 2rem;font-size:.95rem;">
+          ← Mais Categorias
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="logo" style="margin-bottom:1rem;display:inline-flex;">
+          <div class="logo-mark" style="background:linear-gradient(135deg,#f59e0b,#f97316);">LP</div>
+          <div class="logo-body" style="margin-left:.6rem;">
+            <span class="logo-name">LLana <em style="color:#fbbf24;">Promo</em></span>
+            <span class="logo-unit">Brindes & Campanhas B2B</span>
+          </div>
+        </a>
+        <p>Cadernos e brindes corporativos personalizados com a identidade da sua empresa.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Categorias</h5>
+        <a href="./">Cadernos</a>
+        <a href="../#categorias">Kit Onboarding</a>
+        <a href="../#categorias">Tech & Premium</a>
+        <a href="../#categorias">Ecológicos</a>
+        <a href="../#categorias">Linha Executiva</a>
+      </div>
+      <div class="footer-col">
+        <h5>Links</h5>
+        <a href="../">LLana Promo</a>
+        <a href="../../">Portal do Grupo</a>
+        <a href="../../tech/">LLana Tech & Data</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="https://wa.me/5511971071213" target="_blank">(11) 97107-1213</a>
+        <a href="mailto:comercial@llana.com.br">comercial@llana.com.br</a>
+        <p style="margin-top:.5rem;">São Paulo, SP — Entrega nacional</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 LLana Promo & Gifts — Grupo LLana Corporativo</span>
+      <a href="../">← Brindes</a>
+    </div>
+  </div>
+</footer>
+
+<div class="wa-float">
+  <span class="wa-tip">Orçamento de cadernos</span>
+  <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20cadernos%20corporativos." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<script src="../../js/main.js"></script>
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.product-card').forEach(card => {
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
