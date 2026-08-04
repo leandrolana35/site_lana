@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Garrafas & Copos — LLana Promo & Gifts</title>
+  <meta name="description" content="Catálogo completo de garrafas, copos e canecas personalizadas. 88 modelos: copos de viagem, squeezes, garrafas térmicas e canecas. Orçamento via WhatsApp." />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <style>
+
+    .cat-hero { padding: 4rem 0 3rem; background: var(--bg); position: relative; overflow: hidden; }
+    .cat-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(245,158,11,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(251,191,36,.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .cat-hero-inner { position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: var(--tx-dim); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--tx-dim); text-decoration: none; transition: color var(--t); }
+    .breadcrumb a:hover { color: #fbbf24; }
+    .cat-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: .75rem; }
+    .cat-hero p { font-size: 1.05rem; color: var(--tx-muted); max-width: 560px; margin-bottom: 2rem; line-height: 1.7; }
+    .cat-hero-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .meta-item { font-size: .85rem; color: var(--tx-muted); }
+    .filter-bar { padding: 1.25rem 0; border-bottom: 1px solid var(--bdr); background: var(--bg-2); position: sticky; top: var(--hh); z-index: 40; }
+    .filter-inner { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .filter-label { font-size: .78rem; font-weight: 700; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+    .filter-btn { padding: .4rem 1rem; border-radius: 99px; border: 1px solid var(--bdr); background: var(--bg-card); color: var(--tx-muted); font-size: .82rem; font-weight: 600; cursor: pointer; transition: all var(--t); }
+    .filter-btn:hover, .filter-btn.active { border-color: rgba(245,158,11,.4); background: rgba(245,158,11,.08); color: #fbbf24; }
+    .catalog-section { padding: 3rem 0 5rem; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; margin-bottom: 1rem; }
+    @media (max-width:1100px) { .catalog-grid { grid-template-columns: repeat(4,1fr); } }
+    @media (max-width:800px)  { .catalog-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width:540px)  { .catalog-grid { grid-template-columns: repeat(2,1fr); } }
+    .product-card { background: var(--bg-card); border: 1px solid var(--bdr); border-radius: var(--r-xl); overflow: hidden; transition: border-color var(--t), transform var(--t), box-shadow var(--t); display: flex; flex-direction: column; }
+    .product-card:hover { border-color: rgba(245,158,11,.3); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(245,158,11,.1); }
+    .product-card.hidden { display: none; }
+    .product-img { position: relative; aspect-ratio: 1/1; background: #fff; overflow: hidden; }
+    .product-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .product-img::after {
+      content: 'LLANA';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-22deg);
+      font-size: 1.3rem; font-weight: 900; letter-spacing: .28em;
+      color: rgba(155,110,0,.14);
+      pointer-events: none; white-space: nowrap; user-select: none;
+    }
+    .product-info { padding:.75rem; flex:1; display:flex; flex-direction:column; gap:.35rem; }
+    .product-code { font-size:.7rem; font-weight:800; color:#fbbf24; letter-spacing:.04em; }
+    .product-name { font-size:.8rem; font-weight:600; color:var(--tx); line-height:1.35; flex:1; }
+    .product-actions { margin-top:.5rem; }
+    .btn-orcar { display:block; width:100%; text-align:center; padding:.45rem .5rem; background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:#fbbf24; font-size:.75rem; font-weight:700; border-radius:6px; text-decoration:none; transition:all var(--t); }
+    .btn-orcar:hover { background:rgba(245,158,11,.2); border-color:rgba(245,158,11,.5); }
+    .section-title { font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--tx-dim); margin:2.5rem 0 1rem; display:flex; align-items:center; gap:.6rem; }
+
+    .section-title::before { content: '🥤'; font-size:.9rem; }
+    .section-title.garrafa::before { content: '🍶'; }
+    .section-title.caneca::before { content: '☕'; }
+  </style>
+</head>
+<body>
+  <header id="site-header">
+    <nav class="container nav-inner">
+      <a href="../../" class="logo">LLana <span>Grupo Corporativo</span></a>
+      <div class="nav-links">
+        <a href="../../">Portal</a>
+        <a href="../" class="active">Brindes</a>
+        <a href="../../tech/">Tech</a>
+      </div>
+      <a href="https://wa.me/5511971071213" class="btn btn-amber btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </header>
+
+  <section class="cat-hero">
+    <div class="container cat-hero-inner">
+      <nav class="breadcrumb">
+        <a href="../../">Portal</a>
+        <span>›</span>
+        <a href="../">Brindes</a>
+        <span>›</span>
+        <span>Garrafas & Copos</span>
+      </nav>
+      <h1>Garrafas & Copos</h1>
+      <p>Squeezes, garrafas térmicas, copos de viagem e canecas personalizados. Todos com gravação da sua marca.</p>
+      <div class="cat-hero-meta">
+        <span class="meta-item">20 Copos de Viagem</span>
+        <span class="meta-item">40 Garrafas & Squeezes</span>
+        <span class="meta-item">28 Canecas</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="container filter-inner">
+      <span class="filter-label">Filtrar:</span>
+      <button class="filter-btn active" data-filter="todos">Todos (88)</button>
+      <button class="filter-btn" data-filter="copo">Copos (20)</button>
+      <button class="filter-btn" data-filter="garrafa">Garrafas &amp; Squeezes (40)</button>
+      <button class="filter-btn" data-filter="caneca">Canecas (28)</button>
+    </div>
+  </div>
+
+  <main class="catalog-section">
+    <div class="container">
+      <div class="section-title">Copos de Viagem</div>
+      <div class="catalog-grid">
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/54635.jpeg" alt="Copo de Viagem 54635" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">54635</div>
+            <div class="product-name">Copo de Viagem 54635</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2054635%20%E2%80%94%20Copo%20de%20Viagem%2054635" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/8102.jpeg" alt="Copo 8102" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">8102</div>
+            <div class="product-name">Copo 8102</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%208102%20%E2%80%94%20Copo%208102" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94058.jpeg" alt="Copo de Viagem 94058" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94058</div>
+            <div class="product-name">Copo de Viagem 94058</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094058%20%E2%80%94%20Copo%20de%20Viagem%2094058" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94066.jpeg" alt="Copo de Viagem 94066" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94066</div>
+            <div class="product-name">Copo de Viagem 94066</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094066%20%E2%80%94%20Copo%20de%20Viagem%2094066" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94067.jpeg" alt="Copo de Viagem 94067" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94067</div>
+            <div class="product-name">Copo de Viagem 94067</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094067%20%E2%80%94%20Copo%20de%20Viagem%2094067" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94068.jpeg" alt="Copo de Viagem 94068" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94068</div>
+            <div class="product-name">Copo de Viagem 94068</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094068%20%E2%80%94%20Copo%20de%20Viagem%2094068" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94241.jpeg" alt="Copo Viagem Bambu Inox 94241" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94241</div>
+            <div class="product-name">Copo Viagem Bambu Inox 94241</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094241%20%E2%80%94%20Copo%20Viagem%20Bambu%20Inox%2094241" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94242.jpeg" alt="Copo Viagem Aço Inox 94242" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94242</div>
+            <div class="product-name">Copo Viagem Aço Inox 94242</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094242%20%E2%80%94%20Copo%20Viagem%20A%C3%A7o%20Inox%2094242" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94266.jpeg" alt="Copo 94266" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94266</div>
+            <div class="product-name">Copo 94266</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094266%20%E2%80%94%20Copo%2094266" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94267.jpeg" alt="Copo Térmico 94267" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94267</div>
+            <div class="product-name">Copo Térmico 94267</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094267%20%E2%80%94%20Copo%20T%C3%A9rmico%2094267" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94276.jpeg" alt="Copo 94276" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94276</div>
+            <div class="product-name">Copo 94276</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094276%20%E2%80%94%20Copo%2094276" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94280.jpeg" alt="Copo 94280" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94280</div>
+            <div class="product-name">Copo 94280</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094280%20%E2%80%94%20Copo%2094280" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94322.jpeg" alt="Copo Reutilizável 450ml 94322" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94322</div>
+            <div class="product-name">Copo Reutilizável 450ml 94322</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094322%20%E2%80%94%20Copo%20Reutiliz%C3%A1vel%20450ml%2094322" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94323.jpeg" alt="Copo de Viagem 350ml 94323" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94323</div>
+            <div class="product-name">Copo de Viagem 350ml 94323</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094323%20%E2%80%94%20Copo%20de%20Viagem%20350ml%2094323" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94372.jpeg" alt="Copo 94372" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94372</div>
+            <div class="product-name">Copo 94372</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094372%20%E2%80%94%20Copo%2094372" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94373.jpeg" alt="Copo 94373" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94373</div>
+            <div class="product-name">Copo 94373</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094373%20%E2%80%94%20Copo%2094373" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94377.jpeg" alt="Copo 94377" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94377</div>
+            <div class="product-name">Copo 94377</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094377%20%E2%80%94%20Copo%2094377" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94626.jpeg" alt="Copo 94626" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94626</div>
+            <div class="product-name">Copo 94626</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094626%20%E2%80%94%20Copo%2094626" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94636.jpeg" alt="Copo de Viagem 94636" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94636</div>
+            <div class="product-name">Copo de Viagem 94636</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094636%20%E2%80%94%20Copo%20de%20Viagem%2094636" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="copo">
+          <div class="product-img">
+            <img src="/brindes/94637.jpeg" alt="Copo de Viagem 94637" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94637</div>
+            <div class="product-name">Copo de Viagem 94637</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094637%20%E2%80%94%20Copo%20de%20Viagem%2094637" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title garrafa">Garrafas &amp; Squeezes</div>
+      <div class="catalog-grid">
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/54299.jpeg" alt="Squeeze Esportiva 600ml 54299" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">54299</div>
+            <div class="product-name">Squeeze Esportiva 600ml 54299</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2054299%20%E2%80%94%20Squeeze%20Esportiva%20600ml%2054299" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/54957.jpeg" alt="Garrafa Alumínio 54957" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">54957</div>
+            <div class="product-name">Garrafa Alumínio 54957</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2054957%20%E2%80%94%20Garrafa%20Alum%C3%ADnio%2054957" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94061.jpeg" alt="Squeeze 94061" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94061</div>
+            <div class="product-name">Squeeze 94061</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094061%20%E2%80%94%20Squeeze%2094061" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94069.jpeg" alt="Garrafa Térmica 94069" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94069</div>
+            <div class="product-name">Garrafa Térmica 94069</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094069%20%E2%80%94%20Garrafa%20T%C3%A9rmica%2094069" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94078.jpeg" alt="Garrafa Térmica 94078" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94078</div>
+            <div class="product-name">Garrafa Térmica 94078</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094078%20%E2%80%94%20Garrafa%20T%C3%A9rmica%2094078" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94239.jpeg" alt="Squeeze Bambu Inox 94239" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94239</div>
+            <div class="product-name">Squeeze Bambu Inox 94239</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094239%20%E2%80%94%20Squeeze%20Bambu%20Inox%2094239" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94240.jpeg" alt="Squeeze Inox Cortiça 94240" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94240</div>
+            <div class="product-name">Squeeze Inox Cortiça 94240</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094240%20%E2%80%94%20Squeeze%20Inox%20Corti%C3%A7a%2094240" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94264.jpeg" alt="Garrafa Inox 500ml 94264" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94264</div>
+            <div class="product-name">Garrafa Inox 500ml 94264</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094264%20%E2%80%94%20Garrafa%20Inox%20500ml%2094264" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94268.jpeg" alt="Squeeze Vidro Tampa Bambu 94268" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94268</div>
+            <div class="product-name">Squeeze Vidro Tampa Bambu 94268</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094268%20%E2%80%94%20Squeeze%20Vidro%20Tampa%20Bambu%2094268" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94284.jpeg" alt="Garrafa 94284" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94284</div>
+            <div class="product-name">Garrafa 94284</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094284%20%E2%80%94%20Garrafa%2094284" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94285.jpeg" alt="Garrafa 94285" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94285</div>
+            <div class="product-name">Garrafa 94285</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094285%20%E2%80%94%20Garrafa%2094285" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94286.jpeg" alt="Garrafa 94286" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94286</div>
+            <div class="product-name">Garrafa 94286</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094286%20%E2%80%94%20Garrafa%2094286" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94287.jpeg" alt="Garrafa 94287" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94287</div>
+            <div class="product-name">Garrafa 94287</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094287%20%E2%80%94%20Garrafa%2094287" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94294.jpeg" alt="Garrafa 94294" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94294</div>
+            <div class="product-name">Garrafa 94294</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094294%20%E2%80%94%20Garrafa%2094294" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94297.jpeg" alt="Garrafa Alumínio 94297" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94297</div>
+            <div class="product-name">Garrafa Alumínio 94297</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094297%20%E2%80%94%20Garrafa%20Alum%C3%ADnio%2094297" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94315.jpeg" alt="Garrafa Vidro 500ml 94315" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94315</div>
+            <div class="product-name">Garrafa Vidro 500ml 94315</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094315%20%E2%80%94%20Garrafa%20Vidro%20500ml%2094315" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94316.jpeg" alt="Garrafa Aço Inox 570ml 94316" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94316</div>
+            <div class="product-name">Garrafa Aço Inox 570ml 94316</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094316%20%E2%80%94%20Garrafa%20A%C3%A7o%20Inox%20570ml%2094316" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94317.jpeg" alt="Garrafa Vidro 500ml 94317" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94317</div>
+            <div class="product-name">Garrafa Vidro 500ml 94317</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094317%20%E2%80%94%20Garrafa%20Vidro%20500ml%2094317" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94329.jpeg" alt="Garrafa PETG 1200ml 94329" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94329</div>
+            <div class="product-name">Garrafa PETG 1200ml 94329</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094329%20%E2%80%94%20Garrafa%20PETG%201200ml%2094329" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94335.jpeg" alt="Garrafa Aço Inox 94335" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94335</div>
+            <div class="product-name">Garrafa Aço Inox 94335</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094335%20%E2%80%94%20Garrafa%20A%C3%A7o%20Inox%2094335" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/54601.jpeg" alt="Squeeze Alumínio Mosquetão 54601" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">54601</div>
+            <div class="product-name">Squeeze Alumínio Mosquetão 54601</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2054601%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20Mosquet%C3%A3o%2054601" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94059.jpeg" alt="Squeeze 94059" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94059</div>
+            <div class="product-name">Squeeze 94059</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094059%20%E2%80%94%20Squeeze%2094059" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94060.jpeg" alt="Squeeze 94060" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94060</div>
+            <div class="product-name">Squeeze 94060</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094060%20%E2%80%94%20Squeeze%2094060" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94062.jpeg" alt="Squeeze 94062" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94062</div>
+            <div class="product-name">Squeeze 94062</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094062%20%E2%80%94%20Squeeze%2094062" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94063.jpeg" alt="Squeeze 94063" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94063</div>
+            <div class="product-name">Squeeze 94063</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094063%20%E2%80%94%20Squeeze%2094063" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94246.jpeg" alt="Squeeze Alumínio Mosquetão 94246" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94246</div>
+            <div class="product-name">Squeeze Alumínio Mosquetão 94246</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094246%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20Mosquet%C3%A3o%2094246" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94250.jpeg" alt="Squeeze Alumínio Tampa Bambu 94250" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94250</div>
+            <div class="product-name">Squeeze Alumínio Tampa Bambu 94250</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094250%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20Tampa%20Bambu%2094250" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94256.jpeg" alt="Squeeze Alumínio Emborrachado 94256" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94256</div>
+            <div class="product-name">Squeeze Alumínio Emborrachado 94256</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094256%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20Emborrachado%2094256" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94257.jpeg" alt="Squeeze Bambu Inox 440 94257" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94257</div>
+            <div class="product-name">Squeeze Bambu Inox 440 94257</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094257%20%E2%80%94%20Squeeze%20Bambu%20Inox%20440%2094257" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94269.jpeg" alt="Squeeze Alumínio 660ml 94269" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94269</div>
+            <div class="product-name">Squeeze Alumínio 660ml 94269</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094269%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20660ml%2094269" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94270.jpeg" alt="Squeeze Alumínio 660ml 94270" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94270</div>
+            <div class="product-name">Squeeze Alumínio 660ml 94270</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094270%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20660ml%2094270" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94271.jpeg" alt="Squeeze 94271" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94271</div>
+            <div class="product-name">Squeeze 94271</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094271%20%E2%80%94%20Squeeze%2094271" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94295.jpeg" alt="Squeeze Alumínio Reciclado 94295" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94295</div>
+            <div class="product-name">Squeeze Alumínio Reciclado 94295</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094295%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20Reciclado%2094295" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94325.jpeg" alt="Squeeze Alumínio Reciclado 94325" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94325</div>
+            <div class="product-name">Squeeze Alumínio Reciclado 94325</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094325%20%E2%80%94%20Squeeze%20Alum%C3%ADnio%20Reciclado%2094325" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94326.jpeg" alt="Squeeze Reciclado RPET 94326" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94326</div>
+            <div class="product-name">Squeeze Reciclado RPET 94326</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094326%20%E2%80%94%20Squeeze%20Reciclado%20RPET%2094326" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94378.jpeg" alt="Squeeze 94378" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94378</div>
+            <div class="product-name">Squeeze 94378</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094378%20%E2%80%94%20Squeeze%2094378" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94379.jpeg" alt="Squeeze 94379" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94379</div>
+            <div class="product-name">Squeeze 94379</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094379%20%E2%80%94%20Squeeze%2094379" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94380.jpeg" alt="Squeeze 94380" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94380</div>
+            <div class="product-name">Squeeze 94380</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094380%20%E2%80%94%20Squeeze%2094380" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94381.jpeg" alt="Squeeze 94381" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94381</div>
+            <div class="product-name">Squeeze 94381</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094381%20%E2%80%94%20Squeeze%2094381" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="garrafa">
+          <div class="product-img">
+            <img src="/brindes/94550.jpeg" alt="Squeeze 94550" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94550</div>
+            <div class="product-name">Squeeze 94550</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094550%20%E2%80%94%20Squeeze%2094550" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title caneca">Canecas</div>
+      <div class="catalog-grid">
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA219.jpeg" alt="Caneca Acrílica 450ml CA219" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA219</div>
+            <div class="product-name">Caneca Acrílica 450ml CA219</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA219%20%E2%80%94%20Caneca%20Acr%C3%ADlica%20450ml%20CA219" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA220C.jpeg" alt="Caneca Porcelana CA220C" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA220C</div>
+            <div class="product-name">Caneca Porcelana CA220C</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA220C%20%E2%80%94%20Caneca%20Porcelana%20CA220C" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA280.jpeg" alt="Caneca Cerâmica CA280" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA280</div>
+            <div class="product-name">Caneca Cerâmica CA280</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA280%20%E2%80%94%20Caneca%20Cer%C3%A2mica%20CA280" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA281.jpeg" alt="Caneca Cerâmica Alça Coração CA281" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA281</div>
+            <div class="product-name">Caneca Cerâmica Alça Coração CA281</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA281%20%E2%80%94%20Caneca%20Cer%C3%A2mica%20Al%C3%A7a%20Cora%C3%A7%C3%A3o%20CA281" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA283.jpeg" alt="Caneca Cerâmica Alça Lua CA283" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA283</div>
+            <div class="product-name">Caneca Cerâmica Alça Lua CA283</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA283%20%E2%80%94%20Caneca%20Cer%C3%A2mica%20Al%C3%A7a%20Lua%20CA283" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA300.jpeg" alt="Caneca CA300" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA300</div>
+            <div class="product-name">Caneca CA300</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA300%20%E2%80%94%20Caneca%20CA300" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA365B.jpeg" alt="Caneca Mágica CA365B" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA365B</div>
+            <div class="product-name">Caneca Mágica CA365B</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA365B%20%E2%80%94%20Caneca%20M%C3%A1gica%20CA365B" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA365F.jpeg" alt="Caneca Mágica Fosca CA365F" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA365F</div>
+            <div class="product-name">Caneca Mágica Fosca CA365F</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA365F%20%E2%80%94%20Caneca%20M%C3%A1gica%20Fosca%20CA365F" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/94319.jpeg" alt="Caneca Esmalte 350ml 94319" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94319</div>
+            <div class="product-name">Caneca Esmalte 350ml 94319</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094319%20%E2%80%94%20Caneca%20Esmalte%20350ml%2094319" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/94608.jpeg" alt="Caneca de Viagem 94608" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94608</div>
+            <div class="product-name">Caneca de Viagem 94608</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094608%20%E2%80%94%20Caneca%20de%20Viagem%2094608" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/94625.jpeg" alt="Caneca de Viagem Térmico 94625" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">94625</div>
+            <div class="product-name">Caneca de Viagem Térmico 94625</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%2094625%20%E2%80%94%20Caneca%20de%20Viagem%20T%C3%A9rmico%2094625" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/C122038.jpeg" alt="Caneca Inox C122038" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">C122038</div>
+            <div class="product-name">Caneca Inox C122038</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20C122038%20%E2%80%94%20Caneca%20Inox%20C122038" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA033B.jpeg" alt="Caneca Térmica 1,2L CA033B" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA033B</div>
+            <div class="product-name">Caneca Térmica 1,2L CA033B</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA033B%20%E2%80%94%20Caneca%20T%C3%A9rmica%201%2C2L%20CA033B" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA04.jpeg" alt="Caneca CA04" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA04</div>
+            <div class="product-name">Caneca CA04</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA04%20%E2%80%94%20Caneca%20CA04" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA040.jpeg" alt="Caneca Gel CA040" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA040</div>
+            <div class="product-name">Caneca Gel CA040</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA040%20%E2%80%94%20Caneca%20Gel%20CA040" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA05.jpeg" alt="Caneca CA05" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA05</div>
+            <div class="product-name">Caneca CA05</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA05%20%E2%80%94%20Caneca%20CA05" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA051.jpeg" alt="Caneca Metal CA051" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA051</div>
+            <div class="product-name">Caneca Metal CA051</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA051%20%E2%80%94%20Caneca%20Metal%20CA051" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA06.jpeg" alt="Caneca CA06" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA06</div>
+            <div class="product-name">Caneca CA06</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA06%20%E2%80%94%20Caneca%20CA06" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA061.jpeg" alt="Caneca Térmica CA061" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA061</div>
+            <div class="product-name">Caneca Térmica CA061</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA061%20%E2%80%94%20Caneca%20T%C3%A9rmica%20CA061" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA081.jpeg" alt="Caneca Térmica Aço Inox CA081" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA081</div>
+            <div class="product-name">Caneca Térmica Aço Inox CA081</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA081%20%E2%80%94%20Caneca%20T%C3%A9rmica%20A%C3%A7o%20Inox%20CA081" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA083.jpeg" alt="Caneca Térmica 700ml CA083" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA083</div>
+            <div class="product-name">Caneca Térmica 700ml CA083</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA083%20%E2%80%94%20Caneca%20T%C3%A9rmica%20700ml%20CA083" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA097.jpeg" alt="Caneca CA097" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA097</div>
+            <div class="product-name">Caneca CA097</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA097%20%E2%80%94%20Caneca%20CA097" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA099.jpeg" alt="Caneca Bambu 330ml CA099" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA099</div>
+            <div class="product-name">Caneca Bambu 330ml CA099</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA099%20%E2%80%94%20Caneca%20Bambu%20330ml%20CA099" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA1071.jpeg" alt="Caneca Acrílica Inox CA1071" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA1071</div>
+            <div class="product-name">Caneca Acrílica Inox CA1071</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA1071%20%E2%80%94%20Caneca%20Acr%C3%ADlica%20Inox%20CA1071" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA108.jpeg" alt="Caneca Vidro 300ml CA108" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA108</div>
+            <div class="product-name">Caneca Vidro 300ml CA108</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA108%20%E2%80%94%20Caneca%20Vidro%20300ml%20CA108" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA1295.jpeg" alt="Caneca Metal CA1295" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA1295</div>
+            <div class="product-name">Caneca Metal CA1295</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA1295%20%E2%80%94%20Caneca%20Metal%20CA1295" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA1823.jpeg" alt="Caneca Inox Parede Dupla CA1823" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA1823</div>
+            <div class="product-name">Caneca Inox Parede Dupla CA1823</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA1823%20%E2%80%94%20Caneca%20Inox%20Parede%20Dupla%20CA1823" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-cat="caneca">
+          <div class="product-img">
+            <img src="/brindes/CA200.jpeg" alt="Caneca CA200" loading="lazy" />
+          </div>
+          <div class="product-info">
+            <div class="product-code">CA200</div>
+            <div class="product-name">Caneca CA200</div>
+            <div class="product-actions">
+              <a class="btn-orcar" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20produto%20CA200%20%E2%80%94%20Caneca%20CA200" target="_blank" rel="noopener">Pedir Orçamento</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="padding:3rem 0 2rem; border-top:1px solid var(--bdr); margin-top:4rem;">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <div class="logo" style="font-size:1.1rem; margin-bottom:.4rem;">LLana <span>Grupo Corporativo</span></div>
+        <p style="font-size:.8rem; color:var(--tx-dim);">Brindes corporativos personalizados com qualidade e agilidade.</p>
+      </div>
+      <a href="https://wa.me/5511971071213" class="btn btn-amber" target="_blank" rel="noopener" style="font-size:.85rem;">
+        Fale no WhatsApp
+      </a>
+    </div>
+  </footer>
+  <script>
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.product-card');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          c.classList.toggle('hidden', f !== 'todos' && c.dataset.cat !== f);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

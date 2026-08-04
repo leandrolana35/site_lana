@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Canetas — LLana Promo & Gifts</title>
+  <meta name="description" content="Catálogo completo de canetas corporativas personalizadas. 60 modelos: metálicas, plásticas, ecológicas e bambu. Orçamento via WhatsApp." />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <style>
+    .cat-hero { padding: 4rem 0 3rem; background: var(--bg); position: relative; overflow: hidden; }
+    .cat-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(245,158,11,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(251,191,36,.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .cat-hero-inner { position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: var(--tx-dim); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--tx-dim); text-decoration: none; transition: color var(--t); }
+    .breadcrumb a:hover { color: #fbbf24; }
+    .cat-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: .75rem; }
+    .cat-hero p { font-size: 1.05rem; color: var(--tx-muted); max-width: 560px; margin-bottom: 2rem; line-height: 1.7; }
+    .cat-hero-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .meta-item { font-size: .85rem; color: var(--tx-muted); }
+    .filter-bar { padding: 1.25rem 0; border-bottom: 1px solid var(--bdr); background: var(--bg-2); position: sticky; top: var(--hh); z-index: 40; }
+    .filter-inner { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .filter-label { font-size: .78rem; font-weight: 700; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+    .filter-btn { padding: .4rem 1rem; border-radius: 99px; border: 1px solid var(--bdr); background: var(--bg-card); color: var(--tx-muted); font-size: .82rem; font-weight: 600; cursor: pointer; transition: all var(--t); }
+    .filter-btn:hover, .filter-btn.active { border-color: rgba(245,158,11,.4); background: rgba(245,158,11,.08); color: #fbbf24; }
+    .catalog-section { padding: 3rem 0 5rem; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; margin-bottom: 1rem; }
+    @media (max-width:1100px) { .catalog-grid { grid-template-columns: repeat(4,1fr); } }
+    @media (max-width:800px)  { .catalog-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width:540px)  { .catalog-grid { grid-template-columns: repeat(2,1fr); } }
+    .product-card { background: var(--bg-card); border: 1px solid var(--bdr); border-radius: var(--r-xl); overflow: hidden; transition: border-color var(--t), transform var(--t), box-shadow var(--t); display: flex; flex-direction: column; }
+    .product-card:hover { border-color: rgba(245,158,11,.3); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(245,158,11,.1); }
+    .product-card[data-cat="plastica"]:hover { border-color: rgba(16,185,129,.3); box-shadow: 0 8px 24px rgba(16,185,129,.08); }
+    .product-card[data-cat="eco"]:hover { border-color: rgba(34,197,94,.3); box-shadow: 0 8px 24px rgba(34,197,94,.08); }
+    .product-card.hidden { display: none; }
+    .product-img { position: relative; aspect-ratio: 1/1; background: #fff; overflow: hidden; }
+    .product-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    /* Logo LLANA — efeito gravação/impressão */
+    .product-img::after {
+      content: 'LLANA';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-22deg);
+      font-size: 1.3rem; font-weight: 900; letter-spacing: .28em;
+      color: rgba(155,110,0,.14);
+      pointer-events: none; white-space: nowrap; user-select: none;
+    }
+    .product-badge { position: absolute; top:.5rem; left:.5rem; background: rgba(17,24,39,.85); color: #fbbf24; font-size:.65rem; font-weight:800; padding:.2rem .45rem; border-radius:4px; letter-spacing:.03em; backdrop-filter:blur(4px); }
+    .cat-tag { position: absolute; top:.5rem; right:.5rem; font-size:.6rem; font-weight:700; padding:.15rem .4rem; border-radius:3px; text-transform:uppercase; letter-spacing:.05em; }
+    .cat-tag.metal   { background:rgba(245,158,11,.15); color:#fbbf24; border:1px solid rgba(245,158,11,.25); }
+    .cat-tag.plastica { background:rgba(16,185,129,.15); color:#10b981; border:1px solid rgba(16,185,129,.25); }
+    .cat-tag.eco     { background:rgba(34,197,94,.15); color:#22c55e; border:1px solid rgba(34,197,94,.25); }
+    .product-info { padding:.75rem; flex:1; display:flex; flex-direction:column; gap:.35rem; }
+    .product-code { font-size:.7rem; font-weight:800; color:#fbbf24; letter-spacing:.04em; }
+    .product-name { font-size:.8rem; font-weight:600; color:var(--tx); line-height:1.35; flex:1; }
+    .product-actions { margin-top:.5rem; }
+    .btn-orcar { display:block; width:100%; text-align:center; padding:.45rem .5rem; background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:#fbbf24; font-size:.75rem; font-weight:700; border-radius:6px; text-decoration:none; transition:all var(--t); }
+    .btn-orcar:hover { background:rgba(245,158,11,.2); border-color:rgba(245,158,11,.5); }
+    .section-title { font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--tx-dim); margin:2.5rem 0 1rem; display:flex; align-items:center; gap:.6rem; }
+    .section-title::before { content:'✒️'; font-size:.9rem; }
+    .section-title.green::before { content:'🖊️'; }
+    .section-title.eco::before { content:'🌿'; }
+  </style>
+</head>
+<body>
+  <header id="site-header">
+    <nav class="container nav-inner">
+      <a href="../../" class="logo">LLana <span>Grupo Corporativo</span></a>
+      <div class="nav-links">
+        <a href="../../">Portal</a>
+        <a href="../" class="active">Brindes</a>
+        <a href="../../tech/">Tech</a>
+      </div>
+      <a href="https://wa.me/5511971071213" class="btn btn-amber btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </header>
+
+  <section class="cat-hero">
+    <div class="container cat-hero-inner">
+      <nav class="breadcrumb">
+        <a href="../../">Portal</a><span>/</span>
+        <a href="../">Brindes</a><span>/</span>
+        <span>Canetas</span>
+      </nav>
+      <h1>Canetas Corporativas</h1>
+      <p>60 modelos disponíveis: metálicas executivas, plásticas promocionais e ecológicas em bambu. Personalização com a identidade da sua marca.</p>
+      <div class="cat-hero-meta">
+        <span class="meta-item">✒️ 60 modelos</span>
+        <span class="meta-item">🥇 Metálicas & Plásticas</span>
+        <span class="meta-item">🌿 Linha Ecológica & Bambu</span>
+        <span class="meta-item">💬 Orçamento via WhatsApp</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="container filter-inner">
+      <span class="filter-label">Filtrar:</span>
+      <button class="filter-btn active" data-filter="all">Todos (60)</button>
+      <button class="filter-btn" data-filter="metal">Metálicas (20)</button>
+      <button class="filter-btn" data-filter="plastica">Plásticas (20)</button>
+      <button class="filter-btn" data-filter="eco">Eco &amp; Bambu (20)</button>
+    </div>
+  </div>
+
+  <section class="catalog-section">
+    <div class="container">
+      <div class="section-title">Canetas Metálicas</div>
+      <div class="catalog-grid">
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/3002.jpeg" alt="3002" loading="lazy">
+            <span class="product-badge">3002</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">3002</div>
+            <div class="product-name">Caneta Esferográfica Semimetálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%203002." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51125.jpeg" alt="51125" loading="lazy">
+            <span class="product-badge">51125</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51125</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051125." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51140.jpeg" alt="51140" loading="lazy">
+            <span class="product-badge">51140</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51140</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051140." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51348.jpeg" alt="51348" loading="lazy">
+            <span class="product-badge">51348</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51348</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051348." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51437.jpeg" alt="51437" loading="lazy">
+            <span class="product-badge">51437</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51437</div>
+            <div class="product-name">Caneta Roller Metálica Multifunção</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051437." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51837.jpeg" alt="51837" loading="lazy">
+            <span class="product-badge">51837</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51837</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051837." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51842.jpeg" alt="51842" loading="lazy">
+            <span class="product-badge">51842</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51842</div>
+            <div class="product-name">Conjunto Benton – Caneta Roller</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051842." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51974.jpeg" alt="51974" loading="lazy">
+            <span class="product-badge">51974</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51974</div>
+            <div class="product-name">Esferográfica em Metal 60% Reciclado</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051974." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51977.jpeg" alt="51977" loading="lazy">
+            <span class="product-badge">51977</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51977</div>
+            <div class="product-name">Caneta Esferográfica Elegante</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051977." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/51980.jpeg" alt="51980" loading="lazy">
+            <span class="product-badge">51980</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51980</div>
+            <div class="product-name">Conjunto Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051980." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/6136BC.jpeg" alt="6136BC" loading="lazy">
+            <span class="product-badge">6136BC</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6136BC</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206136BC." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/6136BF.jpeg" alt="6136BF" loading="lazy">
+            <span class="product-badge">6136BF</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6136BF</div>
+            <div class="product-name">Caneta Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206136BF." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/6143.jpeg" alt="6143" loading="lazy">
+            <span class="product-badge">6143</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6143</div>
+            <div class="product-name">Caneta Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206143." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/6145.jpeg" alt="6145" loading="lazy">
+            <span class="product-badge">6145</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6145</div>
+            <div class="product-name">Caneta Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206145." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/81000.jpeg" alt="81000" loading="lazy">
+            <span class="product-badge">81000</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81000</div>
+            <div class="product-name">Caneta Metálica Wass Esferográfica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081000." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/81001.jpeg" alt="81001" loading="lazy">
+            <span class="product-badge">81001</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81001</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081001." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/81003.jpeg" alt="81003" loading="lazy">
+            <span class="product-badge">81003</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81003</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081003." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/81005.jpeg" alt="81005" loading="lazy">
+            <span class="product-badge">81005</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81005</div>
+            <div class="product-name">Caneta Esferográfica Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081005." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/81126.jpeg" alt="81126" loading="lazy">
+            <span class="product-badge">81126</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81126</div>
+            <div class="product-name">Caneta Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081126." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="metal">
+          <div class="product-img">
+            <img src="/brindes/81139.jpeg" alt="81139" loading="lazy">
+            <span class="product-badge">81139</span>
+            <span class="cat-tag metal">Metálica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81139</div>
+            <div class="product-name">Caneta Esferográfica em Alumínio</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081139." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title green">Canetas Plásticas</div>
+      <div class="catalog-grid">
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/3018.jpeg" alt="3018" loading="lazy">
+            <span class="product-badge">3018</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">3018</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%203018." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/3070.jpeg" alt="3070" loading="lazy">
+            <span class="product-badge">3070</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">3070</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%203070." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/3099B.jpeg" alt="3099B" loading="lazy">
+            <span class="product-badge">3099B</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">3099B</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%203099B." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/31019.jpeg" alt="31019" loading="lazy">
+            <span class="product-badge">31019</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">31019</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2031019." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/3662.jpeg" alt="3662" loading="lazy">
+            <span class="product-badge">3662</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">3662</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%203662." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/5073.jpeg" alt="5073" loading="lazy">
+            <span class="product-badge">5073</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5073</div>
+            <div class="product-name">Caneta Esferográfica Touch</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205073." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/91256.jpeg" alt="91256" loading="lazy">
+            <span class="product-badge">91256</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">91256</div>
+            <div class="product-name">Caneta Promocional</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2091256." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/5151B.jpeg" alt="5151B" loading="lazy">
+            <span class="product-badge">5151B</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5151B</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205151B." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6011B.jpeg" alt="6011B" loading="lazy">
+            <span class="product-badge">6011B</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6011B</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206011B." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6011C.jpeg" alt="6011C" loading="lazy">
+            <span class="product-badge">6011C</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6011C</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206011C." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6011D.jpeg" alt="6011D" loading="lazy">
+            <span class="product-badge">6011D</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6011D</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206011D." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6017.jpeg" alt="6017" loading="lazy">
+            <span class="product-badge">6017</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6017</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206017." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6021.jpeg" alt="6021" loading="lazy">
+            <span class="product-badge">6021</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6021</div>
+            <div class="product-name">Caneta Esferográfica Touch</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206021." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6037.jpeg" alt="6037" loading="lazy">
+            <span class="product-badge">6037</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6037</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206037." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6040B.jpeg" alt="6040B" loading="lazy">
+            <span class="product-badge">6040B</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6040B</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206040B." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6041C.jpeg" alt="6041C" loading="lazy">
+            <span class="product-badge">6041C</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6041C</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206041C." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6051.jpeg" alt="6051" loading="lazy">
+            <span class="product-badge">6051</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6051</div>
+            <div class="product-name">Caneta Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206051." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6060.jpeg" alt="6060" loading="lazy">
+            <span class="product-badge">6060</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6060</div>
+            <div class="product-name">Caneta Esferográfica Touch</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206060." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6069.jpeg" alt="6069" loading="lazy">
+            <span class="product-badge">6069</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6069</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206069." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="plastica">
+          <div class="product-img">
+            <img src="/brindes/6078.jpeg" alt="6078" loading="lazy">
+            <span class="product-badge">6078</span>
+            <span class="cat-tag plastica">Plástica</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6078</div>
+            <div class="product-name">Caneta Esferográfica Plástica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206078." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title eco">Canetas Ecológicas &amp; Bambu</div>
+      <div class="catalog-grid">
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/5103.jpeg" alt="5103" loading="lazy">
+            <span class="product-badge">5103</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5103</div>
+            <div class="product-name">Caneta Ecológica Papelão</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205103." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/5107.jpeg" alt="5107" loading="lazy">
+            <span class="product-badge">5107</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5107</div>
+            <div class="product-name">Caneta Ecológica de Papelão Color</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205107." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/CE016.jpeg" alt="CE016" loading="lazy">
+            <span class="product-badge">CE016</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">CE016</div>
+            <div class="product-name">Caneta Ecológica com Suporte Celular</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20CE016." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/51162.jpeg" alt="51162" loading="lazy">
+            <span class="product-badge">51162</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">51162</div>
+            <div class="product-name">Conjunto de Esferográficas Ecológicas</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2051162." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/5151.jpeg" alt="5151" loading="lazy">
+            <span class="product-badge">5151</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5151</div>
+            <div class="product-name">Caneta Reciclada com Clip</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205151." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/5188.jpeg" alt="5188" loading="lazy">
+            <span class="product-badge">5188</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5188</div>
+            <div class="product-name">Caneta Ecológica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205188." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/5190.jpeg" alt="5190" loading="lazy">
+            <span class="product-badge">5190</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">5190</div>
+            <div class="product-name">Caneta em Bambu</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%205190." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6107.jpeg" alt="6107" loading="lazy">
+            <span class="product-badge">6107</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6107</div>
+            <div class="product-name">Caneta Papel Reciclado Color</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206107." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6107D.jpeg" alt="6107D" loading="lazy">
+            <span class="product-badge">6107D</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6107D</div>
+            <div class="product-name">Caneta Papel Reciclado</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206107D." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6209.jpeg" alt="6209" loading="lazy">
+            <span class="product-badge">6209</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6209</div>
+            <div class="product-name">Caneta Ecológica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206209." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6271P.jpeg" alt="6271P" loading="lazy">
+            <span class="product-badge">6271P</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6271P</div>
+            <div class="product-name">Caneta Ecológica Touch</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206271P." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6515.jpeg" alt="6515" loading="lazy">
+            <span class="product-badge">6515</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6515</div>
+            <div class="product-name">Caneta em Bambu com Detalhes</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206515." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6516.jpeg" alt="6516" loading="lazy">
+            <span class="product-badge">6516</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6516</div>
+            <div class="product-name">Caneta em Bambu com Detalhes</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206516." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6582.jpeg" alt="6582" loading="lazy">
+            <span class="product-badge">6582</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6582</div>
+            <div class="product-name">Caneta Cortiça</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206582." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6591.jpeg" alt="6591" loading="lazy">
+            <span class="product-badge">6591</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6591</div>
+            <div class="product-name">Caneta em Bambu Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206591." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6594.jpeg" alt="6594" loading="lazy">
+            <span class="product-badge">6594</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6594</div>
+            <div class="product-name">Caneta em Bambu Metálica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206594." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/6599.jpeg" alt="6599" loading="lazy">
+            <span class="product-badge">6599</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">6599</div>
+            <div class="product-name">Caneta Ecológica Touch</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%206599." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/81009.jpeg" alt="81009" loading="lazy">
+            <span class="product-badge">81009</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81009</div>
+            <div class="product-name">Caneta Ecológica em Bambu</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081009." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/81010.jpeg" alt="81010" loading="lazy">
+            <span class="product-badge">81010</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81010</div>
+            <div class="product-name">Caneta Ecológica em Bambu</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081010." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="eco">
+          <div class="product-img">
+            <img src="/brindes/81011.jpeg" alt="81011" loading="lazy">
+            <span class="product-badge">81011</span>
+            <span class="cat-tag eco">Eco/Bambu</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">81011</div>
+            <div class="product-name">Caneta Ecológica em Bambu</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2081011." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:3rem;text-align:center;">
+        <a href="../" class="btn btn-outline">← Voltar ao catálogo de Brindes</a>
+        <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20canetas%20corporativas." class="btn btn-amber" target="_blank" rel="noopener" style="margin-left:1rem;">💬 Orçamento geral</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo">LLana <span>Grupo Corporativo</span></div>
+        <p>Brindes corporativos personalizados</p>
+      </div>
+      <div class="footer-links">
+        <strong>Catálogos</strong>
+        <a href="../cadernos/">📓 Cadernos</a>
+        <a href="./">✒️ Canetas</a>
+        <a href="../mochilas/">🎒 Mochilas</a>
+        <a href="../">← Todos os Brindes</a>
+      </div>
+      <div class="footer-links"><strong>Contato</strong>
+        <a href="https://wa.me/5511971071213" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(card => {
+          card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
+        });
+      });
+    });
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+    }, {threshold:0.05});
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  </script>
+  <script src="../../js/main.js"></script>
+</body>
+</html>
