@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setembro Amarelo — Brindes com Propósito | LLana Promo & Gifts</title>
+  <meta name="description" content="Valorize quem cuida da vida. Brindes personalizados para a campanha Setembro Amarelo — canetas, cadernos, squeezes e muito mais com a sua logomarca." />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <style>
+    :root { --sa: #fbbf24; --sa-deep: #d97706; --sa-glow: rgba(251,191,36,.18); }
+
+    /* HERO */
+    .sa-hero {
+      position: relative; overflow: hidden;
+      background: var(--bg);
+      padding: 0;
+    }
+    .sa-hero-img {
+      width: 100%; max-height: 420px; object-fit: cover; display: block;
+      filter: brightness(.55) saturate(.8);
+    }
+    .sa-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,12,20,.3) 0%, rgba(10,12,20,.85) 80%);
+      display: flex; align-items: flex-end;
+    }
+    .sa-hero-content {
+      padding: 2.5rem 0 3.5rem;
+      position: relative; z-index: 1;
+    }
+    .ribbon-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(251,191,36,.15); border: 1px solid rgba(251,191,36,.3);
+      border-radius: 99px; padding: .35rem .9rem;
+      font-size: .78rem; font-weight: 700; color: var(--sa);
+      letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .sa-hero-content h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900; letter-spacing: -.03em; line-height: 1.05;
+      color: #fff; margin-bottom: .75rem;
+    }
+    .sa-hero-content h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #fbbf24, #fde68a);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .sa-hero-content p {
+      font-size: 1.1rem; color: rgba(255,255,255,.75); max-width: 560px; line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .sa-cta-row { display: flex; gap: .85rem; flex-wrap: wrap; }
+    .btn-sa {
+      padding: .85rem 2rem; border-radius: var(--r-xl);
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #1a1000; font-size: .95rem; font-weight: 800;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 4px 24px rgba(251,191,36,.35);
+      transition: all var(--t); display: inline-block;
+    }
+    .btn-sa:hover { box-shadow: 0 8px 40px rgba(251,191,36,.55); filter: brightness(1.06); }
+
+    /* INTRO */
+    .sa-intro { padding: 4rem 0 3rem; }
+    .sa-intro-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .sa-intro h2 { font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: 1rem; }
+    .sa-intro h2 span { color: var(--sa); }
+    .sa-intro p { color: var(--tx-muted); line-height: 1.8; margin-bottom: 1rem; }
+    .sa-intro-stat {
+      display: flex; align-items: center; gap: .75rem; padding: 1rem 1.25rem;
+      background: var(--bg-card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--sa); border-radius: var(--r-lg);
+    }
+    .sa-intro-stat .stat-icon { font-size: 1.5rem; }
+    .sa-intro-stat p { margin: 0; font-size: .88rem; color: var(--tx-muted); }
+    .sa-intro-stat strong { color: var(--tx); }
+
+    /* SECTION HEADERS */
+    .sa-section { padding: 4rem 0; }
+    .sa-section-alt { padding: 4rem 0; background: var(--bg-2); }
+    .sa-cat-label {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--sa); margin-bottom: .5rem;
+    }
+    .sa-cat-label::before { content:''; width: 28px; height: 2px; background: var(--sa); border-radius: 2px; }
+    .sa-section h2 { font-size: clamp(1.4rem,2.5vw,2rem); font-weight: 800; margin-bottom: .5rem; }
+    .sa-section-alt h2 { font-size: clamp(1.4rem,2.5vw,2rem); font-weight: 800; margin-bottom: .5rem; }
+    .sa-section p.lead, .sa-section-alt p.lead {
+      color: var(--tx-muted); font-size: .95rem; margin-bottom: 2.25rem; max-width: 600px;
+    }
+
+    /* PRODUCT GRID */
+    .prod-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    }
+    .prod-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    }
+    .prod-card {
+      background: var(--bg-card); border: 1px solid var(--bdr); border-radius: var(--r-xl);
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+    }
+    .prod-card:hover {
+      border-color: rgba(251,191,36,.3); transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(251,191,36,.1);
+    }
+    .prod-img-wrap {
+      background: #fff; aspect-ratio: 1/1; display: flex; align-items: center;
+      justify-content: center; overflow: hidden; position: relative;
+    }
+    .prod-img-wrap img { width: 90%; height: 90%; object-fit: contain; display: block; }
+    .prod-img-wrap::after {
+      content: 'LLANA';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-22deg);
+      font-size: 1.2rem; font-weight: 900; letter-spacing: .28em;
+      color: rgba(155,110,0,.13); pointer-events: none; white-space: nowrap;
+    }
+    .prod-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: .35rem; }
+    .prod-ref { font-size: .68rem; font-weight: 800; color: var(--sa); letter-spacing: .05em; }
+    .prod-name { font-size: .85rem; font-weight: 700; color: var(--tx); line-height: 1.35; flex: 1; }
+    .prod-price { font-size: .82rem; color: var(--tx-muted); }
+    .prod-price strong { color: var(--tx); font-size: .95rem; }
+    .prod-price .price-range { font-size: .7rem; color: var(--tx-dim); }
+    .btn-wa-sm {
+      display: block; width: 100%; text-align: center;
+      padding: .5rem .5rem; margin-top: .5rem;
+      background: rgba(37,211,102,.1); border: 1px solid rgba(37,211,102,.25);
+      color: #4ade80; font-size: .75rem; font-weight: 700;
+      border-radius: 6px; text-decoration: none; transition: all var(--t);
+    }
+    .btn-wa-sm:hover { background: rgba(37,211,102,.2); border-color: rgba(37,211,102,.45); }
+
+    /* FINAL CTA */
+    .sa-final-cta {
+      padding: 5rem 0; text-align: center;
+      background: linear-gradient(135deg, rgba(251,191,36,.06) 0%, rgba(245,158,11,.04) 100%);
+      border-top: 1px solid rgba(251,191,36,.12);
+    }
+    .sa-final-cta h2 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900; margin-bottom: 1rem; }
+    .sa-final-cta p { color: var(--tx-muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sa-intro-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .prod-grid { grid-template-columns: repeat(2,1fr); }
+      .prod-grid-4 { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 540px) {
+      .prod-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="site-header">
+    <nav class="container nav-inner">
+      <a href="../../" class="logo">LLana <span>Grupo Corporativo</span></a>
+      <div class="nav-links">
+        <a href="../../">Portal</a>
+        <a href="../" class="active">Brindes</a>
+        <a href="../../tech/">Tech</a>
+      </div>
+      <a href="https://wa.me/5511971071213" class="btn btn-amber btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="sa-hero">
+    <img
+      src="https://email-editor-production.s3.amazonaws.com/images/339865/setembro-amarelo/2026-06-setembro-amarelo2.jpg"
+      alt="Campanha Setembro Amarelo"
+      class="sa-hero-img"
+      onerror="this.style.display='none'"
+    />
+    <div class="sa-hero-overlay">
+      <div class="container sa-hero-content">
+        <nav style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1rem;">
+          <a href="../../" style="color:rgba(255,255,255,.5);text-decoration:none;">Portal</a>
+          <span>›</span>
+          <a href="../" style="color:rgba(255,255,255,.5);text-decoration:none;">Brindes</a>
+          <span>›</span>
+          <span style="color:rgba(255,255,255,.7);">Setembro Amarelo</span>
+        </nav>
+        <div class="ribbon-badge">🎗️ Setembro Amarelo 2025</div>
+        <h1>Brindes que valorizam<br><em>quem cuida da vida</em></h1>
+        <p>Uma data que convida as empresas a cuidar das pessoas. Reforce sua cultura de bem-estar com brindes personalizados que comunicam acolhimento e pertencimento.</p>
+        <div class="sa-cta-row">
+          <a href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20kit%20Setembro%20Amarelo%20%28Ref.%20SET25%29" class="btn-sa" target="_blank" rel="noopener">
+            💬 Montar meu kit agora
+          </a>
+          <a href="../" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.25);">
+            ← Ver todos os brindes
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="sa-intro">
+    <div class="container sa-intro-inner">
+      <div>
+        <span class="ribbon-badge" style="margin-bottom:1rem;">🎗️ Por que participar</span>
+        <h2>Transforme a campanha em um<br><span>gesto real de cuidado</span></h2>
+        <p>O Setembro Amarelo é o mês de conscientização sobre prevenção ao suicídio no Brasil. Cada empresa pode ampliar o alcance da campanha — e um brinde bem escolhido transforma esse gesto em memória afetiva duradoura para colaboradores e clientes.</p>
+        <p>A LLana seleciona produtos que refletem cuidado, presença e qualidade — com arte personalizada e entrega em todo o Brasil.</p>
+        <a href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Quero%20montar%20um%20kit%20Setembro%20Amarelo%20para%20minha%20empresa%20%28Ref.%20SET25%29" class="btn-sa" style="display:inline-block;margin-top:.5rem;" target="_blank" rel="noopener">
+          Falar com a Elaine →
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="sa-intro-stat">
+          <span class="stat-icon">🎗️</span>
+          <p><strong>Setembro Amarelo</strong> — campanha brasileira de prevenção ao suicídio, promovida desde 2015 pelo CFM e CVV.</p>
+        </div>
+        <div class="sa-intro-stat">
+          <span class="stat-icon">💛</span>
+          <p><strong>Brindes com propósito</strong> geram 3× mais retenção de memória de marca do que ações digitais isoladas.</p>
+        </div>
+        <div class="sa-intro-stat">
+          <span class="stat-icon">🏢</span>
+          <p><strong>Empresas que participam</strong> da campanha fortalecem a cultura de saúde mental e engajam equipes em torno de um propósito maior.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINHA ESCRITA -->
+  <section class="sa-section-alt">
+    <div class="container">
+      <div class="sa-cat-label">Linha Escrita</div>
+      <h2>Canetas & Instrumentos de Escrita</h2>
+      <p class="lead">Itens de alta utilidade que ficam na mesa e na memória — com a logo da sua empresa aplicada em gravação a laser, tampografia ou impressão colorida.</p>
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/CATALOGO_2006_TODOS/3002_120.JPG" alt="Caneta Esferográfica Semimetálica" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 3002</div>
+            <div class="prod-name">Caneta Esferográfica Semimetálica</div>
+            <div class="prod-price"><strong>R$&nbsp;2,96</strong> <span class="price-range">(300 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Caneta%20Esferogr%C3%A1fica%20Semimet%C3%A1lica%20%28Ref.%203002%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/PRODUTOS/CE016/CE016-SET-A-160.JPG" alt="Caneta Ecológica com Suporte para Celular" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. CE016</div>
+            <div class="prod-name">Caneta Ecológica com Suporte para Celular</div>
+            <div class="prod-price"><strong>R$&nbsp;2,65</strong> <span class="price-range">(300 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Caneta%20Ecol%C3%B3gica%20com%20Suporte%20para%20Celular%20%28Ref.%20CE016%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/CATALOGO%202012_2013/CANETAS%20METALICAS/M6136BC_160.jpg" alt="Caneta Esferográfica Metálica Cromada" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 6136BC</div>
+            <div class="prod-name">Caneta Esferográfica Metálica Cromada</div>
+            <div class="prod-price"><strong>R$&nbsp;13,45</strong> <span class="price-range">(300 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Caneta%20Esferogr%C3%A1fica%20Met%C3%A1lica%20Cromada%20%28Ref.%206136BC%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINHA IMPRESSOS -->
+  <section class="sa-section">
+    <div class="container">
+      <div class="sa-cat-label">Linha Impressos</div>
+      <h2>Cadernos, Agendas & Calendários</h2>
+      <p class="lead">Itens de papelaria premium — companheiros diários que reforçam a presença da marca no ambiente de trabalho e em casa.</p>
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/Catalogo_2017_2018/2014_160.jpg" alt="Calendário Pequeno com Base em PVC" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 2014</div>
+            <div class="prod-name">Calendário Pequeno com Base em PVC</div>
+            <div class="prod-price"><strong>R$&nbsp;5,87</strong> <span class="price-range">(300 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Calend%C3%A1rio%20Pequeno%20com%20Base%20em%20PVC%20%28Ref.%202014%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/CATALOGO%202012_2013/CADERNOS/CAD12P_160.JPG" alt="Caderno Fotolux Brilho 17x24cm" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. CAD11B-17</div>
+            <div class="prod-name">Caderno Fotolux Brilho 17×24 cm</div>
+            <div class="prod-price"><strong>R$&nbsp;25,96</strong> <span class="price-range">(300 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Caderno%20Fotolux%20Brilho%2017x24cm%20%28Ref.%20CAD11B-17%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/PRODUTOS/CAD32/cad32-160.jpg" alt="Agenda Diária Bela Vista" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. AGD32-15</div>
+            <div class="prod-name">Agenda Diária Bela Vista</div>
+            <div class="prod-price"><strong>R$&nbsp;34,90</strong> <span class="price-range">(300 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Agenda%20Di%C3%A1ria%20Bela%20Vista%20%28Ref.%20AGD32-15%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITENS DIVERSOS -->
+  <section class="sa-section-alt">
+    <div class="container">
+      <div class="sa-cat-label">Itens Diversos</div>
+      <h2>Acessórios & Utilidades</h2>
+      <p class="lead">Brindes de alto impacto e uso frequente — ideais para destacar sua participação na campanha em qualquer ambiente.</p>
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/PRODUTOS/SPOT/160px/97335_set.jpg" alt="Caixa de Som com Microfone" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 97335</div>
+            <div class="prod-name">Caixa de Som com Microfone</div>
+            <div class="prod-price"><strong>R$&nbsp;74,18</strong> <span class="price-range">(250 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Caixa%20de%20Som%20com%20Microfone%20%28Ref.%2097335%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/PRODUTOS/SPOT/160px/94446_set.jpg" alt="Porta Cartões em Silicone" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 94446</div>
+            <div class="prod-name">Porta Cartões em Silicone</div>
+            <div class="prod-price"><strong>R$&nbsp;8,90</strong> <span class="price-range">(250 a 499 un.)</span></div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Porta%20Cart%C3%B5es%20em%20Silicone%20%28Ref.%2094446%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://unitycorp.com.br/FOTOS/PRODUTOS/SPOT/160px/94623_set.jpg" alt="Squeeze de Alumínio com Mosquetão" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 94623</div>
+            <div class="prod-name">Squeeze de Alumínio com Mosquetão</div>
+            <div class="prod-price" style="color:var(--tx-muted);">Sob consulta</div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Squeeze%20de%20Alum%C3%ADnio%20com%20Mosquet%C3%A3o%20%28Ref.%2094623%29" target="_blank" rel="noopener">💬 Cotar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRINDES ESPECIAIS -->
+  <section class="sa-section">
+    <div class="container">
+      <div class="sa-cat-label">🎗️ Seleção Especial</div>
+      <h2>Brindes Especiais Setembro Amarelo</h2>
+      <p class="lead">Itens com apelo emocional e visual forte — perfeitos para campanhas internas, presentes para colaboradores e kits de conscientização.</p>
+      <div class="prod-grid-4">
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://email-editor-production.s3.amazonaws.com/images/339865/cad11f-site.jpg" alt="Caderno Fotolux Fosco" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. CAD11F</div>
+            <div class="prod-name">Caderno Fotolux Fosco</div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Caderno%20Fotolux%20Fosco%20%28Ref.%20CAD11F%29" target="_blank" rel="noopener">💬 Cotar</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://email-editor-production.s3.amazonaws.com/images/339865/botton.jpg" alt="Botton Americano Personalizado" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. BOA02</div>
+            <div class="prod-name">Botton Americano Personalizado 35mm</div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Botton%20Americano%20Personalizado%2035mm%20%28Ref.%20BOA02%29" target="_blank" rel="noopener">💬 Cotar</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="https://email-editor-production.s3.amazonaws.com/images/339865/garrafa.jpg" alt="Squeeze em RPET Personalizado" loading="lazy" />
+          </div>
+          <div class="prod-body">
+            <div class="prod-ref">Ref. 94782</div>
+            <div class="prod-name">Squeeze em RPET Personalizado</div>
+            <a class="btn-wa-sm" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Squeeze%20em%20RPET%20Personalizado%20%28Ref.%2094782%29" target="_blank" rel="noopener">💬 Cotar</a>
+          </div>
+        </div>
+        <div class="prod-card" style="background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(245,158,11,.05));border-color:rgba(251,191,36,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;gap:.85rem;">
+          <span style="font-size:2.5rem;">🎗️</span>
+          <p style="font-size:.88rem;color:var(--tx-muted);line-height:1.6;margin:0;">Precisa de um item específico para sua campanha?</p>
+          <a class="btn-sa" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Quero%20um%20brinde%20personalizado%20para%20minha%20campanha%20Setembro%20Amarelo%20%28Ref.%20SET25%29" target="_blank" rel="noopener" style="font-size:.82rem;padding:.6rem 1.2rem;">Fale com a Elaine →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="sa-final-cta">
+    <div class="container container--sm">
+      <div style="font-size:3rem;margin-bottom:1rem;">🎗️</div>
+      <h2>Vamos montar o kit<br>ideal para sua empresa?</h2>
+      <p>Orçamento gratuito e sem compromisso. Arte personalizada inclusa. Entrega em todo o Brasil — a tempo para o Setembro Amarelo.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a class="btn-sa" href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Quero%20montar%20um%20kit%20Setembro%20Amarelo%20para%20minha%20empresa%20%28Ref.%20SET25%29" target="_blank" rel="noopener" style="font-size:1rem;padding:1rem 2.5rem;">
+          💬 Solicitar Orçamento Agora
+        </a>
+        <a href="../" class="btn btn-outline btn-xl">← Voltar ao catálogo</a>
+      </div>
+      <p style="margin-top:2rem;font-size:.82rem;color:var(--tx-dim);">
+        📞 (11) 97107-1213 &nbsp;·&nbsp; ✉️ comercial@llana.com.br
+      </p>
+    </div>
+  </section>
+
+  <footer style="padding:3rem 0 2rem;border-top:1px solid var(--bdr);">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <div class="logo" style="font-size:1.1rem;margin-bottom:.4rem;">LLana <span>Grupo Corporativo</span></div>
+        <p style="font-size:.8rem;color:var(--tx-dim);">Brindes corporativos personalizados com qualidade e agilidade.</p>
+      </div>
+      <a href="https://wa.me/5511971071213?text=Ol%C3%A1%21%20Recebi%20a%20campanha%20Setembro%20Amarelo%20e%20gostaria%20de%20cotar%3A%20Quero%20montar%20um%20kit%20Setembro%20Amarelo%20%28Ref.%20SET25%29" class="btn btn-amber" target="_blank" rel="noopener" style="font-size:.85rem;">
+        💬 Falar no WhatsApp
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
