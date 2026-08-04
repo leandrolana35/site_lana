@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Mochilas e Bolsas — LLana Promo & Gifts</title>
+  <meta name="description" content="Catálogo de mochilas, bolsas e necessaires corporativos. 58 modelos personalizados. Orçamento via WhatsApp." />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <style>
+    .cat-hero { padding:4rem 0 3rem; background:var(--bg); position:relative; overflow:hidden; }
+    .cat-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(245,158,11,.07) 0%,transparent 60%), radial-gradient(ellipse 50% 60% at 80% 30%, rgba(251,191,36,.05) 0%,transparent 55%); pointer-events:none; }
+    .cat-hero-inner { position:relative; z-index:1; }
+    .breadcrumb { display:flex; align-items:center; gap:.5rem; font-size:.8rem; color:var(--tx-dim); margin-bottom:1.5rem; }
+    .breadcrumb a { color:var(--tx-dim); text-decoration:none; transition:color var(--t); }
+    .breadcrumb a:hover { color:#fbbf24; }
+    .cat-hero h1 { font-size:clamp(2rem,4vw,3rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.75rem; }
+    .cat-hero p { font-size:1.05rem; color:var(--tx-muted); max-width:560px; margin-bottom:2rem; line-height:1.7; }
+    .cat-hero-meta { display:flex; gap:2rem; flex-wrap:wrap; }
+    .meta-item { font-size:.85rem; color:var(--tx-muted); }
+    .filter-bar { padding:1.25rem 0; border-bottom:1px solid var(--bdr); background:var(--bg-2); position:sticky; top:var(--hh); z-index:40; }
+    .filter-inner { display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+    .filter-label { font-size:.78rem; font-weight:700; color:var(--tx-dim); text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
+    .filter-btn { padding:.4rem 1rem; border-radius:99px; border:1px solid var(--bdr); background:var(--bg-card); color:var(--tx-muted); font-size:.82rem; font-weight:600; cursor:pointer; transition:all var(--t); }
+    .filter-btn:hover,.filter-btn.active { border-color:rgba(245,158,11,.4); background:rgba(245,158,11,.08); color:#fbbf24; }
+    .catalog-section { padding:3rem 0 5rem; }
+    .catalog-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-bottom:1rem; }
+    @media (max-width:1100px) { .catalog-grid { grid-template-columns:repeat(4,1fr); } }
+    @media (max-width:800px) { .catalog-grid { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:540px) { .catalog-grid { grid-template-columns:repeat(2,1fr); } }
+    .product-card { background:var(--bg-card); border:1px solid var(--bdr); border-radius:var(--r-xl); overflow:hidden; transition:border-color var(--t),transform var(--t),box-shadow var(--t); display:flex; flex-direction:column; }
+    .product-card:hover { border-color:rgba(245,158,11,.3); transform:translateY(-3px); box-shadow:0 8px 32px rgba(245,158,11,.1); }
+    .product-card[data-cat="mochila"]:hover { border-color:rgba(139,92,246,.3); box-shadow:0 8px 24px rgba(139,92,246,.08); }
+    .product-card[data-cat="nec"]:hover { border-color:rgba(16,185,129,.3); box-shadow:0 8px 24px rgba(16,185,129,.08); }
+    .product-card.hidden { display:none; }
+    .product-img { position:relative; aspect-ratio:1/1; background:#fff; overflow:hidden; }
+    .product-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .product-img::after {
+      content: 'LLANA';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-22deg);
+      font-size: 1.3rem; font-weight: 900; letter-spacing: .28em;
+      color: rgba(155,110,0,.14);
+      pointer-events: none; white-space: nowrap; user-select: none;
+    }
+    .product-badge { position:absolute; top:.5rem; left:.5rem; background:rgba(17,24,39,.85); color:#fbbf24; font-size:.65rem; font-weight:800; padding:.2rem .45rem; border-radius:4px; letter-spacing:.03em; backdrop-filter:blur(4px); }
+    .cat-tag { position:absolute; top:.5rem; right:.5rem; font-size:.6rem; font-weight:700; padding:.15rem .4rem; border-radius:3px; text-transform:uppercase; letter-spacing:.05em; }
+    .cat-tag.amber  { background:rgba(245,158,11,.15); color:#fbbf24; border:1px solid rgba(245,158,11,.25); }
+    .cat-tag.purple { background:rgba(139,92,246,.15); color:#a78bfa; border:1px solid rgba(139,92,246,.25); }
+    .cat-tag.green  { background:rgba(16,185,129,.15); color:#10b981; border:1px solid rgba(16,185,129,.25); }
+    .product-info { padding:.75rem; flex:1; display:flex; flex-direction:column; gap:.35rem; }
+    .product-code { font-size:.7rem; font-weight:800; color:#fbbf24; letter-spacing:.04em; }
+    .product-name { font-size:.8rem; font-weight:600; color:var(--tx); line-height:1.35; flex:1; }
+    .product-actions { margin-top:.5rem; }
+    .btn-orcar { display:block; width:100%; text-align:center; padding:.45rem .5rem; background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:#fbbf24; font-size:.75rem; font-weight:700; border-radius:6px; text-decoration:none; transition:all var(--t); }
+    .btn-orcar:hover { background:rgba(245,158,11,.2); border-color:rgba(245,158,11,.5); }
+    .section-title { font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--tx-dim); margin:2.5rem 0 1rem; display:flex; align-items:center; gap:.6rem; }
+    .section-title::before { content:'🎒'; font-size:.9rem; }
+    .section-title.nec::before { content:'👜'; }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../../" class="logo">
+          <div class="logo-body">
+            <span class="logo-name">LLana <em style="color:#fbbf24;">Promo</em></span>
+            <span class="logo-unit">Brindes & Campanhas B2B</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Menu">
+          <a href="../">Brindes</a>
+          <a href="../catalogo/">Catálogo</a>
+          <a href="./" class="active">Mochilas</a>
+          <span class="nav-sep"></span>
+          <a href="../../tech/" class="nav-back">⚡ LLana Tech →</a>
+        </nav>
+        <div class="header-cta">
+          <a href="../../" class="btn btn-ghost btn-sm">🏠 Portal</a>
+          <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20mochilas%20corporativas." class="btn btn-amber btn-sm" target="_blank" rel="noopener">💬 Orçamento</a>
+        </div>
+        <button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <nav class="mobile-nav">
+      <a href="../">LLana Promo</a>
+      <a href="../catalogo/">Catálogo Completo</a>
+      <a href="./">Mochilas & Bolsas</a>
+      <div class="mob-cta">
+        <a href="https://wa.me/5511971071213" class="btn btn-wa btn-full" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+        <a href="../../" class="btn btn-ghost btn-full">🏠 Portal do Grupo</a>
+      </div>
+    </nav>
+  </header>
+  <section class="cat-hero">
+    <div class="container cat-hero-inner">
+      <nav class="breadcrumb"><a href="../../">Portal</a><span>/</span><a href="../">Brindes</a><span>/</span><span>Mochilas e Bolsas</span></nav>
+      <h1>Mochilas, Bolsas e Necessaires</h1>
+      <p>58 modelos: mochilas para notebook, bolsas esportivas, sacochilas, bolsas térmicas e necessaires. Personalização com a identidade da sua marca.</p>
+      <div class="cat-hero-meta">
+        <span class="meta-item">🎒 38 bolsas e mochilas</span>
+        <span class="meta-item">👜 20 necessaires & estojos</span>
+        <span class="meta-item">💬 Orçamento via WhatsApp</span>
+      </div>
+    </div>
+  </section>
+  <div class="filter-bar">
+    <div class="container filter-inner">
+      <span class="filter-label">Filtrar:</span>
+      <button class="filter-btn active" data-filter="all">Todos (58)</button>
+      <button class="filter-btn" data-filter="mochila">Mochilas</button>
+      <button class="filter-btn" data-filter="bolsa">Bolsas & Sacochilas</button>
+      <button class="filter-btn" data-filter="nec">Necessaires</button>
+    </div>
+  </div>
+  <section class="catalog-section">
+    <div class="container">
+      <div class="section-title">Mochilas, Bolsas e Sacochilas</div>
+      <div class="catalog-grid">
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/2095.jpeg" alt="2095" loading="lazy">
+            <span class="product-badge">2095</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">2095</div>
+            <div class="product-name">Bolsa Tiracolo em Nylon Impermeável</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%202095." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4041.jpeg" alt="4041" loading="lazy">
+            <span class="product-badge">4041</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4041</div>
+            <div class="product-name">Bolsa de Poliéster Impermeável 33L</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204041." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4064.jpeg" alt="4064" loading="lazy">
+            <span class="product-badge">4064</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4064</div>
+            <div class="product-name">Mini Bolsa Transversal de RPET</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204064." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4127.jpeg" alt="4127" loading="lazy">
+            <span class="product-badge">4127</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4127</div>
+            <div class="product-name">Mini Bolsa Transversal de Nylon</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204127." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4129.jpeg" alt="4129" loading="lazy">
+            <span class="product-badge">4129</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4129</div>
+            <div class="product-name">Mini Bolsa Transversal de Nylon</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204129." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4240.jpeg" alt="4240" loading="lazy">
+            <span class="product-badge">4240</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4240</div>
+            <div class="product-name">Bolsa Oxford 19 Litros</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204240." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4600.jpeg" alt="4600" loading="lazy">
+            <span class="product-badge">4600</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4600</div>
+            <div class="product-name">Bolsa de Viagem em Nylon 600</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204600." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/478.jpeg" alt="478" loading="lazy">
+            <span class="product-badge">478</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">478</div>
+            <div class="product-name">Bolsa Multiuso em Neoprene</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20478." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/58412.jpeg" alt="58412" loading="lazy">
+            <span class="product-badge">58412</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">58412</div>
+            <div class="product-name">Bolsa Térmica com Alça Tiracolo</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2058412." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/9118.jpeg" alt="9118" loading="lazy">
+            <span class="product-badge">9118</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">9118</div>
+            <div class="product-name">Mala/Bolsa Esportiva em Poliéster</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%209118." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92079.jpeg" alt="92079" loading="lazy">
+            <span class="product-badge">92079</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92079</div>
+            <div class="product-name">Bolsa Esportiva RPET Forrada</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092079." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92096.jpeg" alt="92096" loading="lazy">
+            <span class="product-badge">92096</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92096</div>
+            <div class="product-name">Bolsa Esportiva</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092096." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92097.jpeg" alt="92097" loading="lazy">
+            <span class="product-badge">92097</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92097</div>
+            <div class="product-name">Bolsa Térmica 7L</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092097." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/9220.jpeg" alt="9220" loading="lazy">
+            <span class="product-badge">9220</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">9220</div>
+            <div class="product-name">Mala Esportiva</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%209220." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92348.jpeg" alt="92348" loading="lazy">
+            <span class="product-badge">92348</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92348</div>
+            <div class="product-name">Bolsa Térmica</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092348." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92380.jpeg" alt="92380" loading="lazy">
+            <span class="product-badge">92380</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92380</div>
+            <div class="product-name">Bolsa Térmica em Poliéster/PEVA</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092380." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92386.jpeg" alt="92386" loading="lazy">
+            <span class="product-badge">92386</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92386</div>
+            <div class="product-name">Pochete em Poliéster Reciclado 600D</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092386." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92388.jpeg" alt="92388" loading="lazy">
+            <span class="product-badge">92388</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92388</div>
+            <div class="product-name">Pochete em Poliéster Reciclada</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092388." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92511.jpeg" alt="92511" loading="lazy">
+            <span class="product-badge">92511</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92511</div>
+            <div class="product-name">Bolsa Esportiva 600D</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092511." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/92515.jpeg" alt="92515" loading="lazy">
+            <span class="product-badge">92515</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92515</div>
+            <div class="product-name">Bolsa Esportiva 600D Fundo</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092515." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/22901.jpeg" alt="22901" loading="lazy">
+            <span class="product-badge">22901</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">22901</div>
+            <div class="product-name">Sacochila em Non-Woven</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2022901." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/28064.jpeg" alt="28064" loading="lazy">
+            <span class="product-badge">28064</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">28064</div>
+            <div class="product-name">Mochila para Notebook</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2028064." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/4058.jpeg" alt="4058" loading="lazy">
+            <span class="product-badge">4058</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4058</div>
+            <div class="product-name">Mochila Transversal USB Antifurto</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204058." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/4059.jpeg" alt="4059" loading="lazy">
+            <span class="product-badge">4059</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4059</div>
+            <div class="product-name">Mochila Transversal com USB</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204059." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4061.jpeg" alt="4061" loading="lazy">
+            <span class="product-badge">4061</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4061</div>
+            <div class="product-name">Sacochila em Poliéster</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204061." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/4104.jpeg" alt="4104" loading="lazy">
+            <span class="product-badge">4104</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4104</div>
+            <div class="product-name">Bolsa Sacochila</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204104." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/484.jpeg" alt="484" loading="lazy">
+            <span class="product-badge">484</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">484</div>
+            <div class="product-name">Sacochila em Nylon Resinado</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20484." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/488.jpeg" alt="488" loading="lazy">
+            <span class="product-badge">488</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">488</div>
+            <div class="product-name">Sacochila em Nylon</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20488." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52081.jpeg" alt="52081" loading="lazy">
+            <span class="product-badge">52081</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52081</div>
+            <div class="product-name">Mochila para Notebook em Nylon</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052081." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52085.jpeg" alt="52085" loading="lazy">
+            <span class="product-badge">52085</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52085</div>
+            <div class="product-name">Mochila para Notebook 300D c/ USB</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052085." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52087.jpeg" alt="52087" loading="lazy">
+            <span class="product-badge">52087</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52087</div>
+            <div class="product-name">Mochila para Notebook c/ USB</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052087." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52170.jpeg" alt="52170" loading="lazy">
+            <span class="product-badge">52170</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52170</div>
+            <div class="product-name">Mochila para Notebook</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052170." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52280.jpeg" alt="52280" loading="lazy">
+            <span class="product-badge">52280</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52280</div>
+            <div class="product-name">Mochila para Notebook</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052280." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52318.jpeg" alt="52318" loading="lazy">
+            <span class="product-badge">52318</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52318</div>
+            <div class="product-name">Mochila de Viagem em Poliéster</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052318." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52329.jpeg" alt="52329" loading="lazy">
+            <span class="product-badge">52329</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52329</div>
+            <div class="product-name">Mochila Executiva</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052329." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="bolsa">
+          <div class="product-img">
+            <img src="/brindes/52619.jpeg" alt="52619" loading="lazy">
+            <span class="product-badge">52619</span>
+            <span class="cat-tag amber">Bolsa</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52619</div>
+            <div class="product-name">Sacochila com Giz de Cera</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052619." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52635.jpeg" alt="52635" loading="lazy">
+            <span class="product-badge">52635</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52635</div>
+            <div class="product-name">Mochila</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052635." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="mochila">
+          <div class="product-img">
+            <img src="/brindes/52637.jpeg" alt="52637" loading="lazy">
+            <span class="product-badge">52637</span>
+            <span class="cat-tag purple">Mochila</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">52637</div>
+            <div class="product-name">Mochila para Notebook</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2052637." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title nec">Necessaires &amp; Estojos</div>
+      <div class="catalog-grid">
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/180.jpeg" alt="180" loading="lazy">
+            <span class="product-badge">180</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">180</div>
+            <div class="product-name">Necessaire em PVC Sólido</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20180." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/181.jpeg" alt="181" loading="lazy">
+            <span class="product-badge">181</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">181</div>
+            <div class="product-name">Necessaire em PVC Transparente</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20181." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/182.jpeg" alt="182" loading="lazy">
+            <span class="product-badge">182</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">182</div>
+            <div class="product-name">Necessaire em PVC Transparente</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20182." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4100.jpeg" alt="4100" loading="lazy">
+            <span class="product-badge">4100</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4100</div>
+            <div class="product-name">Necessaire</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204100." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4101.jpeg" alt="4101" loading="lazy">
+            <span class="product-badge">4101</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4101</div>
+            <div class="product-name">Necessaire</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204101." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4169.jpeg" alt="4169" loading="lazy">
+            <span class="product-badge">4169</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4169</div>
+            <div class="product-name">Estojo Tubular em Nylon</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204169." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4173.jpeg" alt="4173" loading="lazy">
+            <span class="product-badge">4173</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4173</div>
+            <div class="product-name">Bolsa Modelo Necessaire</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204173." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4176.jpeg" alt="4176" loading="lazy">
+            <span class="product-badge">4176</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4176</div>
+            <div class="product-name">Necessaire Cabeleira</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204176." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4177.jpeg" alt="4177" loading="lazy">
+            <span class="product-badge">4177</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4177</div>
+            <div class="product-name">Necessaire Cabeleira</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204177." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/4193.jpeg" alt="4193" loading="lazy">
+            <span class="product-badge">4193</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">4193</div>
+            <div class="product-name">Estojo em Poliéster</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%204193." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/472.jpeg" alt="472" loading="lazy">
+            <span class="product-badge">472</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">472</div>
+            <div class="product-name">Necessaire com Alça Lateral</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20472." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/481.jpeg" alt="481" loading="lazy">
+            <span class="product-badge">481</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">481</div>
+            <div class="product-name">Porta Tênis com Alça de Mão</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20481." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/497P.jpeg" alt="497P" loading="lazy">
+            <span class="product-badge">497P</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">497P</div>
+            <div class="product-name">Frasqueira em Poliéster</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20497P." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/92075.jpeg" alt="92075" loading="lazy">
+            <span class="product-badge">92075</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92075</div>
+            <div class="product-name">Pasta A5 com Bateria Portátil 4000mAh</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092075." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/869S.jpeg" alt="869S" loading="lazy">
+            <span class="product-badge">869S</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">869S</div>
+            <div class="product-name">Necessaire com Zíper em Sintético</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%20869S." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/92077.jpeg" alt="92077" loading="lazy">
+            <span class="product-badge">92077</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92077</div>
+            <div class="product-name">Necessaire em Algodão Reciclado</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092077." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/92078.jpeg" alt="92078" loading="lazy">
+            <span class="product-badge">92078</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92078</div>
+            <div class="product-name">Necessaire RPET Forrado</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092078." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/92125.jpeg" alt="92125" loading="lazy">
+            <span class="product-badge">92125</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92125</div>
+            <div class="product-name">Bolsa Esportiva</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092125." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/92148.jpeg" alt="92148" loading="lazy">
+            <span class="product-badge">92148</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92148</div>
+            <div class="product-name">Necessaire</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092148." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card reveal" data-cat="nec">
+          <div class="product-img">
+            <img src="/brindes/92365.jpeg" alt="92365" loading="lazy">
+            <span class="product-badge">92365</span>
+            <span class="cat-tag green">Necessaire</span>
+          </div>
+          <div class="product-info">
+            <div class="product-code">92365</div>
+            <div class="product-name">Necessaire</div>
+            <div class="product-actions">
+              <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20do%20produto%2092365." class="btn-orcar" target="_blank" rel="noopener">💬 Orçar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:3rem;text-align:center;">
+        <a href="../" class="btn btn-outline">← Voltar ao catálogo de Brindes</a>
+        <a href="https://wa.me/5511971071213?text=Olá!%20Gostaria%20de%20orçamento%20de%20mochilas%20e%20bolsas." class="btn btn-amber" target="_blank" rel="noopener" style="margin-left:1rem;">💬 Orçamento geral</a>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><div class="logo">LLana <span>Grupo Corporativo</span></div><p>Brindes corporativos personalizados</p></div>
+      <div class="footer-links"><strong>Catálogos</strong><a href="../cadernos/">📓 Cadernos</a><a href="../canetas/">✒️ Canetas</a><a href="./">🎒 Mochilas</a><a href="../">← Todos</a></div>
+      <div class="footer-links"><strong>Contato</strong><a href="https://wa.me/5511971071213" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+  </footer>
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(c => c.classList.toggle('hidden', f!=='all' && c.dataset.cat!==f));
+      });
+    });
+    const ro = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);} }); }, {threshold:0.05});
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  </script>
+  <script src="../../js/main.js"></script>
+</body>
+</html>
