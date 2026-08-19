@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://llana.com.br/sitemap.xml
