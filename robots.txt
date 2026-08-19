@@ -1,11 +1,4 @@
 User-agent: *
 Allow: /
 
-# Evitar indexação de arquivos de sistema e admin
-Disallow: /deploy.php
-Disallow: /editor.html
-Disallow: /brindes/baixar-imagens.php
-Disallow: /*.php$
-
-# Sitemap
 Sitemap: https://llana.com.br/sitemap.xml
