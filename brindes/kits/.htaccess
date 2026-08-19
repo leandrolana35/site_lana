@@ -1,0 +1,9 @@
+Options -Indexes
+DirectoryIndex index.html index.php
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /brindes/kits/
+</IfModule>
+<FilesMatch "\.(html|css|js|jpg|jpeg|png|gif|svg|ico|woff|woff2)$">
+  Require all granted
+</FilesMatch>
