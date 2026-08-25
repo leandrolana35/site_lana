@@ -76,7 +76,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Campanhas sazonais -->
+  <!-- Campanhas sazonais de saúde -->
   <url>
     <loc>https://llana.com.br/brindes/setembro-amarelo/</loc>
     <changefreq>yearly</changefreq>
@@ -91,6 +91,150 @@
     <loc>https://llana.com.br/brindes/novembro-azul/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- Calendário de datas profissionais — Janeiro -->
+  <url>
+    <loc>https://llana.com.br/brindes/farmaceutico/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/corretor-de-imoveis/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Fevereiro -->
+  <url>
+    <loc>https://llana.com.br/brindes/dentista/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/biomedico/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Março -->
+  <url>
+    <loc>https://llana.com.br/brindes/profissional-ti/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/mulher-empreendedora/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Abril -->
+  <url>
+    <loc>https://llana.com.br/brindes/contador/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/seguranca-do-trabalho/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Maio -->
+  <url>
+    <loc>https://llana.com.br/brindes/enfermeiro/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/assistente-social/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Junho -->
+  <url>
+    <loc>https://llana.com.br/brindes/arquiteto/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/profissional-marketing/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Julho -->
+  <url>
+    <loc>https://llana.com.br/brindes/jornalista/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/engenheiro-agronomo/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Agosto -->
+  <url>
+    <loc>https://llana.com.br/brindes/advogado/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/psicologo/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Setembro -->
+  <url>
+    <loc>https://llana.com.br/brindes/administrador/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/secretariado/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Outubro -->
+  <url>
+    <loc>https://llana.com.br/brindes/professor/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/medico/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Novembro -->
+  <url>
+    <loc>https://llana.com.br/brindes/engenheiro/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/nutricionista/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Dezembro -->
+  <url>
+    <loc>https://llana.com.br/brindes/medico-veterinario/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/relacoes-publicas/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
   </url>
 
 </urlset>
