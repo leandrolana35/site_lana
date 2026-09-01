@@ -31,6 +31,41 @@
     "isPartOf":{"@type":"WebSite","name":"LLana Grupo","url":"https://llana.com.br/"},
     "publisher":{"@type":"Organization","name":"LLana Promo & Gifts","url":"https://llana.com.br/brindes/","telephone":"+5511971071213"}
   }
+  
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+</script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"LLana Grupo","item":"https://llana.com.br/"},
+      {"@type":"ListItem","position":2,"name":"Brindes Corporativos","item":"https://llana.com.br/brindes/"},
+      {"@type":"ListItem","position":3,"name":"Brindes Do Secretariado","item":"https://llana.com.br/brindes/secretariado/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Quando é o Dia do Secretariado?","acceptedAnswer":{"@type":"Answer","text":"Em 30 de Setembro, data instituída pela Federação Nacional das Secretárias e Secretários para celebrar a profissão."}},
+      {"@type":"Question","name":"Quais brindes são ideais para o Dia do Secretariado?","acceptedAnswer":{"@type":"Answer","text":"Organizadores, cadernos elegantes, canetas de qualidade e porta-cartões — brindes que valorizam a organização e o profissionalismo de quem mantém a empresa funcionando."}},
+      {"@type":"Question","name":"Qual o pedido mínimo para personalização?","acceptedAnswer":{"@type":"Answer","text":"A partir de 20 unidades. Kits secretariado com embalagem especial a partir de 10 unidades."}},
+      {"@type":"Question","name":"Qual o prazo de entrega dos brindes corporativos?","acceptedAnswer":{"@type":"Answer","text":"7 a 15 dias úteis. Para datas em Setembro, solicite com 30 dias de antecedência."}}
+    ]
+  }
   </script>
   <link rel="stylesheet" href="../../css/theme.css" />
   <style>
@@ -122,7 +157,33 @@
       .prod-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 540px) { .prod-grid { grid-template-columns: 1fr; } }
-  </style>
+  
+  /* ── FAQ Section ── */
+  .faq-section { padding: 64px 0; background: var(--bg); }
+  .faq-section .sa-label { color: var(--c); }
+  .faq-list { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-direction: column; gap: .75rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .faq-q {
+    width: 100%; text-align: left; background: var(--card-bg);
+    padding: 1.1rem 1.4rem; font-size: 1rem; font-weight: 600;
+    color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; border: none; line-height: 1.4;
+    transition: background .2s;
+  }
+  .faq-q:hover { background: var(--card-hover, var(--border)); }
+  .faq-q .faq-icon { flex-shrink: 0; color: var(--c); font-size: 1.2rem; transition: transform .3s; }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    padding: 0 1.4rem;
+    background: var(--card-bg);
+    color: var(--text-2);
+    font-size: .95rem; line-height: 1.7;
+    transition: max-height .35s ease, padding .35s ease;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.4rem 1.2rem; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+</style>
 </head>
 <body>
 
@@ -345,12 +406,13 @@
   </section>
 
   <!-- CAMP NAV -->
+    <!-- CAMP NAV -->
   <nav class="camp-nav-bar">
     <div class="container">
       <div class="camp-nav-inner">
-        <a href="../outubro-rosa/" class="camp-nav-link">← 🎀 Outubro Rosa</a>
+        <a href="../administrador/" class="camp-nav-link">← 🏢 Administrador</a>
         <a href="../" class="camp-nav-link">Ver todas as campanhas</a>
-        <a href="../novembro-azul/" class="camp-nav-link">💙 Novembro Azul →</a>
+        <a href="../professor/" class="camp-nav-link">📚 Professor →</a>
       </div>
     </div>
   </nav>
