@@ -1,0 +1,25 @@
+# ── Redirecionamentos 301 — URLs antigas para estrutura atual ──────────────────
+
+Options -Indexes
+RewriteEngine On
+
+# URLs de produto antigas → catálogo correspondente
+RewriteRule ^produto/.*caderno.*$    /brindes/cadernos/    [R=301,L,NC]
+RewriteRule ^produto/.*caneta.*$     /brindes/canetas/     [R=301,L,NC]
+RewriteRule ^produto/.*mochila.*$    /brindes/mochilas/    [R=301,L,NC]
+RewriteRule ^produto/.*garrafa.*$    /brindes/garrafas/    [R=301,L,NC]
+RewriteRule ^produto/.*bolsa.*$      /brindes/garrafas/    [R=301,L,NC]
+RewriteRule ^produto/.*bloco.*$      /brindes/cadernos/    [R=301,L,NC]
+RewriteRule ^produto/(.*)$           /brindes/catalogo/    [R=301,L,NC]
+
+# Catálogo antigo → novo catálogo
+RewriteRule ^home/catalogo\.html.*$  /brindes/catalogo/    [R=301,L]
+RewriteRule ^catalogo\.html.*$       /brindes/catalogo/    [R=301,L]
+RewriteRule ^catalogo/?$             /brindes/catalogo/    [R=301,L]
+
+# Páginas antigas sem equivalente → hub de brindes
+RewriteRule ^loja/?$                 /brindes/             [R=301,L]
+RewriteRule ^servicos/?$             /brindes/             [R=301,L]
+RewriteRule ^portfolio/?$            /brindes/             [R=301,L]
+RewriteRule ^sobre/?$                /                     [R=301,L]
+RewriteRule ^contato/?$              /                     [R=301,L]
