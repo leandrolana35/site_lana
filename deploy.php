@@ -57,4 +57,10 @@ foreach ($copyTargets as $target) {
 
 removeDir($tmpDir);
 
+// Baixa imagens de produtos que ainda não existem localmente
+$imgScript = __DIR__ . '/brindes/baixar-imagens.php';
+if (file_exists($imgScript)) {
+    include $imgScript;
+}
+
 echo 'Deploy realizado com sucesso em ' . date('d/m/Y H:i:s');
