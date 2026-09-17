@@ -1,3 +1,25 @@
+# ── Security Headers ──────────────────────────────────────────────────────────
+
+<IfModule mod_headers.c>
+  # Impede clickjacking (embedding em iframes de outros domínios)
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Impede sniffing de MIME type
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Força HTTPS por 1 ano (incluindo subdomínios)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Controla informações de referrer enviadas a terceiros
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions Policy: desativa câmera, microfone, geolocalização
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # CSP básico: permite recursos próprios + Google Fonts + WhatsApp
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://llana.com.br https://unitybrindes.com.br; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'"
+</IfModule>
+
 # ── Redirecionamentos 301 — URLs antigas para estrutura atual ──────────────────
 
 Options -Indexes
