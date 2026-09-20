@@ -26,6 +26,14 @@
   </FilesMatch>
 </IfModule>
 
+# ── ModSecurity: libera deploy.php para chamadas externas (GitHub Actions) ─────
+
+<IfModule mod_security2.c>
+  <Files "deploy.php">
+    SecRuleEngine Off
+  </Files>
+</IfModule>
+
 # ── Redirecionamentos 301 — URLs antigas para estrutura atual ──────────────────
 
 Options -Indexes
