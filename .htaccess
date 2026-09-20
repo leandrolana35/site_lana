@@ -18,6 +18,12 @@
 
   # CSP básico: permite recursos próprios + Google Fonts + WhatsApp
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://llana.com.br; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'"
+
+  # Permite que imagens sejam carregadas por e-mails e páginas externas
+  <FilesMatch "\.(jpe?g|jpg|png|gif|webp)$">
+    Header always set Cross-Origin-Resource-Policy "cross-origin"
+    Header always set Access-Control-Allow-Origin "*"
+  </FilesMatch>
 </IfModule>
 
 # ── Redirecionamentos 301 — URLs antigas para estrutura atual ──────────────────
