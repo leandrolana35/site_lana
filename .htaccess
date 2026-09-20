@@ -17,7 +17,7 @@
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 
   # CSP básico: permite recursos próprios + Google Fonts + WhatsApp
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://llana.com.br https://unitybrindes.com.br; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://llana.com.br; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'"
 </IfModule>
 
 # ── Redirecionamentos 301 — URLs antigas para estrutura atual ──────────────────
