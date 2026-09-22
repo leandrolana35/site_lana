@@ -1,32 +1,27 @@
-# ── Security Headers ──────────────────────────────────────────────────────────
+# Use PHP71
+#AddHandler application/x-httpd-php71 .php
 
+
+# Block WordPress xmlrpc.php requests
+<Files xmlrpc.php>
+order deny,allow
+deny from all
+allow from 122.248.245.244/32
+allow from 54.217.201.243/32
+allow from 54.232.116.4/32
+allow from 192.0.80.0/20
+allow from 192.0.96.0/20
+allow from 192.0.112.0/20
+allow from 195.234.108.0/22
+</Files>
+
+# Permite que imagens sejam carregadas por e-mails e páginas externas
 <IfModule mod_headers.c>
-  # Impede clickjacking (embedding em iframes de outros domínios)
-  Header always set X-Frame-Options "SAMEORIGIN"
-
-  # Impede sniffing de MIME type
-  Header always set X-Content-Type-Options "nosniff"
-
-  # Força HTTPS por 1 ano (incluindo subdomínios)
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-
-  # Controla informações de referrer enviadas a terceiros
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-
-  # Permissions Policy: desativa câmera, microfone, geolocalização
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-
-  # CSP básico: permite recursos próprios + Google Fonts + WhatsApp
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://llana.com.br; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'"
-
-  # Permite que imagens sejam carregadas por e-mails e páginas externas
   <FilesMatch "\.(jpe?g|jpg|png|gif|webp)$">
     Header always set Cross-Origin-Resource-Policy "cross-origin"
     Header always set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
-
-# ── Redirecionamentos 301 — URLs antigas para estrutura atual ──────────────────
 
 Options -Indexes
 RewriteEngine On
