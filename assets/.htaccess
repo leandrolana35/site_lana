@@ -1,4 +1,1 @@
 Options -Indexes
-<FilesMatch "\.(jpg|jpeg|png|gif|svg|webp|ico)$">
-  Require all granted
-</FilesMatch>
