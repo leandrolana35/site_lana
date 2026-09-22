@@ -26,7 +26,7 @@ unlink($tmpZip);
 $srcBase = $tmpDir . '/site_lana-main';
 $dstBase = __DIR__;
 
-$copyTargets = ['index.html', 'brindes', 'tech', 'css', 'js', 'emails', 'images'];
+$copyTargets = ['index.html', '.htaccess', 'brindes', 'tech', 'css', 'js', 'emails', 'images'];
 
 function copyRecursive($src, $dst) {
     if (!is_dir($dst)) mkdir($dst, 0755, true);
