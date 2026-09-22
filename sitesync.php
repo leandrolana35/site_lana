@@ -2,7 +2,7 @@
 $isCli = php_sapi_name() === 'cli';
 if (!$isCli) {
     $token = getenv('DEPLOY_TOKEN');
-    $provided = $_SERVER['HTTP_X_DEPLOY_TOKEN'] ?? $_GET['token'] ?? '';
+    $provided = $_SERVER['HTTP_X_DEPLOY_TOKEN'] ?? $_POST['token'] ?? $_GET['token'] ?? '';
     if (!$token || $provided !== $token) {
         http_response_code(403);
         die('Unauthorized');
