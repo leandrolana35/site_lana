@@ -1,0 +1,11 @@
+Options -Indexes
+DirectoryIndex index.html index.php
+
+# Permite carregamento de imagens por e-mail marketing e páginas externas
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpe?g|jpg|png|gif|webp)$">
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Cross-Origin-Resource-Policy "cross-origin"
+    Header always unset X-Frame-Options
+  </FilesMatch>
+</IfModule>
