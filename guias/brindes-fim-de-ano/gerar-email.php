@@ -5,20 +5,21 @@
 header('Content-Type: text/html; charset=utf-8');
 header('Content-Disposition: attachment; filename="email-fim-de-ano-brindes.html"');
 
-$base = dirname(__DIR__, 2); // raiz do site
+$base    = dirname(__DIR__, 2);
+$siteUrl = 'https://llana.com.br';
 
-function img64($path) {
-    if (!file_exists($path)) return '';
-    $data = base64_encode(file_get_contents($path));
-    $mime = str_ends_with($path, '.png') ? 'image/png' : 'image/jpeg';
-    return "data:$mime;base64,$data";
+function img64($localPath, $url) {
+    $data = file_exists($localPath) ? file_get_contents($localPath) : @file_get_contents($url);
+    if (empty($data)) return $url;
+    $mime = str_ends_with($url, '.png') ? 'image/png' : 'image/jpeg';
+    return 'data:' . $mime . ';base64,' . base64_encode($data);
 }
 
-$elaine_foto = img64($base . '/images/elaine-lana.png');
-$assinatura  = img64($base . '/assets/assinatura-elaine.png');
-$prod_cad12p = img64($base . '/brindes/CAD12P.jpeg');
-$prod_93591  = img64($base . '/brindes/93591.jpeg');
-$prod_51125  = img64($base . '/brindes/51125.jpeg');
+$elaine_foto = img64($base . '/images/elaine-lana.png',   $siteUrl . '/images/elaine-lana.png');
+$assinatura  = img64($base . '/assets/assinatura-elaine.png', $siteUrl . '/assets/assinatura-elaine.png');
+$prod_cad12p = img64($base . '/brindes/CAD12P.jpeg',      $siteUrl . '/brindes/CAD12P.jpeg');
+$prod_93591  = img64($base . '/brindes/93591.jpeg',       $siteUrl . '/brindes/93591.jpeg');
+$prod_51125  = img64($base . '/brindes/51125.jpeg',       $siteUrl . '/brindes/51125.jpeg');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -71,10 +72,8 @@ $prod_51125  = img64($base . '/brindes/51125.jpeg');
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td style="text-align:center;padding-bottom:24px;">
-            <?php if ($elaine_foto): ?>
             <img src="<?= $elaine_foto ?>" alt="Elaine Lana" width="72" height="72"
                  style="border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:3px solid #f0b429;" />
-            <?php endif; ?>
             <p style="margin:0;font-size:14px;font-weight:800;color:#1C1917;">Elaine Lana</p>
             <p style="margin:2px 0 0;font-size:11px;color:#78716C;">Fundadora · LLana Promo & Gifts</p>
           </td>
@@ -137,9 +136,7 @@ $prod_51125  = img64($base . '/brindes/51125.jpeg');
           <td class="prod-col" width="50%" style="padding:0 6px 0 0;vertical-align:top;">
             <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;">
               <tr><td style="background:#FFF7ED;padding:16px;text-align:center;">
-                <?php if ($prod_cad12p): ?>
                 <img src="<?= $prod_cad12p ?>" alt="Caderno Andrômeda Plus" width="110" height="110" style="object-fit:contain;display:block;margin:auto;" />
-                <?php endif; ?>
               </td></tr>
               <tr><td style="padding:12px;">
                 <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#d97706;letter-spacing:.05em;text-transform:uppercase;">Ref. CAD12P · 📓 Caderno</p>
@@ -153,9 +150,7 @@ $prod_51125  = img64($base . '/brindes/51125.jpeg');
           <td class="prod-col" width="50%" style="padding:0 0 0 6px;vertical-align:top;">
             <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;">
               <tr><td style="background:#FFF7ED;padding:16px;text-align:center;">
-                <?php if ($prod_93591): ?>
                 <img src="<?= $prod_93591 ?>" alt="Caderno Wire-o 15x21cm" width="110" height="110" style="object-fit:contain;display:block;margin:auto;" />
-                <?php endif; ?>
               </td></tr>
               <tr><td style="padding:12px;">
                 <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#d97706;letter-spacing:.05em;text-transform:uppercase;">Ref. 93591 · 📓 Caderno</p>
@@ -175,9 +170,7 @@ $prod_51125  = img64($base . '/brindes/51125.jpeg');
           <td class="prod-col" width="50%" style="padding:0 6px 0 0;vertical-align:top;">
             <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;">
               <tr><td style="background:#FFF7ED;padding:16px;text-align:center;">
-                <?php if ($prod_51125): ?>
                 <img src="<?= $prod_51125 ?>" alt="Caneta Roller Premium" width="110" height="110" style="object-fit:contain;display:block;margin:auto;" />
-                <?php endif; ?>
               </td></tr>
               <tr><td style="padding:12px;">
                 <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#d97706;letter-spacing:.05em;text-transform:uppercase;">Ref. 51125 · ✒️ Caneta</p>
@@ -230,9 +223,7 @@ $prod_51125  = img64($base . '/brindes/51125.jpeg');
   <!-- SIGNATURE -->
   <tr>
     <td style="background:#ffffff;padding:24px 28px;border-top:1px solid #F2EFE9;text-align:center;">
-      <?php if ($assinatura): ?>
       <img src="<?= $assinatura ?>" alt="Assinatura Elaine Lana" width="160" style="display:block;margin:0 auto 14px;" />
-      <?php endif; ?>
     </td>
   </tr>
 
