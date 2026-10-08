@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Portal principal -->
+  <url>
+    <loc>https://llana.com.br/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- LLana Tech & Data -->
+  <url>
+    <loc>https://llana.com.br/tech/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- LLana Promo & Gifts — hub de brindes -->
+  <url>
+    <loc>https://llana.com.br/brindes/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Catálogos de produto -->
+  <url>
+    <loc>https://llana.com.br/brindes/cadernos/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/canetas/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/mochilas/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/garrafas/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/informatica/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/catalogo/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Kits Corporativos -->
+  <url>
+    <loc>https://llana.com.br/brindes/kits/boas-vindas/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/kits/eventos-feiras/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/kits/premiacao/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/kits/fim-de-ano/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hub de ações e campanha sazonal -->
+  <url>
+    <loc>https://llana.com.br/brindes/acoes/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/fim-de-ano/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Campanhas sazonais de saúde -->
+  <url>
+    <loc>https://llana.com.br/brindes/setembro-amarelo/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/outubro-rosa/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/novembro-azul/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Calendário de datas profissionais — Janeiro -->
+  <url>
+    <loc>https://llana.com.br/brindes/farmaceutico/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/corretor-de-imoveis/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Fevereiro -->
+  <url>
+    <loc>https://llana.com.br/brindes/dentista/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/biomedico/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Março -->
+  <url>
+    <loc>https://llana.com.br/brindes/profissional-ti/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/mulher-empreendedora/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Abril -->
+  <url>
+    <loc>https://llana.com.br/brindes/contador/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/seguranca-do-trabalho/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Maio -->
+  <url>
+    <loc>https://llana.com.br/brindes/enfermeiro/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/assistente-social/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Junho -->
+  <url>
+    <loc>https://llana.com.br/brindes/arquiteto/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/profissional-marketing/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Julho -->
+  <url>
+    <loc>https://llana.com.br/brindes/jornalista/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/engenheiro-agronomo/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Agosto -->
+  <url>
+    <loc>https://llana.com.br/brindes/advogado/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/psicologo/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Setembro -->
+  <url>
+    <loc>https://llana.com.br/brindes/administrador/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/secretariado/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Outubro -->
+  <url>
+    <loc>https://llana.com.br/brindes/professor/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/medico/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Novembro -->
+  <url>
+    <loc>https://llana.com.br/brindes/engenheiro/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/nutricionista/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Dezembro -->
+  <url>
+    <loc>https://llana.com.br/brindes/medico-veterinario/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/brindes/relacoes-publicas/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- Otimização para IA -->
+  <url>
+    <loc>https://llana.com.br/llms.txt</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Guias -->
+  <url>
+    <loc>https://llana.com.br/guias/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/guias/brindes-area-saude/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/guias/brindes-fim-de-ano/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/guias/brinde-personalizado-vs-generico/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://llana.com.br/guias/kit-boas-vindas-colaboradores/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
