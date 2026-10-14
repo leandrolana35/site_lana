@@ -22,8 +22,10 @@ Especializada em brindes personalizados com logo da empresa para o mercado B2B.
 
 ### Categorias de produtos
 
-- **Cadernos e blocos personalizados** — capa dura, ecológicos, fotolux, executivos (25+ modelos)
+- **Cadernos personalizados** — capa dura, ecológicos, fotolux, executivos (25+ modelos)
 - **Canetas personalizadas** — esferográficas, metálicas, ecológicas, sets executivos
+- **Agendas personalizadas** — capa dura, couro sintético, espiral, slim/pocket; ideais para fim de ano
+- **Calendários personalizados** — de mesa, de parede, mini/imã, blocos; maior exposição de marca anual
 - **Mochilas e bolsas corporativas** — mochilas executivas, sacolas, malas de viagem
 - **Garrafas e copos térmicos** — garrafas de inox, squeeze, copos com tampa
 - **Itens de informática** — pen drives, carregadores portáteis, fones de ouvido
@@ -64,6 +66,18 @@ Site: https://llana.com.br/tech/
 
 ---
 
+## Guias de Brindes Corporativos
+
+Conteúdo editorial com orientações práticas para empresas B2B:
+
+- Guias (hub): https://llana.com.br/guias/
+- Como montar o kit boas-vindas para novos colaboradores: https://llana.com.br/guias/kit-boas-vindas-colaboradores/
+- 10 ideias de brindes para fim de ano corporativo: https://llana.com.br/guias/brindes-fim-de-ano/
+- Brinde personalizado ou genérico: qual vale mais: https://llana.com.br/guias/brinde-personalizado-vs-generico/
+- Guia completo de brindes para a área da saúde: https://llana.com.br/guias/brindes-area-saude/
+
+---
+
 ## Páginas principais
 
 - Portal do Grupo: https://llana.com.br/
@@ -71,6 +85,8 @@ Site: https://llana.com.br/tech/
 - Catálogo completo: https://llana.com.br/brindes/catalogo/
 - Cadernos personalizados: https://llana.com.br/brindes/cadernos/
 - Canetas personalizadas: https://llana.com.br/brindes/canetas/
+- Agendas personalizadas: https://llana.com.br/brindes/agendas/
+- Calendários personalizados: https://llana.com.br/brindes/calendarios/
 - Mochilas corporativas: https://llana.com.br/brindes/mochilas/
 - Garrafas personalizadas: https://llana.com.br/brindes/garrafas/
 - Kits de onboarding: https://llana.com.br/brindes/kits/boas-vindas/
