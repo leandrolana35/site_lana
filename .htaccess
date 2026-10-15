@@ -51,11 +51,5 @@ RewriteRule ^depoimentos/?$          /                     [R=301,L]
 RewriteRule ^sample-page/?$          /                     [R=301,L]
 RewriteRule ^home/?$                 /                     [R=301,L]
 
-# Fallback WordPress — serve index.php para URLs sem arquivo/pasta correspondente
-<IfModule mod_rewrite.c>
-  RewriteBase /
-  RewriteRule ^index\.php$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.php [L]
-</IfModule>
+# Site estático — 404 explícito para URLs inexistentes
+ErrorDocument 404 /index.html
