@@ -23,8 +23,15 @@ allow from 195.234.108.0/22
   </FilesMatch>
 </IfModule>
 
+DirectoryIndex index.html index.htm index.php
 Options -Indexes
 RewriteEngine On
+
+# Guias estáticos — servir index.html diretamente, sem passar pelo WordPress
+RewriteCond %{REQUEST_URI} ^/guias/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}index.html -f
+RewriteRule ^(.+[^/])/?$ $1/index.html [L]
 
 # URLs de produto antigas → catálogo correspondente
 RewriteRule ^produto/.*caderno.*$    /brindes/cadernos/    [R=301,L,NC]
